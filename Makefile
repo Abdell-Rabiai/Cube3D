@@ -47,7 +47,7 @@ SRCS_OBJ = map_parser.c  get_next_line.c get_next_line_utils.c
 
 SRC = main.c
 
-FLAGS = -Wall -Werror -Wextra # -g -fsanitize=address
+FLAGS = -Wall -Werror -Wextra -g -fsanitize=address
 
 HEADER = cub3d.h
 

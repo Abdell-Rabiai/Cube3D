@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: abdell_rabiai <abdell_rabiai@student.42    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/05/20 13:03:01 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/07/10 18:29:47 by abdell_rabi      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,21 @@ int	get_ceil_floor_cols(char *line)
 	return (rgb);
 }
 
+void print_map(t_map *map)
+{
+	int i;
+
+	i = -1;
+	printf("ceil => %d\n", map->ceil_color);
+	printf("floor => %d\n", map->floor_color);
+	printf("path 1 => %s\n", map->paths[0]);
+	printf("path 2 => %s\n", map->paths[1]);
+	printf("path 3 => %s\n", map->paths[2]);
+	printf("path 4 => %s\n", map->paths[3]);
+	while (map->map[++i])
+		printf("%s", map->map[i]);
+}
+
 int pars_map(int map_fd, t_map *map)
 {
 	char    *line;
@@ -44,44 +59,32 @@ int pars_map(int map_fd, t_map *map)
 	int		i;
 
 	i = 0;
-	map->map = malloc(sizeof(char *) * map->rows);
+	map->map = malloc(sizeof(char *) * (map->rows + 1));
 	map->paths = malloc(sizeof(char *) * 4);
-	while (true)
+	line = get_next_line(map_fd);
+	while (line)
 	{
-		line = get_next_line(map_fd);
-		if (!line)
-		{
-			map->map[i] = NULL;
-			break ;
-		}
 		dir = which_dir(line);
 		if (dir != -1)
 			map->paths[dir] = ft_strtrim(line + 2, " ");
 		else if (!ft_strncmp(line, "F", 1))
 			map->floor_color = get_ceil_floor_cols(line);
 		else if (!ft_strncmp(line, "C", 1))
-			map->ceil_color  = get_ceil_floor_cols(line);
+			map->ceil_color = get_ceil_floor_cols(line);
 		else
 			map->map[i++] = ft_strdup(line, 0);
-		// free(line);
+		free(line);
+		line = get_next_line(map_fd);
 	}
-	printf("ceil => %d\n", map->ceil_color);
-	printf("floor => %d\n", map->floor_color);
-	printf("path => %s\n", map->paths[0]);
-	printf("path => %s\n", map->paths[1]);
-	printf("path => %s\n", map->paths[2]);
-	printf("path => %s\n", map->paths[3]);
-	i = -1;
-	while (map->map[++i])
-		printf("%s\n", map->map[i]);
-	// printf("%d\n", map->ceil_color);
-	// printf("%d\n", map->floor_color);
+	map->map[i] = NULL;
+	print_map(map);
 	return (0);
 }
 
 // what is a valid map ?
 // 1. map must be surrounded by walls
 // 2. map must have only 4 directions (N, S, E, W)
+
 
 int	count_map_lines(int	fd)
 {
@@ -97,8 +100,7 @@ int	count_map_lines(int	fd)
 		count++;
 	}
 	count = 0;
-	line = get_next_line(fd);
-	while (line && count < 6)
+	while (line)
 	{
 		free(line);
 		line = get_next_line(fd);
