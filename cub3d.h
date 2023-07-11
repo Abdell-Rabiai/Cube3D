@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/05/20 11:55:47 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/07/11 08:31:49 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,28 @@
 
 typedef enum directions
 {
-    NORTH,
-    SOUTH,
-    EAST,
-    WEST
+	NORTH,
+	SOUTH,
+	EAST,
+	WEST
 }				t_directions;
 
 typedef struct s_map
 {
-    int		columns;
-    char    **paths;
-    int		rows;
-    int     ceil_color;
-    int     floor_color;
-    char	**map;
+	int		columns;
+	char    **paths;
+	int		rows;
+	int     ceil_color;
+	int     floor_color;
+	char	**map;
 }				t_map;
 
-int pars_map(int map_fd, t_map *map);
-int	count_map_lines(int	fd);
+int read_data(char **argv, t_map *map);
+int	count_map_lines(char **argv);
+void initialize_map(t_map *map, char **argv);
+void free_map(t_map *map);
+int	count_map_lines(char **argv);
+int read_data(char **argv, t_map *map);
+void print_map(t_map *map);
+int	get_ceil_floor_cols(char *line);
+int which_dir(char *dir);

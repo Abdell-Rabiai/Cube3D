@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parser.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdell_rabiai <abdell_rabiai@student.42    +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/10 18:29:47 by abdell_rabi      ###   ########.fr       */
+/*   Updated: 2023/07/11 08:32:06 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,15 @@ void print_map(t_map *map)
 		printf("%s", map->map[i]);
 }
 
-int pars_map(int map_fd, t_map *map)
+int read_data(char **argv, t_map *map)
 {
 	char    *line;
 	int     dir;
 	int		i;
+	int		map_fd;
 
 	i = 0;
+	map_fd = open(argv[1], O_RDONLY);
 	map->map = malloc(sizeof(char *) * (map->rows + 1));
 	map->paths = malloc(sizeof(char *) * 4);
 	line = get_next_line(map_fd);
@@ -78,37 +80,40 @@ int pars_map(int map_fd, t_map *map)
 	}
 	map->map[i] = NULL;
 	print_map(map);
+	close(map_fd);
 	return (0);
 }
 
-// what is a valid map ?
-// 1. map must be surrounded by walls
-// 2. map must have only 4 directions (N, S, E, W)
 
-
-int	count_map_lines(int	fd)
+int	count_map_lines(char **argv)
 {
 	int		count;
+	int		map_fd;
 	char	*line;
 
 	count = 0;
-	line = get_next_line(fd);
+	map_fd = open(argv[1], O_RDONLY);
+	line = get_next_line(map_fd);
 	while (line && count < 6)
 	{
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(map_fd);
 		count++;
 	}
 	count = 0;
 	while (line)
 	{
 		free(line);
-		line = get_next_line(fd);
+		line = get_next_line(map_fd);
 		count++;
 	}
-	close(fd);
+	close(map_fd);
 	return (count);
 }
+
+// what is a valid map ?
+// 1. map must be surrounded by walls
+// 2. map must have only 4 directions (N, S, E, W)
 
 int	is_surrounded_by_walls(t_map *map)
 {

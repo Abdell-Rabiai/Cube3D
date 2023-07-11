@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abdell_rabiai <abdell_rabiai@student.42    +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/10 18:28:58 by abdell_rabi      ###   ########.fr       */
+/*   Updated: 2023/07/11 08:30:30 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void initialize_map(t_map *map, char **argv)
+{
+	map->ceil_color = 0;
+	map->floor_color = 0;
+	map->rows = count_map_lines(argv);
+	map->map = NULL;
+	map->paths = NULL;
+}
 
 void	free_map(t_map *map)
 {
@@ -28,19 +37,15 @@ void	free_map(t_map *map)
 
 int main(int argc, char **argv)
 {
-	int		map_fd;
 	t_map	map;
 
 	if (argc != 2)
 		return (1);
-	map.ceil_color = 0;
-	map.floor_color = 0;
-	map_fd = open(argv[1], O_RDONLY);
-	map.rows = count_map_lines(map_fd);
-	printf("ROWS {%d}\n", map.rows);
-	map_fd = open(argv[1], O_RDONLY);
-	if (pars_map(map_fd, &map))
+	initialize_map(&map, argv);
+	if (read_data(argv, &map))
+		return (1);
+	if (pars_for_errors(&map))
 		return (1);
 	free_map(&map);
-	// while (true);
+	while (1);
 }

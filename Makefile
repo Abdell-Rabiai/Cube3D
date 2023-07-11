@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+         #
+#    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/05/05 16:11:11 by ahmaymou         ###   ########.fr        #
+#    Updated: 2023/07/11 08:29:18 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,7 @@ SRCS_OBJ = map_parser.c  get_next_line.c get_next_line_utils.c
 
 SRC = main.c
 
-FLAGS = -Wall -Werror -Wextra -g -fsanitize=address
+FLAGS = -Wall -Werror -Wextra #-g -fsanitize=address
 
 HEADER = cub3d.h
 
