@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/12 11:38:08 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/12 20:09:59 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int which_dir(char *dir)
 		return (EAST);
 	else if (!ft_strncmp(dir, "WE", 2))
 		return (WEST);
+
 	else
 		return (-1);
 }
