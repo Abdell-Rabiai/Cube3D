@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/11 08:31:49 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/12 11:02:54 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ typedef struct s_map
 	int     floor_color;
 	char	**map;
 }				t_map;
+
+int first_string_len(char *str);
 
 int read_data(char **argv, t_map *map);
 int	count_map_lines(char **argv);

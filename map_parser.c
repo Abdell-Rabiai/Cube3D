@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/11 08:32:06 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/12 11:08:46 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,20 @@ void print_map(t_map *map)
 		printf("%s", map->map[i]);
 }
 
+int first_string_len(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i] && str[i] != ' ')
+		i++;
+	return (i);
+}
+
 int read_data(char **argv, t_map *map)
 {
 	char    *line;
+	char   *tmp;
 	int     dir;
 	int		i;
 	int		map_fd;
@@ -68,12 +79,16 @@ int read_data(char **argv, t_map *map)
 	{
 		dir = which_dir(line);
 		if (dir != -1)
-			map->paths[dir] = ft_strtrim(line + 2, " ");
+		{
+			tmp = ft_strtrim(line + 2, " ");
+			map->paths[dir] = ft_substr(tmp, 0, first_string_len(tmp));
+			free(tmp);
+		}
 		else if (!ft_strncmp(line, "F", 1))
 			map->floor_color = get_ceil_floor_cols(line);
 		else if (!ft_strncmp(line, "C", 1))
 			map->ceil_color = get_ceil_floor_cols(line);
-		else
+		else if (ft_strcmp(line, "\n"))
 			map->map[i++] = ft_strdup(line, 0);
 		free(line);
 		line = get_next_line(map_fd);
