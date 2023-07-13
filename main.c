@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/12 20:10:02 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 11:48:04 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int is_valid_map_line(char *line)
 	int i;
 
 	i = 0;
+	if (!ft_strcmp(line, "\n"))
+		return (1);
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '1' && line[i] != '0' && line[i] != 'N'
@@ -52,7 +54,7 @@ int is_valid_map_line(char *line)
 	}
 	return (0);
 }
-int check_invalid_chars(int fd)
+int check_invalid_characters(int fd)
 {
 	int	i;
 	char *line;
@@ -65,6 +67,13 @@ int check_invalid_chars(int fd)
 		free(line);
 	}
 	line = get_next_line(fd);
+	while (!ft_strcmp(line, "\n"))
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	line = get_next_line(fd);
 	while (line)
 	{
 		tmp = ft_strtrim(line, " ");
@@ -76,6 +85,7 @@ int check_invalid_chars(int fd)
 	}
 	return (0);
 }
+
 int pars_for_errors(char **argv, int argc)
 {
 	int fd;
@@ -87,8 +97,70 @@ int pars_for_errors(char **argv, int argc)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (printf("Error\nFile not found\n"), 1);
-	if (check_invalid_chars(fd))
+	if (check_invalid_characters(fd))
 		return (printf("Error\nInvalid characters in map\n"), 1);
+	return (0);
+}
+
+int check_right(char **arr, int i, int j)
+{
+	printf("the coordinates of the first 0 : (%d, %d)\n", i, j);
+	while (arr[i][j] != '\0' && arr[i][j] == '0')
+		j++;
+	printf("to the right ==> [%c]\n", arr[i][j]);
+	if (arr[i][j] != '1')
+		return (1);
+	return (0);
+}
+int check_left(char **arr, int i, int j)
+{
+	while (j > 0 && arr[i][j] == '0')
+		j--;
+	printf("to the left ==> [%c]\n", arr[i][j]);
+	if (arr[i][j] != '1')
+		return (1);
+	return (0);
+}
+int check_top(char **arr, int i, int j)
+{
+	(void)arr;
+	(void)i;
+	(void)j;
+	// printf("i = %d, j = %d\n", i, j);
+	return (0);
+}
+int check_down(char **arr, int i, int j)
+{
+	(void)arr;
+	(void)i;
+	(void)j;
+	// printf("i = %d, j = %d\n", i, j);
+	return (0);
+}
+
+int check_is_closed(t_map *map)
+{
+	char **arr;
+	int i;
+	int j;
+
+	i = 0;
+	arr = map->map;
+	while (arr[i])
+	{
+		j = 0;
+		while (arr[i][j] != '\0' && arr[i][j] != '0')
+			j++;
+		if (arr[i][j] == '\0')
+			j = 0;
+		else
+		{
+			if (check_right(arr, i, j) || check_left(arr, i, j)
+				|| check_top(arr, i, j) || check_down(arr, i, j))
+				return (1);
+		}
+		i++;
+	}
 	return (0);
 }
 
@@ -100,7 +172,21 @@ int main(int argc, char **argv)
 		return (1);
 	initialize_map(&map, argv);
 	if (read_data(argv, &map))
-		return (1);
+		return (1);	
+	if (check_is_closed(&map))
+		return (printf("Error\nMap is not closed\n"), 1);
 	free_map(&map);
 	while (1);
 }
+
+
+// while (arr[i][++j])
+// {
+// 	if (arr[i][j] == '0' || arr[i][j] == '2')
+// 	{
+// 		if (i == 0 || i == map->rows - 1 || j == 0 || j == (int)ft_strlen(arr[i]) - 1)
+// 			return (1);
+// 		if (arr[i][j - 1] == ' ' || arr[i][j + 1] == ' ' || arr[i - 1][j] == ' ' || arr[i + 1][j] == ' ')
+// 			return (1);
+// 	}
+// }	*/
