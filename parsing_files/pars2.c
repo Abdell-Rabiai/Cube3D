@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 17:59:47 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 18:51:36 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,18 @@ int which_dir(char *dir)
 int	get_ceil_floor_cols(char *line)
 {
 	char    **cols;
+	char	**tmp;
 	int		rgb;
-
-	cols = ft_split(line + 2, ',');
+	
+	tmp = ft_split(line, ' ');
+	if (count_words(line, ' ') != 2)
+		return (free_all(tmp), -1);
+	cols = ft_split(tmp[1], ',');
+	if (count_words(tmp[1], ',') != 3)
+		return (free_all(tmp), free_all(cols), -1);
 	rgb = (ft_atoi(cols[0]) << 16) + (ft_atoi(cols[1]) << 8) + ft_atoi(cols[2]);
 	free_all(cols);
+	free_all(tmp);
 	return (rgb);
 }
 
@@ -81,8 +88,7 @@ int read_data(char **argv, t_map *map)
 		if (dir != -1)
 		{
 			tmp = ft_strtrim(line + 2, " ");
-			map->paths[dir] = ft_substr(tmp, 0, first_string_len(tmp));
-			free(tmp);
+			map->paths[dir] = ft_substr(tmp, 0, first_string_len(tmp), 1);
 		}
 		else if (!ft_strncmp(line, "F", 1))
 			map->floor_color = get_ceil_floor_cols(line);

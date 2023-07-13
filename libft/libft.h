@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:58:35 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/05/06 14:28:22 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:43:45 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void				*ft_calloc(size_t count, size_t size);
 char				*ft_strdup(const char *str, bool to_free);
 void				ft_striteri(char *s, void (*f)(unsigned int, char*));
 
-char				*ft_substr(char const *s, unsigned int start, size_t len);
+// char				*ft_substr(char const *s, unsigned int start, size_t len);
+char				*ft_substr(char const *s, unsigned int start, size_t len, int flag);
 char				*ft_strjoin(const char *s1, const char *s2, int free_s1);
 char				*ft_strjoin_env(const char *s1, const char *s2, int flag);
 char				*ft_strtrim(char const *s1, char const *set);
@@ -63,6 +64,9 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *s, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int n, int fd);
+
+int      			count_words(const char *str, char charset);
+int					word_length(const char *str, char charset);
 
 typedef struct s_delimiter
 {

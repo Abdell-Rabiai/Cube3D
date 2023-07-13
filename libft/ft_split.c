@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:30:40 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/05/05 17:01:19 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/07/13 18:44:37 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	**free_all(char **str)
 	return (NULL);
 }
 
-static int	count_words(const char *str, char charset)
+int	count_words(const char *str, char charset)
 {
 	int	i;
 	int	count;
@@ -45,7 +45,7 @@ static int	count_words(const char *str, char charset)
 	return (count);
 }
 
-static int	word_length(const char *str, char charset)
+int	word_length(const char *str, char charset)
 {
 	int	i;
 
@@ -72,7 +72,7 @@ char	**ft_split(const char *str, char c)
 			str++;
 		if (*str != '\0')
 		{
-			strings[i] = ft_substr(str, 0, word_length(str, c));
+			strings[i] = ft_substr(str, 0, word_length(str, c), 0);
 			if (!strings[i])
 				return (free_all(strings));
 		i++;

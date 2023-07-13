@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 18:06:38 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 19:15:20 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,8 +126,7 @@ void store_paths_colors(t_map *map)
 		if (dir != -1)
 		{
 			tmp = ft_strtrim(arr[i] + 2, " ");
-			map->paths[dir] = ft_substr(tmp, 0, first_string_len(tmp));
-			free(tmp);
+			map->paths[dir] = ft_substr(tmp, 0, first_string_len(tmp), 1);
 		}
 		else if (arr[i][0] == 'F')
 			map->floor_color = get_ceil_floor_cols(arr[i]);
@@ -140,16 +139,45 @@ void store_paths_colors(t_map *map)
 
 int check_map(t_map *map)
 {
+	(void)map;
 	return 0;
 }
 
 int check_text(t_map *map)
 {
-	char **arr;
+	char **text;
 	int i;
+	char *sub;
+	char *trim;
 
-	arr = map->text;
-	
+	sub = NULL;
+	trim = NULL;
+	text = map->text;
+	i = 0;
+	while (text[i])
+	{
+		if ((!ft_strncmp(text[i], "F", 1) || !ft_strncmp(text[i], "C", 1) ) && ft_strcmp(text[i], "\n"))
+		{
+			if (get_ceil_floor_cols(text[i]) == -1)
+				return (printf("Error\nInvalid color\n"), 1);
+		}
+		else if (which_dir(text[i]) == -1 && ft_strcmp(text[i], "\n"))
+			return (printf("Error\nInvalid texture path\n"), 1);
+		else if (which_dir(text[i]) != -1 && ft_strcmp(text[i], "\n"))
+		{
+			trim = ft_strtrim(text[i] + 2, " .\n");
+			sub = ft_substr(trim, 0, first_string_len(trim), 1);
+			if (access(sub, F_OK) != 0)
+			{
+				printf("path = [%s]\n", sub);
+				free(sub);
+				return (printf("Error\nTexture path not accessible\n"), 1);
+			}
+			free(sub);
+		}
+		i++;
+	}
+	return 0;
 }
 
 int main(int argc, char **argv)
@@ -166,7 +194,6 @@ int main(int argc, char **argv)
 	// if everything is ok store map and text and print everything
 	// store_paths_colors(&map);
 	// print_map(&map);
-	
 	
 	// if (check_multiple_players(&map))
 	// 	return (printf("Error\nMultiple players\n"), 1);
