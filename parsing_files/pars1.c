@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:49:07 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/13 14:36:43 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 15:57:01 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int check_invalid_characters(int fd)
 	return (0);
 }
 
-int pars_for_errors(char **argv, int argc)
+int check_file_errors(char **argv, int argc)
 {
 	int fd;
 
@@ -74,8 +74,9 @@ int pars_for_errors(char **argv, int argc)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (printf("Error\nFile not found\n"), 1);
-	if (check_invalid_characters(fd))
-		return (printf("Error\nInvalid characters in map\n"), 1);
+    close(fd);
+	// if (check_invalid_characters(fd))
+	// 	return (printf("Error\nInvalid characters in map\n"), 1);
 	return (0);
 }
 

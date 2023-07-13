@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   map_parser.c                                       :+:      :+:    :+:   */
+/*   pars2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 13:58:11 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 17:59:47 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int which_dir(char *dir)
 		return (EAST);
 	else if (!ft_strncmp(dir, "WE", 2))
 		return (WEST);
-
 	else
 		return (-1);
 }
@@ -43,14 +42,14 @@ void print_map(t_map *map)
 	int i;
 
 	i = -1;
-	printf("ceil => %d\n", map->ceil_color);
-	printf("floor => %d\n", map->floor_color);
-	printf("path 1 => %s\n", map->paths[0]);
-	printf("path 2 => %s\n", map->paths[1]);
-	printf("path 3 => %s\n", map->paths[2]);
-	printf("path 4 => %s\n", map->paths[3]);
+	printf("ceil => (%d)\n", map->ceil_color);
+	printf("floor => (%d)\n", map->floor_color);
+	printf("path 1 => (%s)\n", map->paths[0]);
+	printf("path 2 => (%s)\n", map->paths[1]);
+	printf("path 3 => (%s)\n", map->paths[2]);
+	printf("path 4 => (%s)\n", map->paths[3]);
 	while (map->map[++i])
-		printf("%s", map->map[i]);
+		printf("(%s)", map->map[i]);
 }
 
 int first_string_len(char *str)
@@ -65,8 +64,8 @@ int first_string_len(char *str)
 
 int read_data(char **argv, t_map *map)
 {
-	char    *line;
-	char   *tmp;
+	char	*line;
+	char	*tmp;
 	int     dir;
 	int		i;
 	int		map_fd;
@@ -118,6 +117,30 @@ int	count_map_lines(char **argv)
 	count = 0;
 	while (line)
 	{
+		free(line);
+		line = get_next_line(map_fd);
+		count++;
+	}
+	close(map_fd);
+	return (count);
+}
+
+int count_text_lines(char **argv)
+{
+	int		count;
+	int		map_fd;
+	char	*line;
+
+	count = 0;
+	map_fd = open(argv[1], O_RDONLY);
+	line = get_next_line(map_fd);
+	while (line)
+	{
+		if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
+		{
+			free(line);
+			break ;
+		}
 		free(line);
 		line = get_next_line(map_fd);
 		count++;
