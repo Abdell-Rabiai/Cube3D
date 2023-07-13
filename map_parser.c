@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/12 20:09:59 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 12:10:54 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int read_data(char **argv, t_map *map)
 		line = get_next_line(map_fd);
 	}
 	map->map[i] = NULL;
-	print_map(map);
 	close(map_fd);
 	return (0);
 }
@@ -130,23 +129,3 @@ int	count_map_lines(char **argv)
 // what is a valid map ?
 // 1. map must be surrounded by walls
 // 2. map must have only 4 directions (N, S, E, W)
-
-int	is_surrounded_by_walls(t_map *map)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (++i < map->rows)
-	{
-		j = -1;
-		while (++j < map->columns)
-		{
-			if ((i == 0 || i == map->rows - 1) && map->map[i][j] != '1')
-					return (0);
-			else if ((j == 0 || j == map->columns - 1) && map->map[i][j] != '1')
-				return (0);
-		}
-	}
-	return (1);
-}
