@@ -6,7 +6,7 @@
 #    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/07/11 08:29:18 by arabiai          ###   ########.fr        #
+#    Updated: 2023/07/13 14:43:41 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,9 @@ BANNER=\
                                          
                                                                                                      
 																									 
-# parser = $(addprefix a_parser/,expansions.c files_opener.c files_opener2.c final_list.c split_cmds.c)
+parsing_files = $(addprefix parsing_files/,pars1.c pars2.c)
+
+get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c)
 
 # lexer = $(addprefix a_lexer/,fill_check_1st_list.c get_words.c syntax_checker.c syntax_checker2.c syntax_checker3.c)
 
@@ -43,7 +45,7 @@ BANNER=\
 
 # SRCS_OBJ = $(execution) $(ebuiltin_functions) $(parser) $(lexer)
 
-SRCS_OBJ = map_parser.c  get_next_line.c get_next_line_utils.c
+SRCS_OBJ = $(parsing_files) $(get_next_line)
 
 SRC = main.c
 

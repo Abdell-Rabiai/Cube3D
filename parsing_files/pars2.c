@@ -6,11 +6,11 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 12:10:54 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 13:58:11 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
 int which_dir(char *dir)
 {
@@ -125,7 +125,3 @@ int	count_map_lines(char **argv)
 	close(map_fd);
 	return (count);
 }
-
-// what is a valid map ?
-// 1. map must be surrounded by walls
-// 2. map must have only 4 directions (N, S, E, W)
