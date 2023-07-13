@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:49:07 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/13 15:57:01 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 19:44:25 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,48 +17,33 @@ int is_valid_map_line(char *line)
 	int i;
 
 	i = 0;
-	if (!ft_strcmp(line, "\n"))
-		return (1);
+	if (!ft_strcmp(line, ""))
+		return (printf("Error\nEmpty line in the map\n"), 1);
 	while (line[i])
 	{
 		if (line[i] != ' ' && line[i] != '1' && line[i] != '0' && line[i] != 'N'
 			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != '\n')
 			{
-				printf("character[%d] = %c\n", i, line[i]);
-				return (1);
+				printf("character[%d] = [%c]\n", i, line[i]);
+				return (printf("Error\nInvalid characters in map\n"), 1);
 			}
 		i++;
 	}
 	return (0);
 }
-int check_invalid_characters(int fd)
+int check_invalid_characters(char **arr)
 {
 	int	i;
-	char *line;
 	char *tmp;
 	
 	i = 0;
-	while (i++ < 6)
+	while (arr[i])
 	{
-		line = get_next_line(fd);
-		free(line);
-	}
-	line = get_next_line(fd);
-	while (!ft_strcmp(line, "\n"))
-	{
-		free(line);
-		line = get_next_line(fd);
-	}
-	free(line);
-	line = get_next_line(fd);
-	while (line)
-	{
-		tmp = ft_strtrim(line, " ");
+		tmp = ft_strtrim(arr[i], " ");
 		if (is_valid_map_line(tmp))
-			return (1);
+			return (free(tmp), 1);
 		free(tmp);
-		free(line);
-		line = get_next_line(fd);
+		i++;
 	}
 	return (0);
 }
@@ -74,58 +59,62 @@ int check_file_errors(char **argv, int argc)
 	fd = open(argv[1], O_RDONLY);
 	if (fd == -1)
 		return (printf("Error\nFile not found\n"), 1);
-    close(fd);
-	// if (check_invalid_characters(fd))
-	// 	return (printf("Error\nInvalid characters in map\n"), 1);
+	close(fd);
 	return (0);
 }
 
 int check_right(char **arr, int i, int j)
 {
-	printf("the coordinates of the first 0 : (%d, %d)\n", i, j);
 	while (arr[i][j] != '\0' && arr[i][j] == '0')
 		j++;
-	printf("right ==> [%c]\n", arr[i][j]);
 	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
+	{
+		printf("the coordinates are : (%d, %d)\n", i, j);
+		printf("right ==> [%c]\n", arr[i][j]);
 		return (1);
+	}
 	return (0);
 }
 int check_left(char **arr, int i, int j)
 {
 	while (j > 0 && arr[i][j] == '0')
 		j--;
-	printf("left ==> [%c]\n", arr[i][j]);
 	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
+	{
+		printf("left ==> [%c]\n", arr[i][j]);
 		return (1);
+	}
 	return (0);
 }
 int check_up(char **arr, int i, int j)
 {
 	while (i > 0 && arr[i][j] == '0')
 		i--;
-	printf("up ==> [%c]\n", arr[i][j]);
 	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
+	{
+		printf("up ==> [%c]\n", arr[i][j]);
 		return (1);
+	}
 	return (0);
 }
 int check_down(char **arr, int i, int j)
 {
 	while (arr[i][j] != '\0' && arr[i][j] == '0')
 		i++;
-	printf("down ==> [%c]\n", arr[i][j]);
 	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
+	{
+		printf("down ==> [%c]\n", arr[i][j]);
 		return (1);
+	}
 	return (0);
 }
 
-int check_is_closed(t_map *map)
+int check_is_closed(char **arr)
 {
-	char **arr;
 	int i;
 	int j;
 
 	i = 0;
-	arr = map->map;
 	while (arr[i])
 	{
 		j = 0;
@@ -144,16 +133,14 @@ int check_is_closed(t_map *map)
 	return (0);
 }
 
-int check_multiple_players(t_map *map)
+int check_multiple_players(char **arr)
 {
-	char **arr;
 	int i;
 	int j;
 	int count;
 
 	i = 0;
 	count = 0;
-	arr = map->map;
 	while (arr[i])
 	{
 		j = 0;

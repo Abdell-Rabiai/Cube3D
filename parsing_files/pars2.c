@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 18:51:36 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 19:40:34 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void print_map(t_map *map)
 	printf("path 3 => (%s)\n", map->paths[2]);
 	printf("path 4 => (%s)\n", map->paths[3]);
 	while (map->map[++i])
-		printf("(%s)", map->map[i]);
+		printf("(%s)\n", map->map[i]);
 }
 
 int first_string_len(char *str)
@@ -68,42 +68,6 @@ int first_string_len(char *str)
 		i++;
 	return (i);
 }
-
-int read_data(char **argv, t_map *map)
-{
-	char	*line;
-	char	*tmp;
-	int     dir;
-	int		i;
-	int		map_fd;
-
-	i = 0;
-	map_fd = open(argv[1], O_RDONLY);
-	map->map = malloc(sizeof(char *) * (map->rows + 1));
-	map->paths = malloc(sizeof(char *) * 4);
-	line = get_next_line(map_fd);
-	while (line)
-	{
-		dir = which_dir(line);
-		if (dir != -1)
-		{
-			tmp = ft_strtrim(line + 2, " ");
-			map->paths[dir] = ft_substr(tmp, 0, first_string_len(tmp), 1);
-		}
-		else if (!ft_strncmp(line, "F", 1))
-			map->floor_color = get_ceil_floor_cols(line);
-		else if (!ft_strncmp(line, "C", 1))
-			map->ceil_color = get_ceil_floor_cols(line);
-		else if (ft_strcmp(line, "\n"))
-			map->map[i++] = ft_strdup(line, 0);
-		free(line);
-		line = get_next_line(map_fd);
-	}
-	map->map[i] = NULL;
-	close(map_fd);
-	return (0);
-}
-
 
 int	count_map_lines(char **argv)
 {

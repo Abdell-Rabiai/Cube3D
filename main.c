@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 19:15:20 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 19:45:39 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,18 @@ void print_map1(t_map *map)
 	}
 }
 
+void print_paths(t_map *map)
+{
+	int i;
+
+	i = 0;
+	while (i < 4)
+	{
+		printf("(%s)\n", map->paths[i]);
+		i++;
+	}
+}
+
 void read_map(t_map *map, char **argv)
 {
 	char	*line;
@@ -100,7 +112,7 @@ void read_map(t_map *map, char **argv)
 	}
 	while (line)
 	{
-		map->map[i] = ft_strdup(line, 0);
+		map->map[i] = ft_strdup(ft_strtrim(line, "\n"), 1);
 		free(line);
 		line = get_next_line(map_fd);
 		i++;
@@ -125,7 +137,7 @@ void store_paths_colors(t_map *map)
 		dir = which_dir(arr[i]);
 		if (dir != -1)
 		{
-			tmp = ft_strtrim(arr[i] + 2, " ");
+			tmp = ft_strtrim(arr[i] + 2, " .\n");
 			map->paths[dir] = ft_substr(tmp, 0, first_string_len(tmp), 1);
 		}
 		else if (arr[i][0] == 'F')
@@ -135,12 +147,6 @@ void store_paths_colors(t_map *map)
 		i++;
 	}
 	map->paths[4] = NULL;
-}
-
-int check_map(t_map *map)
-{
-	(void)map;
-	return 0;
 }
 
 int check_text(t_map *map)
@@ -180,6 +186,22 @@ int check_text(t_map *map)
 	return 0;
 }
 
+int check_map(t_map *map)
+{
+	char **mp;
+	int i;
+	
+	i = 0;
+	mp = map->map;
+	if (check_invalid_characters(mp))
+		return (1);
+	if (check_multiple_players(mp))
+		return (printf("Error\nMultiple players\n"), 1);
+	if (check_is_closed(mp))
+		return (printf("Error\nMap is not closed\n"), 1);
+	return 0;
+}
+
 int main(int argc, char **argv)
 {
 	t_map	map;
@@ -192,14 +214,8 @@ int main(int argc, char **argv)
 	if (check_map(&map) || check_text(&map))
 		return (1);
 	// if everything is ok store map and text and print everything
-	// store_paths_colors(&map);
-	// print_map(&map);
-	
-	// if (check_multiple_players(&map))
-	// 	return (printf("Error\nMultiple players\n"), 1);
-	// if (check_is_closed(&map))
-	// 	return (printf("Error\nMap is not closed\n"), 1);
-	// print_map(&map);
-	// free_map(&map);
+	store_paths_colors(&map);
+	print_map(&map);
+	free_map(&map);
 	while (1);
 }

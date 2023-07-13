@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 17:40:01 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/13 19:26:06 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,12 @@ int	get_ceil_floor_cols(char *line);
 int which_dir(char *dir);
 
 int is_valid_map_line(char *line);
-int check_invalid_characters(int fd);
+int check_invalid_characters(char **arr);
 int check_file_errors(char **argv, int argc);
 
 int check_right(char **arr, int i, int j);
 int check_left(char **arr, int i, int j);
 int check_up(char **arr, int i, int j);
 int check_down(char **arr, int i, int j);
-int check_is_closed(t_map *map);
-int check_multiple_players(t_map *map);
+int check_is_closed(char **arr);
+int check_multiple_players(char **arr);
