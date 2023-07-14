@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 11:47:35 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 11:50:11 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int main(int argc, char **argv)
 	// if everything is ok store map and text and print everything
 	store_paths_colors(&map);
 	print_map(&map);
+	// start_the_game(&map);
 	free_map(&map);
 	// while (1);
 }
