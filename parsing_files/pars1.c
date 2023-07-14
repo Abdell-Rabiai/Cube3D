@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/13 13:49:07 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/13 19:44:25 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 08:52:51 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int check_right(char **arr, int i, int j)
 		j++;
 	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
 	{
-		printf("the coordinates are : (%d, %d)\n", i, j);
 		printf("right ==> [%c]\n", arr[i][j]);
 		return (1);
 	}
@@ -90,6 +89,8 @@ int check_up(char **arr, int i, int j)
 {
 	while (i > 0 && arr[i][j] == '0')
 		i--;
+	if (ft_strlen(arr[i]) - 1 < (size_t)j)
+		return (1);
 	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
 	{
 		printf("up ==> [%c]\n", arr[i][j]);
@@ -101,6 +102,8 @@ int check_down(char **arr, int i, int j)
 {
 	while (arr[i][j] != '\0' && arr[i][j] == '0')
 		i++;
+	if (ft_strlen(arr[i]) - 1 < (size_t)j)
+		return (1);
 	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
 	{
 		printf("down ==> [%c]\n", arr[i][j]);

@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 19:45:39 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 08:53:12 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,8 +193,8 @@ int check_map(t_map *map)
 	
 	i = 0;
 	mp = map->map;
-	if (check_invalid_characters(mp))
-		return (1);
+	// if (check_invalid_characters(mp))
+	// 	return (1);
 	if (check_multiple_players(mp))
 		return (printf("Error\nMultiple players\n"), 1);
 	if (check_is_closed(mp))
@@ -217,5 +217,5 @@ int main(int argc, char **argv)
 	store_paths_colors(&map);
 	print_map(&map);
 	free_map(&map);
-	while (1);
+	// while (1);
 }
