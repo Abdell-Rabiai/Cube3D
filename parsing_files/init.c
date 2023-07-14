@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:00:14 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 09:24:50 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 10:54:41 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ int	count_map_lines(char **argv)
 	count = 0;
 	map_fd = open(argv[1], O_RDONLY);
 	line = get_next_line(map_fd);
-	while (line && count < 6)
+	while (line /*&& count < 6*/)
 	{
+		if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
+			break ;
 		free(line);
 		line = get_next_line(map_fd);
 		count++;
