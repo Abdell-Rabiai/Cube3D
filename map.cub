@@ -2,8 +2,8 @@ C 225,30,0
 
 
 
-NO                    ./Users/arabiai/Desktop/42_projects/Cube3D/textures/text.jpg
-WE ./Users/arabiai/Desktop/42_projects/Cube3D/textures/windows.jpg
+NO                    ./USERS/ahmaymou/Desktop/c3d/textures/text.jpg
+WE ./USERS/ahmaymou/Desktop/c3d/textures/windows.jpg
 
 
 
@@ -13,14 +13,14 @@ F 220,100,255
 
 
 
-SO ./Users/arabiai/Desktop/42_projects/Cube3D/textures/saul.jpg
-EA        ./Users/arabiai/Desktop/42_projects/Cube3D/textures/church.jpg
+SO ./USERS/ahmaymou/Desktop/c3d/textures/saul.jpg
+EA        ./USERS/ahmaymou/Desktop/c3d/textures/church.jpg
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
         1001000000000000000000001
 11111111101100001110000000000001
-10000000011000001110111111111111          1  1
+10000000011000001110101111111111          1  1
 11110111111111011100000010001               101
 11110111111111011101010010001     111   1  1101
 11000000110101011100000010111               111

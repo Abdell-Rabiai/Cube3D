@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 10:32:54 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 13:27:13 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
 # include "mlx.h"
+
+# define SCALE 30
 
 typedef enum directions
 {
@@ -38,6 +40,20 @@ typedef struct s_map
 	int     floor_color;
 	int		rows;
 }				t_map;
+
+typedef struct s_img_data
+{
+	int		*img_data;
+	int		endian;
+}				t_img_data;
+
+typedef struct s_mlx_info
+{
+	void		*mlx_ptr;
+	void		*window_ptr;
+	void		*img_ptr;
+	t_img_data	img_data;
+}				t_mlx_info;
 
 /***--------------- PARSING FUNCTINOS ---------------***/
 void initialize_map(t_map *map, char **argv);
@@ -76,3 +92,4 @@ int check_left(char **arr, int i, int j);
 int check_up(char **arr, int i, int j);
 int check_down(char **arr, int i, int j);
 int check_multiple_players(char **arr);
+void	minimap(t_map *map, t_mlx_info *mlx_info);

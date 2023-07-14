@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
+#    By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/07/14 11:47:38 by arabiai          ###   ########.fr        #
+#    Updated: 2023/07/14 13:29:18 by ahmaymou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ BANNER=\
 																									 
 parsing_files = $(addprefix parsing_files/, check_file_errors.c checking_closed_map.c checking_map.c\
 		checking_text.c init.c printing.c reading_map_text.c)
-
+Raycasting = $(addprefix Raycasting/, minimap.c)
 get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c)
 
 # lexer = $(addprefix a_lexer/,fill_check_1st_list.c get_words.c syntax_checker.c syntax_checker2.c syntax_checker3.c)
@@ -46,7 +46,10 @@ get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c
 
 # SRCS_OBJ = $(execution) $(ebuiltin_functions) $(parser) $(lexer)
 
-SRCS_OBJ = $(parsing_files) $(get_next_line)
+INC_EXC = -I /usr/local/include
+FRAMEWORK = -L /usr/local/lib/ -lmlx -framework OpenGl -framework AppKit
+
+SRCS_OBJ = $(parsing_files) $(get_next_line) $(Raycasting)
 
 SRC = main.c
 
@@ -79,7 +82,7 @@ banner2:
 	@$(CC) $(FLAGS) $(READLINE_INC) -c $< -o $@
 
 $(NAME) : $(OBJ) $(SRC) $(HEADER)
-	@$(CC) $(FLAGS) $(SRC) $(OBJ) $(LIBS) -lreadline $(READLINE_LIB) -o $(NAME)
+	@$(CC) $(INC_EXC) $(FLAGS) $(SRC) $(OBJ) $(LIBS) -lreadline $(READLINE_LIB) -Imlx $(FRAMEWORK) -o $(NAME)
 	@echo "\n\n\t$(Cyan) Enjoooy :)\n $(Color_Off)"
 
 libftmake :
