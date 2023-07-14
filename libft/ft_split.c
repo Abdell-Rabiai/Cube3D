@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:30:40 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 18:44:37 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 11:39:06 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,22 @@ int	count_words(const char *str, char charset)
 			count++;
 		while (str[i] != '\0' && str[i] != charset)
 			i++;
+	}
+	return (count);
+}
+
+int	count_charset(const char *str, char charset)
+{
+	int	i;
+	int	count;
+
+	count = 0;
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == charset)
+			count++;
+		i++;
 	}
 	return (count);
 }

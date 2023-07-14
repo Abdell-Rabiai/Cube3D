@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 09:19:49 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 10:59:32 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int check_right(char **arr, int i, int j)
 	}
 	return (0);
 }
+
 int check_left(char **arr, int i, int j)
 {
 	while (j > 0 && arr[i][j] == '0')
@@ -34,6 +35,7 @@ int check_left(char **arr, int i, int j)
 	}
 	return (0);
 }
+
 int check_up(char **arr, int i, int j)
 {
 	while (i > 0 && arr[i][j] == '0')
@@ -47,6 +49,7 @@ int check_up(char **arr, int i, int j)
 	}
 	return (0);
 }
+
 int check_down(char **arr, int i, int j)
 {
 	while (arr[i][j] != '\0' && arr[i][j] == '0')
@@ -74,8 +77,7 @@ int check_is_closed(char **arr)
 		{
 			if (arr[i][j] == '0')
 			{
-				if (check_right(arr, i, j) || check_left(arr, i, j)
-					|| check_up(arr, i, j) || check_down(arr, i, j))
+				if (check_right(arr, i, j) || check_left(arr, i, j) || check_up(arr, i, j) || check_down(arr, i, j))
 					return (1);
 			}
 			j++;

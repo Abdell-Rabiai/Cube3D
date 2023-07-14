@@ -6,17 +6,17 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:00:14 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 10:54:41 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 11:02:51 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	count_map_lines(char **argv)
+int count_map_lines(char **argv)
 {
-	int		count;
-	int		map_fd;
-	char	*line;
+	int count;
+	int map_fd;
+	char *line;
 
 	count = 0;
 	map_fd = open(argv[1], O_RDONLY);
@@ -24,7 +24,7 @@ int	count_map_lines(char **argv)
 	while (line /*&& count < 6*/)
 	{
 		if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
-			break ;
+			break;
 		free(line);
 		line = get_next_line(map_fd);
 		count++;
@@ -42,9 +42,9 @@ int	count_map_lines(char **argv)
 
 int count_text_lines(char **argv)
 {
-	int		count;
-	int		map_fd;
-	char	*line;
+	int count;
+	int map_fd;
+	char *line;
 
 	count = 0;
 	map_fd = open(argv[1], O_RDONLY);
@@ -54,7 +54,7 @@ int count_text_lines(char **argv)
 		if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
 		{
 			free(line);
-			break ;
+			break;
 		}
 		free(line);
 		line = get_next_line(map_fd);
@@ -64,9 +64,9 @@ int count_text_lines(char **argv)
 	return (count);
 }
 
-void	free_map(t_map *map)
+void free_map(t_map *map)
 {
-	int	i;
+	int i;
 
 	i = -1;
 	while (++i < 4)

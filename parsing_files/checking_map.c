@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:16:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 09:27:39 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 10:59:50 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ int check_valid_map_line(char *line)
 		return (printf("Error\nEmpty line in the map\n"), 1);
 	while (line[i])
 	{
-		if (line[i] != ' ' && line[i] != '1' && line[i] != '0' && line[i] != 'N'
-			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != '\n')
-			{
-				printf("character[%d] = [%c]\n", i, line[i]);
-				return (printf("Error\nInvalid characters in map\n"), 1);
-			}
+		if (line[i] != ' ' && line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != '\n')
+		{
+			printf("character[%d] = [%c]\n", i, line[i]);
+			return (printf("Error\nInvalid characters in map\n"), 1);
+		}
 		i++;
 	}
 	return (0);
@@ -34,9 +33,9 @@ int check_valid_map_line(char *line)
 
 int check_invalid_characters(char **arr)
 {
-	int	i;
+	int i;
 	char *tmp;
-	
+
 	i = 0;
 	while (arr[i])
 	{
@@ -77,7 +76,7 @@ int check_map(t_map *map)
 {
 	char **mp;
 	int i;
-	
+
 	i = 0;
 	mp = map->map;
 	if (check_invalid_characters(mp))

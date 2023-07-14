@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:07:27 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 10:54:49 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 11:41:02 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ int which_dir(char *dir)
 
 void read_textures_colors(t_map *map, char **argv)
 {
-	char	*line;
-	int		map_fd;
-	int		i;
+	char *line;
+	int map_fd;
+	int i;
 
 	i = 0;
 	map_fd = open(argv[1], O_RDONLY);
@@ -50,16 +50,15 @@ void read_textures_colors(t_map *map, char **argv)
 
 void read_map(t_map *map, char **argv)
 {
-	char	*line;
-	int		map_fd;
-	int		i;
+	char *line;
+	int map_fd;
+	int i;
 
 	i = 0;
 	map_fd = open(argv[1], O_RDONLY);
 	map->map = malloc(sizeof(char *) * (map->rows + 1));
 	line = get_next_line(map_fd);
-	while (!ft_strcmp(line, "\n") || line[0] == 'C' || line[0] == 'F' || line[0] == 'N'
-		|| line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
+	while (!ft_strcmp(line, "\n") || line[0] == 'C' || line[0] == 'F' || line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 	{
 		free(line);
 		line = get_next_line(map_fd);
@@ -75,16 +74,18 @@ void read_map(t_map *map, char **argv)
 	close(map_fd);
 }
 
-int	get_ceil_floor_cols(char *line)
+int get_ceil_floor_cols(char *line)
 {
-	char    **cols;
-	char	**tmp;
-	int		rgb;
-	
+	char **cols;
+	char **tmp;
+	int rgb;
+
 	tmp = ft_split(line, ' ');
 	if (!tmp)
 		return (-1);
 	if (count_words(line, ' ') != 2)
+		return (free_all(tmp), -1);
+	if (count_charset(tmp[1], ',') != 2)
 		return (free_all(tmp), -1);
 	cols = ft_split(tmp[1], ',');
 	if (!cols)

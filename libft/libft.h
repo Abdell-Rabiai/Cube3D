@@ -67,7 +67,7 @@ void				ft_putnbr_fd(int n, int fd);
 
 int      			count_words(const char *str, char charset);
 int					word_length(const char *str, char charset);
-
+int					count_charset(const char *str, char charset);
 typedef struct s_delimiter
 {
 	char			*delimiter;
