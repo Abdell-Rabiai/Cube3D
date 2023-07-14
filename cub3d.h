@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/13 19:26:06 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/14 09:30:59 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,39 @@ typedef struct s_map
 }				t_map;
 
 /***--------------- PARSING FUNCTINOS ---------------***/
-int first_string_len(char *str);
-int read_data(char **argv, t_map *map);
-int	count_map_lines(char **argv);
-int	count_text_lines(char **argv);
 void initialize_map(t_map *map, char **argv);
-void free_map(t_map *map);
-void print_map(t_map *map);
+int count_text_lines(char **argv);
+int	count_map_lines(char **argv);
+void	free_map(t_map *map);
 
-int	get_ceil_floor_cols(char *line);
+int read_data(char **argv, t_map *map);
+void read_map(t_map *map, char **argv);
 int which_dir(char *dir);
+void read_textures_colors(t_map *map, char **argv);
+int	get_ceil_floor_cols(char *line);
+void store_paths_colors(t_map *map);
+
+void print_map(t_map *map);
+void print_text(t_map *map);
+void print_only_map(t_map *map);
+void print_paths(t_map *map);
+
 
 int is_valid_map_line(char *line);
 int check_invalid_characters(char **arr);
-int check_file_errors(char **argv, int argc);
+void read_textures_colors(t_map *map, char **argv);
 
+
+int check_map(t_map *map);
+int check_multiple_players(char **arr);
+int check_invalid_characters(char **arr);
+int check_valid_map_line(char *line);
+
+int check_text(t_map *map);
+int check_file_errors(char **argv, int argc);
+int check_is_closed(char **arr);
 int check_right(char **arr, int i, int j);
 int check_left(char **arr, int i, int j);
 int check_up(char **arr, int i, int j);
 int check_down(char **arr, int i, int j);
-int check_is_closed(char **arr);
 int check_multiple_players(char **arr);

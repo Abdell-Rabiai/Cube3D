@@ -6,7 +6,7 @@
 #    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/07/13 16:20:09 by arabiai          ###   ########.fr        #
+#    Updated: 2023/07/14 09:24:40 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ BANNER=\
                                          
                                                                                                      
 																									 
-parsing_files = $(addprefix parsing_files/,pars1.c pars2.c)
+parsing_files = $(addprefix parsing_files/, check_file_errors.c checking_closed_map.c checking_map.c\
+		checking_text.c init.c printing.c reading_map_text.c)
 
 get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c)
 

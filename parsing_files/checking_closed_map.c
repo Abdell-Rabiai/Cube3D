@@ -1,67 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pars1.c                                            :+:      :+:    :+:   */
+/*   checking_closed_map.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/13 13:49:07 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 08:52:51 by arabiai          ###   ########.fr       */
+/*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
+/*   Updated: 2023/07/14 09:19:49 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
-
-int is_valid_map_line(char *line)
-{
-	int i;
-
-	i = 0;
-	if (!ft_strcmp(line, ""))
-		return (printf("Error\nEmpty line in the map\n"), 1);
-	while (line[i])
-	{
-		if (line[i] != ' ' && line[i] != '1' && line[i] != '0' && line[i] != 'N'
-			&& line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != '\n')
-			{
-				printf("character[%d] = [%c]\n", i, line[i]);
-				return (printf("Error\nInvalid characters in map\n"), 1);
-			}
-		i++;
-	}
-	return (0);
-}
-int check_invalid_characters(char **arr)
-{
-	int	i;
-	char *tmp;
-	
-	i = 0;
-	while (arr[i])
-	{
-		tmp = ft_strtrim(arr[i], " ");
-		if (is_valid_map_line(tmp))
-			return (free(tmp), 1);
-		free(tmp);
-		i++;
-	}
-	return (0);
-}
-
-int check_file_errors(char **argv, int argc)
-{
-	int fd;
-
-	if (argc != 2)
-		return (printf("Error\nWrong number of arguments\n"), 1);
-	else if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
-		return (printf("Error\nFile format not correct\n"), 1);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (printf("Error\nFile not found\n"), 1);
-	close(fd);
-	return (0);
-}
 
 int check_right(char **arr, int i, int j)
 {
@@ -133,29 +82,5 @@ int check_is_closed(char **arr)
 		}
 		i++;
 	}
-	return (0);
-}
-
-int check_multiple_players(char **arr)
-{
-	int i;
-	int j;
-	int count;
-
-	i = 0;
-	count = 0;
-	while (arr[i])
-	{
-		j = 0;
-		while (arr[i][j] != '\0')
-		{
-			if (arr[i][j] == 'N' || arr[i][j] == 'S' || arr[i][j] == 'E' || arr[i][j] == 'W')
-				count++;
-			j++;
-		}
-		i++;
-	}
-	if (count > 1)
-		return (1);
 	return (0);
 }

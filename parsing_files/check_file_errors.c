@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   check_file_errors.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 09:21:10 by arabiai          ###   ########.fr       */
+/*   Created: 2023/07/14 09:06:55 by arabiai           #+#    #+#             */
+/*   Updated: 2023/07/14 09:06:59 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "../cub3d.h"
 
-int main(int argc, char **argv)
+int check_file_errors(char **argv, int argc)
 {
-	t_map	map;
+	int fd;
 
-	initialize_map(&map, argv);
-	if (check_file_errors(argv, argc))
-		return (1);
-	read_textures_colors(&map, argv);
-	read_map(&map, argv);
-	if (check_map(&map) || check_text(&map))
-		return (1);
-	// if everything is ok store map and text and print everything
-	store_paths_colors(&map);
-	print_map(&map);
-	free_map(&map);
-	// while (1);
+	if (argc != 2)
+		return (printf("Error\nWrong number of arguments\n"), 1);
+	else if (ft_strncmp(argv[1] + ft_strlen(argv[1]) - 4, ".cub", 4))
+		return (printf("Error\nFile format not correct\n"), 1);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (printf("Error\nFile not found\n"), 1);
+	close(fd);
+	return (0);
 }
