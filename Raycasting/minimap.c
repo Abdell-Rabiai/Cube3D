@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 12:33:48 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:51:48 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,24 +135,3 @@ void	minimap(t_map *map, t_mlx_info *mlx_info)
 		i++;
 	}
 }
-
-/*
-int main(int argc, char **argv)
-{
-	t_map	map;
-	t_mlx_info info;
-	info.mlx_ptr = mlx_init();
-	if (pars_for_errors(argv, argc))
-		return (1);
-	initialize_map(&map, argv);
-	if (read_data(argv, &map))
-		return (1);
-	// printf("map.rows%d\nmap.colu%d\n", map.rows, map.columns);
-	info.window_ptr = mlx_new_window(info.mlx_ptr, map.rows * SCALE, 33 * SCALE, "ri2assa");
-	minimap(&map, &info);
-	// free_map(&map);
-	mlx_loop(info.mlx_ptr);
-	(void)argc;
-	(void)argv;
-}
-*/

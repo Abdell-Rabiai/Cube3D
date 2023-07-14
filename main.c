@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 13:27:25 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/07/14 14:52:40 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ int main(int argc, char **argv)
 	print_map(&map);
 	info.window_ptr = mlx_new_window(info.mlx_ptr, map.rows * SCALE, 33 * SCALE, "cub3d");
 	minimap(&map, &info);
-	// free_map(&map);
 	mlx_loop(info.mlx_ptr);
-	// start_the_game(&map);
 	free_map(&map);
-	// while (1);
+	// start_the_game(&map);
 }
