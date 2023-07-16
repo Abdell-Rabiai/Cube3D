@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/16 12:07:57 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/16 20:09:22 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int parsing(char **argv, int argc, t_map *map)
 	read_map(map, argv);
 	if (check_map(map) || check_text(map))
 		return (1);
-	// if everything is ok store map and text and print everything
 	store_paths_colors(map);
 	print_map(map);
 	return (0);
@@ -37,5 +36,4 @@ int main(int argc, char **argv)
 	minimap(&map, &info);
 	mlx_loop(info.mlx_ptr);
 	free_map(&map);
-	// start_the_game(&map);
 }
