@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 13:27:13 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/07/16 12:04:30 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ typedef struct s_mlx_info
 }				t_mlx_info;
 
 /***--------------- PARSING FUNCTINOS ---------------***/
-void initialize_map(t_map *map, char **argv);
+void initialize_map(t_map *map, t_mlx_info *info, char **argv);
 int count_text_lines(char **argv);
 int	count_map_lines(char **argv);
 void	free_map(t_map *map);
