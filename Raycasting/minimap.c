@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 14:51:48 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/19 05:31:52 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	draw_direction_line(t_mlx_info *mlx_info, int x, int y, int dir)
 	}
 }
 
-void	draw_square(t_mlx_info *mlx_info ,int x, int y, int color, int dir)
+void	draw_square(t_mlx_info *info ,int x, int y, int color, int dir)
 {
 	int i;
 	int j;
@@ -81,10 +81,10 @@ void	draw_square(t_mlx_info *mlx_info ,int x, int y, int color, int dir)
 	{
 		j = SCALE * y - 1;
 		while (++j < SCALE + (SCALE * y))
-			mlx_pixel_put(mlx_info->mlx_ptr, mlx_info->window_ptr, i, j, color);
+			my_mlx_pixel_put(&info->image, i, j, color);
 	}
 	if (dir != -1)
-		draw_direction_line(mlx_info, x, y, dir);
+		draw_direction_line(info, x, y, dir);
 }
 
 int	is_player(char dir)

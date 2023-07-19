@@ -6,7 +6,7 @@
 #    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/07/14 14:51:03 by arabiai          ###   ########.fr        #
+#    Updated: 2023/07/19 05:32:33 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ BANNER=\
 																									 
 parsing_files = $(addprefix parsing_files/, check_file_errors.c checking_closed_map.c checking_map.c\
 		checking_text.c init.c printing.c reading_map_text.c)
-Raycasting = $(addprefix Raycasting/, minimap.c)
+		
+Raycasting = $(addprefix Raycasting/, minimap.c mlx_files.c)
+
 get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c)
 
 # lexer = $(addprefix a_lexer/,fill_check_1st_list.c get_words.c syntax_checker.c syntax_checker2.c syntax_checker3.c)

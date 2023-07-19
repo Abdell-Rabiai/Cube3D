@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/16 12:04:30 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/19 05:22:26 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include "mlx.h"
 
 # define SCALE 30
-
+# define HEIGHT 1920
+# define WIDTH 1080
 typedef enum directions
 {
 	NORTH,
@@ -41,18 +42,21 @@ typedef struct s_map
 	int		rows;
 }				t_map;
 
-typedef struct s_img_data
+typedef struct s_image
 {
-	int		*img_data;
-	int		endian;
-}				t_img_data;
+  void        *img;
+  char        *addr;
+  int         bits_per_pixel;
+  int         line_length;
+  int         endian;
+}				t_image;
 
 typedef struct s_mlx_info
 {
 	void		*mlx_ptr;
 	void		*window_ptr;
 	void		*img_ptr;
-	t_img_data	img_data;
+	t_image		image;
 }				t_mlx_info;
 
 /***--------------- PARSING FUNCTINOS ---------------***/
@@ -93,3 +97,8 @@ int check_up(char **arr, int i, int j);
 int check_down(char **arr, int i, int j);
 int check_multiple_players(char **arr);
 void	minimap(t_map *map, t_mlx_info *mlx_info);
+
+/***--------------- MLX FUNCTINOS ---------------***/
+void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
+
+/***--------------- RAYCASTING FUNCTINOS ---------------***/

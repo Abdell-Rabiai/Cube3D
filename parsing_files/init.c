@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:00:14 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/16 12:06:21 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/19 05:09:58 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,14 +78,3 @@ void free_map(t_map *map)
 	free(map->map);
 }
 
-void initialize_map(t_map *map, t_mlx_info *info, char **argv)
-{
-	map->ceil_color = 0;
-	map->floor_color = 0;
-	map->rows = count_map_lines(argv);
-	map->text_rows = count_text_lines(argv);
-	map->map = NULL;
-	map->paths = NULL;
-	info->mlx_ptr = mlx_init();
-	info->window_ptr = mlx_new_window(info->mlx_ptr, map->rows * SCALE, 33 * SCALE, "CUBE3D");
-}
