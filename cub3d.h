@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/19 05:22:26 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/19 06:08:15 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include "libft/libft.h"
 # include "mlx.h"
 
-# define SCALE 30
-# define HEIGHT 1920
-# define WIDTH 1080
+# define SCALE 32
+# define HEIGHT 1080
+# define WIDTH 1920
 typedef enum directions
 {
 	NORTH,
@@ -40,6 +40,7 @@ typedef struct s_map
 	int     ceil_color;
 	int     floor_color;
 	int		rows;
+	int		cols;
 }				t_map;
 
 typedef struct s_image
@@ -63,6 +64,7 @@ typedef struct s_mlx_info
 void initialize_map(t_map *map, t_mlx_info *info, char **argv);
 int count_text_lines(char **argv);
 int	count_map_lines(char **argv);
+int	count_map_cols(char **argv);
 void	free_map(t_map *map);
 
 int read_data(char **argv, t_map *map);

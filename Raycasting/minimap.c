@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/19 05:31:52 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/19 06:09:10 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ void	draw_square(t_mlx_info *info ,int x, int y, int color, int dir)
 	{
 		j = SCALE * y - 1;
 		while (++j < SCALE + (SCALE * y))
-			my_mlx_pixel_put(&info->image, i, j, color);
+		{
+			if ((i > 0 && i < WIDTH) && (j > 0 && j < HEIGHT))
+				my_mlx_pixel_put(&info->image, i, j, color);
+		}
 	}
 	if (dir != -1)
 		draw_direction_line(info, x, y, dir);
@@ -106,9 +109,7 @@ void	minimap(t_map *map, t_mlx_info *mlx_info)
 	int		j;
 	int		row_len;
 	int		dir;
-	// int x;
-	// int y;
-	int color;
+	int		color;
 
 	i = 0;
 	while (i < map->rows - 1)
@@ -117,8 +118,6 @@ void	minimap(t_map *map, t_mlx_info *mlx_info)
 		row_len = ft_strlen(map->map[i]);
 		while (j < row_len)
 		{
-			// x = j;
-			// y = i;
 			dir = is_player(map->map[i][j]);
 			if (map->map[i][j] == '1')
 				color = 0xFFFFFF;
@@ -128,7 +127,6 @@ void	minimap(t_map *map, t_mlx_info *mlx_info)
 				color = 0xFF0000;
 			else
 				color = 0x0000FF;
-			// mlx_pixel_put(mlx_info->mlx_ptr, mlx_info->window_ptr, i, j, color);
 			draw_square(mlx_info, i, j, color, dir);
 			j++;
 		}
