@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/20 08:18:31 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/20 11:47:53 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -173,6 +173,7 @@ void	minimap(t_map *map)
 				color = 0x000000; // black represents the void
 			if (dir != -1)
 			{
+				// hanta a khy lmoudir hahowa l commentaire li tlbti
 				if (map->player->x == 0)
 					map->player->x = (SCALE * i + SCALE / 2);
 				if (map->player->y == 0)
