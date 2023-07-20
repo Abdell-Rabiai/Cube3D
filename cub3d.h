@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/19 06:08:15 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/20 07:04:30 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 # define SCALE 32
 # define HEIGHT 1080
 # define WIDTH 1920
+# define PIE 3.14159265358979323846
+
 typedef enum directions
 {
 	NORTH,
@@ -31,37 +33,69 @@ typedef enum directions
 	WEST
 }				t_directions;
 
-typedef struct s_map
+typedef struct s_point
 {
-	char	**map;
-	char	**text;
-	char    **paths;
-	int		text_rows;
-	int     ceil_color;
-	int     floor_color;
-	int		rows;
-	int		cols;
-}				t_map;
+	int			x;
+	int			y;
+}				t_point;
 
 typedef struct s_image
 {
-  void        *img;
-  char        *addr;
-  int         bits_per_pixel;
-  int         line_length;
-  int         endian;
-}				t_image;
-
-typedef struct s_mlx_info
-{
 	void		*mlx_ptr;
 	void		*window_ptr;
-	void		*img_ptr;
-	t_image		image;
-}				t_mlx_info;
+	void        *img;
+	char        *addr;
+	int         bits_per_pixel;
+	int         line_length;
+	int         endian;
+}				t_image;
 
+typedef struct s_bresenham
+{
+	int			dx;
+	int			dy;
+	int			err;
+	int			step_x;
+	int			step_y;
+	int 		e2;
+	t_point		point1;
+	t_point		point2;
+}				t_bresenham;
+
+typedef struct s_player
+{
+	int			x;
+	int			y;
+	double		step;
+	int 		turn_dir; // right or left
+	int			walk_dir; // forward or backward
+	double		rot_angel;
+	double 		move_speed;
+	double 		rotation_speed;
+	int			dir;
+}				t_player;
+typedef struct s_map
+{
+	char		**map;
+	char		**text;
+	char    	**paths;
+	int			text_rows;
+	int     	ceil_color;
+	int     	floor_color;
+	int			rows;
+	int			cols;
+	int			width;
+	int			height;
+	t_bresenham	*bresenham;
+	t_image		*image;
+	t_player	*player;
+}				t_map;
+
+
+void	draw_bresenhams_line(t_map *carte);
+void	initialize_bresenhams_variables(t_bresenham *map);
 /***--------------- PARSING FUNCTINOS ---------------***/
-void initialize_map(t_map *map, t_mlx_info *info, char **argv);
+void initialize_map(t_map *map, char **argv);
 int count_text_lines(char **argv);
 int	count_map_lines(char **argv);
 int	count_map_cols(char **argv);
@@ -98,7 +132,7 @@ int check_left(char **arr, int i, int j);
 int check_up(char **arr, int i, int j);
 int check_down(char **arr, int i, int j);
 int check_multiple_players(char **arr);
-void	minimap(t_map *map, t_mlx_info *mlx_info);
+void	minimap(t_map *map);
 
 /***--------------- MLX FUNCTINOS ---------------***/
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
