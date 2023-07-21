@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:02:45 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/21 11:57:06 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/21 23:20:34 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void draw_line(t_map *map, int x1, int y1)
 {
-	// explain teh function very briefly
 	// draw a line the point (x1, y1) which is the player's initial position to the point (x2, y2) which is the player's direction
 	// in which x2 = x1 + 30 * cos(rotation_angel) and y2 = y1 + 30 * sin(rotation_angel)
 	// the 30 is the length of the line we multiply it by cos(rotation_angel) and sin(rotation_angel) to get the x2 and y2
@@ -38,8 +37,8 @@ void draw_the_player(t_map *map) // this functino represents the player as a lit
 
 int draw_the_map(t_map *map) // this function draws the map and the player
 {
-	minimap(map);
-	draw_the_player(map);
+	minimap(map); // this function draws the map only
+	draw_the_player(map); // and this one adds the player to the map
 	return (0);
 }
 
