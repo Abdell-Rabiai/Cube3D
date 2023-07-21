@@ -6,7 +6,7 @@
 #    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/07/19 05:49:27 by arabiai          ###   ########.fr        #
+#    Updated: 2023/07/21 06:22:49 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ BANNER=\
 parsing_files = $(addprefix parsing_files/, check_file_errors.c checking_closed_map.c checking_map.c\
 		checking_text.c init.c printing.c reading_map_text.c)
 		
-Raycasting = $(addprefix Raycasting/, minimap.c mlx_files.c)
+raycasting = $(addprefix raycasting/, mlx_files.c)
+
+prepare_the_map = $(addprefix prepare_the_map/, init_map.c minimap.c player_and_line.c hooks.c)
 
 get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c)
 
@@ -51,7 +53,7 @@ get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c
 INC_EXC = -I /usr/local/include
 FRAMEWORK = -L /usr/local/lib/ -lmlx -framework OpenGl -framework AppKit
 
-SRCS_OBJ = $(parsing_files) $(get_next_line) $(Raycasting)
+SRCS_OBJ = $(parsing_files) $(get_next_line) $(raycasting) $(prepare_the_map)
 
 SRC = main.c
 

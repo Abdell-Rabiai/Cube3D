@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/20 07:04:30 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/21 06:23:17 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,16 @@
 # define HEIGHT 1080
 # define WIDTH 1920
 # define PIE 3.14159265358979323846
+
+enum {
+	ON_KEYDOWN = 2,
+	ON_KEYUP = 3,
+	ON_MOUSEDOWN = 4,
+	ON_MOUSEUP = 5,
+	ON_MOUSEMOVE = 6,
+	ON_EXPOSE = 12,
+	ON_DESTROY = 17
+};
 
 typedef enum directions
 {
@@ -69,7 +79,7 @@ typedef struct s_player
 	double		step;
 	int 		turn_dir; // right or left
 	int			walk_dir; // forward or backward
-	double		rot_angel;
+	double		rotation_angel;
 	double 		move_speed;
 	double 		rotation_speed;
 	int			dir;
@@ -92,49 +102,65 @@ typedef struct s_map
 }				t_map;
 
 
-void	draw_bresenhams_line(t_map *carte);
-void	initialize_bresenhams_variables(t_bresenham *map);
+/***--------------- INIT FUNCTIONS ---------------***/
+void	initialize_map(t_map *map, char **argv);
+void	initialize_map(t_map *map, char **argv);
+int		count_text_lines(char **argv);
+int		count_map_lines(char **argv);
+int		count_map_cols(char **argv);
+
 /***--------------- PARSING FUNCTINOS ---------------***/
-void initialize_map(t_map *map, char **argv);
-int count_text_lines(char **argv);
-int	count_map_lines(char **argv);
-int	count_map_cols(char **argv);
 void	free_map(t_map *map);
 
-int read_data(char **argv, t_map *map);
-void read_map(t_map *map, char **argv);
-int which_dir(char *dir);
-void read_textures_colors(t_map *map, char **argv);
-int	get_ceil_floor_cols(char *line);
-void store_paths_colors(t_map *map);
+int		read_data(char **argv, t_map *map);
+void	read_map(t_map *map, char **argv);
+int		which_dir(char *dir);
+void	read_textures_colors(t_map *map, char **argv);
+int		get_ceil_floor_cols(char *line);
+void	store_paths_colors(t_map *map);
 
-void print_map(t_map *map);
-void print_text(t_map *map);
-void print_only_map(t_map *map);
-void print_paths(t_map *map);
-
-
-int is_valid_map_line(char *line);
-int check_invalid_characters(char **arr);
-void read_textures_colors(t_map *map, char **argv);
+void	print_map(t_map *map);
+void	print_text(t_map *map);
+void	print_only_map(t_map *map);
+void	print_paths(t_map *map);
 
 
-int check_map(t_map *map);
-int check_multiple_players(char **arr);
-int check_invalid_characters(char **arr);
-int check_valid_map_line(char *line);
+int		is_player(char dir);
+int		is_valid_map_line(char *line);
+int		check_invalid_characters(char **arr);
+void	read_textures_colors(t_map *map, char **argv);
 
-int check_text(t_map *map);
-int check_file_errors(char **argv, int argc);
-int check_is_closed(char **arr);
-int check_right(char **arr, int i, int j);
-int check_left(char **arr, int i, int j);
-int check_up(char **arr, int i, int j);
-int check_down(char **arr, int i, int j);
-int check_multiple_players(char **arr);
-void	minimap(t_map *map);
 
-/***--------------- MLX FUNCTINOS ---------------***/
+int		check_map(t_map *map);
+int		check_multiple_players(char **arr);
+int		check_invalid_characters(char **arr);
+int		check_valid_map_line(char *line);
+int		check_text(t_map *map);
+int		check_file_errors(char **argv, int argc);
+int		check_is_closed(char **arr);
+int		check_right(char **arr, int i, int j);
+int		check_left(char **arr, int i, int j);
+int		check_up(char **arr, int i, int j);
+int		check_down(char **arr, int i, int j);
+int		check_multiple_players(char **arr);
+
+/***--------------- MLX FUNCTINOS && HOOKS FUNCTIONS---------------***/
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
+void	all_hooks(t_map *map);
+int		key_hook(int keycode, t_map *map);
+int		mouse_hook(int x, int y, t_map *map);
+void	change_coordinates(t_map *map, int x2, int y2);
+void	apply_the_changes(t_map *map);
+int		exit_hook(void);
+void	create_new_image(t_map *map, t_image *image);
+void	player_movement_hooks(int keycode, t_map *map);
 
-/***--------------- RAYCASTING FUNCTINOS ---------------***/
+/***--------------- THE MAP AN PLAYER MOVEMEMET FUNCTINOS ---------------***/
+void	draw_the_map(t_map *map);
+void	minimap(t_map *map);
+void	draw_square(t_map *map ,int x, int y, int color);
+void	draw_circle(t_map *map, int centerX, int centerY, int radius, int color);
+void	draw_line(t_map *map, int x1, int y1);
+void	draw_bresenhams_line(t_map *carte);
+void	get_color_and_draw_sqaure(t_map *map, int i, int j, int *color);
+
