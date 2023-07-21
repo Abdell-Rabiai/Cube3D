@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/21 06:23:17 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/21 11:06:44 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,7 +156,7 @@ void	create_new_image(t_map *map, t_image *image);
 void	player_movement_hooks(int keycode, t_map *map);
 
 /***--------------- THE MAP AN PLAYER MOVEMEMET FUNCTINOS ---------------***/
-void	draw_the_map(t_map *map);
+int		draw_the_map(t_map *map);
 void	minimap(t_map *map);
 void	draw_square(t_map *map ,int x, int y, int color);
 void	draw_circle(t_map *map, int centerX, int centerY, int radius, int color);
