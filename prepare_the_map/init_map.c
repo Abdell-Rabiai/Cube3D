@@ -6,11 +6,38 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/21 23:24:53 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 09:47:33 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
+
+size_t max_len(char **argv)
+{
+	size_t max;
+	int map_fd;
+	char *line;
+
+	max = 0;
+	map_fd = open(argv[1], O_RDONLY);
+	line = get_next_line(map_fd);
+	while (line)
+	{
+		if (line[0] == '1' || line[0] == '0' || line[0] == ' ')
+			break;
+		free(line);
+		line = get_next_line(map_fd);
+	}
+	while (line)
+	{
+		if (ft_strlen(line) > max)
+			max = ft_strlen(line);
+		free(line);
+		line = get_next_line(map_fd);
+	}
+	close(map_fd);
+	return (max);
+}
 
 void initialize_map(t_map *map, char **argv)
 {
@@ -43,17 +70,18 @@ void initialize_map(t_map *map, char **argv)
 	map->ceil_color = 0;
 	map->floor_color = 0;
 	map->rows = count_map_lines(argv);
+	map->max_len = max_len(argv);
 	map->cols = count_map_cols(argv);
 	map->text_rows = count_text_lines(argv); // only for the text above the map, map not included
 	map->map = NULL;
 	map->paths = NULL;
-	map->width = map->cols * SCALE; // width of the window = number of columns in the map * SCALE which is 10 (width fo each column in the map is equal to 10 pixels)
-	map->height = map->rows * SCALE; // height of the window = number of rows in the map * SCALE which is 10 (height fo each row in the map is equal to 10 pixels)
+	map->width = map->rows * SCALE; // width of the window = number of columns in the map * SCALE which is 10 (width fo each column in the map is equal to 10 pixels)
+	map->height = map->cols * SCALE; // height of the window = number of rows in the map * SCALE which is 10 (height fo each row in the map is equal to 10 pixels)
 
 	// initialize the mlx stuff
 	map->image->mlx_ptr = mlx_init();
-	map->image->window_ptr = mlx_new_window(map->image->mlx_ptr, map->height, map->width, "CUBE3D");
-	map->image->img = mlx_new_image(map->image->mlx_ptr, map->height, map->width);
+	map->image->window_ptr = mlx_new_window(map->image->mlx_ptr, map->width, map->height, "CUBE3D");
+	map->image->img = mlx_new_image(map->image->mlx_ptr, map->width, map->height);
 	map->image->addr = mlx_get_data_addr(map->image->img, &map->image->bits_per_pixel, &map->image->line_length, &map->image->endian);
 
 }

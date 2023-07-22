@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/21 06:20:14 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 09:39:53 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	draw_square(t_map *map ,int x, int y, int color)
 		j = SCALE * y;
 		while (j < SCALE + (SCALE * y))
 		{
-			if ((i > 0 && i < map->height) && (j > 0 && j < map->width))
+			if ((i > 0 && i < map->width) && (j > 0 && j < map->height))
 			{
 				if ((i == SCALE * x || j == SCALE * y) && color == 0xFFFFFF)
 					my_mlx_pixel_put(map->image, i, j, 0x222222);
@@ -63,9 +63,9 @@ void draw_circle(t_map *map, int centerX, int centerY, int radius, int color)
 		i = centerX - y;
         while (i <= centerX + y)
         {
-			if ((i > 0 && i < map->height) && (centerY + x > 0 && centerY + x < map->width))
+			if ((i > 0 && i < map->width) && (centerY + x > 0 && centerY + x < map->height))
                 my_mlx_pixel_put(map->image, i, centerY + x, color);
-			if ((i > 0 && i < map->height) && (centerY - x > 0 && centerY - x < map->width))
+			if ((i > 0 && i < map->width) && (centerY - x > 0 && centerY - x < map->height))
                 my_mlx_pixel_put(map->image, i, centerY - x, color);
 			i++;
         }
@@ -118,7 +118,7 @@ void	minimap(t_map *map)
 	{
 		j = 0;
 		row_len = ft_strlen(map->map[i]);
-		while (j < row_len )
+		while (j < row_len)
 		{
 			get_color_and_draw_sqaure(map, i, j, &color);
 			j++;

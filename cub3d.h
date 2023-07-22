@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/21 11:06:44 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 09:47:54 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_map
 	int     	floor_color;
 	int			rows;
 	int			cols;
+	int			max_len;
 	int			width;
 	int			height;
 	t_bresenham	*bresenham;
@@ -107,6 +108,7 @@ void	initialize_map(t_map *map, char **argv);
 void	initialize_map(t_map *map, char **argv);
 int		count_text_lines(char **argv);
 int		count_map_lines(char **argv);
+size_t 	max_len(char **argv);
 int		count_map_cols(char **argv);
 
 /***--------------- PARSING FUNCTINOS ---------------***/

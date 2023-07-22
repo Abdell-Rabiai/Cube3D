@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 10:59:32 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 09:26:24 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int check_left(char **arr, int i, int j)
 
 int check_up(char **arr, int i, int j)
 {
+	if (arr[i + 1] == NULL)
+		return (1);
 	while (i > 0 && arr[i][j] == '0')
 		i--;
 	if (ft_strlen(arr[i]) - 1 < (size_t)j)
@@ -52,6 +54,8 @@ int check_up(char **arr, int i, int j)
 
 int check_down(char **arr, int i, int j)
 {
+	if (arr[i + 1] == NULL)
+		return (1);
 	while (arr[i][j] != '\0' && arr[i][j] == '0')
 		i++;
 	if (ft_strlen(arr[i]) - 1 < (size_t)j)

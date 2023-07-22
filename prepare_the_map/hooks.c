@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/22 05:00:57 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 12:38:37 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,14 @@ int is_there_a_wall(t_map *map, int x, int y)
 	int x0; // x0 and y0 are the coordinates of the square that the player is in
 	int y0; // the indexes in the matrix (map->map)
 
-	// if (x < 0 || x > map->width || y < 0 || y > map->height)
-	// 	return (1);
 	x0 = x / SCALE; // i divide by SCALE to get the coordinates of the square that the player is in
 	y0 = y / SCALE;
 	printf("x0 = [%d]\n", x0);
 	printf("y0 = [%d]\n", y0);
+	print_only_map(map);
 	printf("map->map[x0][y0] = [%c]\n", map->map[x0][y0]);
 	// if the player is in a wall then return 1 else return 0
-	if (map->map[x0][y0] == '1') 
+	if (map->map[x0][y0] == '1' || map->map[x0][y0] == ' ') 
 		return (1);
 	else
 		return (0);
@@ -68,6 +67,14 @@ void change_coordinates(t_map *map, int x2, int y2)
 	// old coordinates
 	x1 = player->x;
 	y1 = player->y;
+	// make sure that the new coordinates are not out of the map
+	// int x0 = x2 / SCALE;
+	if (x2 < 0 || x2 > map->width || y2 < 0 || y2 > map->height)
+		return ;
+	printf("x2 = [%d]  ??  ", x2);
+	printf("y2 = [%d]\n", y2);
+	printf("width = [%d]  ??  ", map->width);
+	printf("height = [%d]\n", map->height);
 	if (!is_there_a_wall(map, x2, y2))
 	{
 		// new coordinates
@@ -82,7 +89,7 @@ void create_new_image(t_map *map, t_image *image)
 {
     mlx_destroy_image(image->mlx_ptr, image->img);
 	mlx_clear_window(image->mlx_ptr, image->window_ptr);
-	image->img = mlx_new_image(image->mlx_ptr, map->height, map->width);
+	image->img = mlx_new_image(image->mlx_ptr, map->width, map->height);
 	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->line_length, &image->endian);
 }
 

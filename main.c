@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/21 23:19:28 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 09:41:43 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int parsing(char **argv, int argc, t_map *map)
 	if (check_map(map) || check_text(map))
 		return (1);
 	store_paths_colors(map);
-	print_map(map);
+	// print_map(map);
 	return (0);
 }
 
@@ -43,6 +43,11 @@ int main(int argc, char **argv)
 	initialize_map(map, argv);// this function initializes the map and the player
 	if (parsing(argv, argc, map))
 		return (1);
+	print_only_map(map);
+	// make_the_map_ractangular(map);
+	// printf("***********************************\n");
+	// print_only_map(map);
+	
 	draw_the_map(map); // this function draws the map and the player
 	mlx_put_image_to_window(map->image->mlx_ptr, map->image->window_ptr, map->image->img, 0, 0);
 	all_hooks(map); // this function calls all the hooks that i need to move the player and the line
