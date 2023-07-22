@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:07:27 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 11:41:02 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 14:02:24 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@ void read_textures_colors(t_map *map, char **argv)
 	close(map_fd);
 }
 
+void get_dir(t_map *map, char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] != 'N' && line[i] != 'S' && line[i] != 'W' && line[i] != 'E')
+		i++;
+	if (line[i] == 'N')
+		map->player->dir = NORTH;
+	else if (line[i] == 'S')
+		map->player->dir = SOUTH;
+	else if (line[i] == 'W')
+		map->player->dir = WEST;
+	else if (line[i] == 'E')
+		map->player->dir = EAST;
+}
+
 void read_map(t_map *map, char **argv)
 {
 	char *line;
@@ -66,6 +83,7 @@ void read_map(t_map *map, char **argv)
 	while (line)
 	{
 		map->map[i] = ft_strdup(ft_strtrim(line, "\n"), 1);
+		get_dir(map, line);
 		free(line);
 		line = get_next_line(map_fd);
 		i++;

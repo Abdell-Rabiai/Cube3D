@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/22 12:38:37 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 13:27:12 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ int is_there_a_wall(t_map *map, int x, int y)
 {
 	int x0; // x0 and y0 are the coordinates of the square that the player is in
 	int y0; // the indexes in the matrix (map->map)
-
+	
+	if (x < 0 || x > map->width - 1 || y < 0 || y > map->height - 1)
+		return (0);
 	x0 = x / SCALE; // i divide by SCALE to get the coordinates of the square that the player is in
 	y0 = y / SCALE;
 	printf("x0 = [%d]\n", x0);
@@ -67,10 +69,9 @@ void change_coordinates(t_map *map, int x2, int y2)
 	// old coordinates
 	x1 = player->x;
 	y1 = player->y;
-	// make sure that the new coordinates are not out of the map
-	// int x0 = x2 / SCALE;
-	if (x2 < 0 || x2 > map->width || y2 < 0 || y2 > map->height)
+	if (x2 < 0 || x2 > map->width - 1 || y2 < 0 || y2 > map->height - 1)
 		return ;
+	// make sure that the new coordinates are not out of the map
 	printf("x2 = [%d]  ??  ", x2);
 	printf("y2 = [%d]\n", y2);
 	printf("width = [%d]  ??  ", map->width);

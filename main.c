@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/22 09:41:43 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 14:04:25 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,19 @@ int parsing(char **argv, int argc, t_map *map)
 	return (0);
 }
 
+void get_player_position(t_map *map)
+{
+		
+	if (map->player->dir == NORTH)
+		map->player->rotation_angel = - PIE / 2;
+	else if (map->player->dir == SOUTH)
+		map->player->rotation_angel = PIE / 2;
+	else if (map->player->dir == EAST)
+		map->player->rotation_angel = 0;
+	else if (map->player->dir == WEST)
+		map->player->rotation_angel = PIE;
+}
+
 int main(int argc, char **argv)
 {
 	t_map *map;
@@ -42,12 +55,8 @@ int main(int argc, char **argv)
 	map = malloc(sizeof(t_map));
 	initialize_map(map, argv);// this function initializes the map and the player
 	if (parsing(argv, argc, map))
-		return (1);
-	print_only_map(map);
-	// make_the_map_ractangular(map);
-	// printf("***********************************\n");
-	// print_only_map(map);
-	
+		return (1);	
+	get_player_position(map); // this function gets the player's position and direction
 	draw_the_map(map); // this function draws the map and the player
 	mlx_put_image_to_window(map->image->mlx_ptr, map->image->window_ptr, map->image->img, 0, 0);
 	all_hooks(map); // this function calls all the hooks that i need to move the player and the line

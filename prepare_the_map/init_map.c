@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/22 09:47:33 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 13:56:19 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void initialize_map(t_map *map, char **argv)
 	map->player->dir = -1; // the player's initial direction is -1
 	map->player->turn_dir = 0; // 1 for right or -1 for left i will ue these later in the key_hook function
 	map->player->walk_dir = 0; // 1 for forward or -1 for backward 
-	
-	map->player->rotation_angel =  - PIE / 2; // the player's initial rotation angel is 90 degrees
+
+	map->player->rotation_angel = PIE / 4; // the player's initial rotation angel is 90 degrees
 	// the rotation angel is the angle between the player's direction and the X axis
 	// when i click the right arrow key the rotation angel increases by ROTATION_SPEED = 0.44 and when i click the left arrow key the rotation angel decreases by 0.44
 	// which will make the player's line rotate right or left
@@ -61,7 +61,7 @@ void initialize_map(t_map *map, char **argv)
 	// the move speed is the distance the player moves in each step, when i click the up arrow key the player moves forward by 4
 	// and when i click the down arrow key the player moves backward by 4
 	// i will use the move speed later in the key_hook function
-	map->player->rotation_speed = 0.44; // the player's initial rotation speed is 0.44 IS how much i will increase or decrease the rotation angel when
+	map->player->rotation_speed = 0.14; // the player's initial rotation speed is 0.44 IS how much i will increase or decrease the rotation angel when
 	// i click the right or left arrow key
 	// i will use the rotation speed later in the key_hook function
 
@@ -80,7 +80,7 @@ void initialize_map(t_map *map, char **argv)
 
 	// initialize the mlx stuff
 	map->image->mlx_ptr = mlx_init();
-	map->image->window_ptr = mlx_new_window(map->image->mlx_ptr, map->width, map->height, "CUBE3D");
+	map->image->window_ptr = mlx_new_window(map->image->mlx_ptr, map->width, map->height - SCALE, "CUBE3D");
 	map->image->img = mlx_new_image(map->image->mlx_ptr, map->width, map->height);
 	map->image->addr = mlx_get_data_addr(map->image->img, &map->image->bits_per_pixel, &map->image->line_length, &map->image->endian);
 

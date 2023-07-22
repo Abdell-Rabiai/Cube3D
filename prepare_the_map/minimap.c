@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/22 09:39:53 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 14:04:11 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	minimap(t_map *map)
 	int		color;
 
 	i = 0;
-	while (i < map->rows - 1)
+	while (i < map->rows) // rows - 1;
 	{
 		j = 0;
 		row_len = ft_strlen(map->map[i]);
