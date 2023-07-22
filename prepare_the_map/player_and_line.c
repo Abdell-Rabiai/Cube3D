@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:02:45 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/21 23:22:01 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/21 23:23:03 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void draw_line(t_map *map, int x1, int y1)
 {
 	// draw a line from point (x1, y1) which is the player's initial position to the point (x2, y2) which is the player's direction
 	// in which x2 = x1 + 30 * cos(rotation_angel) and y2 = y1 + 30 * sin(rotation_angel)
-	// the 30 is the length of the line we multiply it by cos(rotation_angel) and sin(rotation_angel) to get the x2 and y2
+	// the 30 is the length of the line and we multiply it by cos(rotation_angel) and sin(rotation_angel) to get the x2 and y2
 	// because cos(rot_angel) = adjacent / hypotenuse = x2 - x1 / 30 ===> x2 = x1 + 30 * cos(rot_angel)
 	// and sin(rot_angel) = opposite / hypotenuse = y2 - y1 / 30 ====> y2 = y1 + 30 * sin(rot_angel)
 	map->bresenham->point1.x = x1;
@@ -24,7 +24,7 @@ void draw_line(t_map *map, int x1, int y1)
 	map->bresenham->point2.x = x1 + (30 * cos(map->player->rotation_angel));
 	map->bresenham->point2.y = y1 + (30 * sin(map->player->rotation_angel));
 	// now we've got the two points we need to draw the line between them
-	// so each we call the draw_line function we vary the rotation_angel by 0.44 or -0.44 which is the rotation_speed
+	// so each time we call the draw_line function we vary the rotation_angel by 0.44 or -0.44 which is the rotation_speed
 	// go to init_map.c to see how we vary the rotation_angel
 	draw_bresenhams_line(map);
 }

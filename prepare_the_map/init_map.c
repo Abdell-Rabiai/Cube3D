@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/21 12:03:16 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/21 23:24:53 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void initialize_map(t_map *map, char **argv)
 	map->player->turn_dir = 0; // 1 for right or -1 for left i will ue these later in the key_hook function
 	map->player->walk_dir = 0; // 1 for forward or -1 for backward 
 	
-	map->player->rotation_angel = PIE / 2; // the player's initial rotation angel is 90 degrees
+	map->player->rotation_angel =  - PIE / 2; // the player's initial rotation angel is 90 degrees
 	// the rotation angel is the angle between the player's direction and the X axis
 	// when i click the right arrow key the rotation angel increases by ROTATION_SPEED = 0.44 and when i click the left arrow key the rotation angel decreases by 0.44
 	// which will make the player's line rotate right or left

@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/21 12:37:58 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 04:46:18 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,28 +17,45 @@ int	exit_hook(void)
 	exit(0);
 }
 
-void apply_the_changes(t_map *map) // this function applies the changed values (walk_dir and turn_dir) gotten from the key_hook function to the player's position and rotation angel
+int is_there_a_wall(t_map *map, int x, int y)
 {
-	t_player *player; // i intiate a player pointer to the player struct in the map struct
-	int transaltion_distance; // this is the distance the player will move in each step (how much i should add to the player's x and y in each step)
-	// its like translate a line a certain distance
+	int x0; // x0 and y0 are the coordinates of the square that the player is in
+	int y0; // the indexes in the matrix (map->map)
 	
+	x0 = x / SCALE; // i divide by SCALE to get the coordinates of the square that the player is in
+	y0 = y / SCALE;
+	if (x0 < 0 || x0 > map->width || y0 < 0 || y0 > map->height)
+		return (1);
+	printf("x0 = [%d]\n", x0);
+	printf("y0 = [%d]\n", y0);
+	printf("map->map[x0][y0] = [%c]\n", map->map[x0][y0]);
+	// if the player is in a wall then return 1 else return 0
+	if (map->map[x0][y0] == '1') 
+		return (1);
+	else
+		return (0);
+}
+
+void apply_the_changes(t_map *map)
+{
+	t_player	*player; 
+	int			new_player_x;
+	int			new_player_y;
+	int			transaltion_distance;
 
 	player = map->player;
-	transaltion_distance = player->walk_dir * player->move_speed; // the translation distance is literraly (move_speed==4 in init) but i multiply it by walk_dir to make the player move forward or backward
-	// and walk_dir is 1 or -1. meaning this distance will either increase or decrease with 4 steps
-	// now that we know the distance we should add to the player's x and y we can calculate the new x and y of the player
-	// keep in mind that we only change the x and y of the player when the walk_dir is not 0 beacuse if it is 0 the player will not move (translation distnace in this case will be 0)
-	player->rotation_angel += player->turn_dir * player->rotation_speed; // the rotation angel is literraly (rotation_speed==0.44 in init) but i multiply it by turn_dir to make the player rotate right or left
-	// and turn_dir is 1 or -1. meaning this angel will either increase or decrease with 0.44 steps
-	// now that we know the rotation angel we should change the x and y of the player
-	// keep in mind that we only change the x and y of the player when the turn_dir is not 0 beacuse if it is 0 the player will not rotate (rotation_angel in this case will be 0)
+	transaltion_distance = player->walk_dir * player->move_speed; 
+	player->rotation_angel += player->turn_dir * player->rotation_speed; 
+
+	new_player_x = player->x + transaltion_distance * cos(player->rotation_angel);
+	new_player_y = player->y + transaltion_distance * sin(player->rotation_angel);
 	
-	// now we can calculate the new x and y of the player
-	player->x += transaltion_distance * cos(player->rotation_angel); // the new x of the player is the old x + the translation distance * cos(rotation_angel)
-	// imagine a triangle with the hypotenuse = translation_distance and the angle between the hypotenuse and the x axis = rotation_angel
-	player->y += transaltion_distance * sin(player->rotation_angel); // the new y of the player is the old y + the translation distance * sin(rotation_angel)
-	//CHECK THE PAPER ON THE TABLE TO SEE HOW I GOT THESE FORMULAS
+	// if the new player coordinates are not in a wall then we can move the player
+	if (!is_there_a_wall(map, new_player_x, new_player_y))
+	{
+		player->x = new_player_x;
+		player->y = new_player_y;
+	}
 }
 
 void change_coordinates(t_map *map, int x2, int y2)
@@ -46,15 +63,19 @@ void change_coordinates(t_map *map, int x2, int y2)
 	t_player *player;
 	int x1;
 	int y1;
-	
-	player = map->player; 
+
+	player = map->player;
+	// old coordinates
 	x1 = player->x;
 	y1 = player->y;
-	player->x = x2;
-	player->y = y2;
-
-	// modify the rotaion angel to make the line follow the direction of the mouse
-	player->rotation_angel = atan2((y2 - y1), (x2 - x1));
+	if (!is_there_a_wall(map, x2, y2))
+	{
+		// new coordinates
+		player->x = x2;
+		player->y = y2;
+		// modify the rotaion angel to make the line follow the direction of the mouse
+		player->rotation_angel = atan2((y2 - y1), (x2 - x1));
+	}
 }
 
 void create_new_image(t_map *map, t_image *image)
@@ -71,8 +92,8 @@ int	mouse_hook(int x, int y, t_map *map)
 	
 	image = map->image;
 	
-	printf("x = %d\n", x);
-	printf("y = %d\n", y);
+	// printf("x = %d\n", x);
+	// printf("y = %d\n", y);
 	
 	create_new_image(map, image);
 	change_coordinates(map, x, y);
