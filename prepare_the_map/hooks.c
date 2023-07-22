@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/22 04:46:18 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/22 05:00:57 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ int is_there_a_wall(t_map *map, int x, int y)
 {
 	int x0; // x0 and y0 are the coordinates of the square that the player is in
 	int y0; // the indexes in the matrix (map->map)
-	
+
+	// if (x < 0 || x > map->width || y < 0 || y > map->height)
+	// 	return (1);
 	x0 = x / SCALE; // i divide by SCALE to get the coordinates of the square that the player is in
 	y0 = y / SCALE;
-	if (x0 < 0 || x0 > map->width || y0 < 0 || y0 > map->height)
-		return (1);
 	printf("x0 = [%d]\n", x0);
 	printf("y0 = [%d]\n", y0);
 	printf("map->map[x0][y0] = [%c]\n", map->map[x0][y0]);
