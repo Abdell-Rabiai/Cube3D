@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_and_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:02:45 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/22 13:51:49 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/26 09:46:58 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void draw_line(t_map *map, int x1, int y1)
 
 void draw_the_player(t_map *map) // this functino represents the player as a little green circle and a line that shows the direction of the player
 {
-	draw_circle(map, map->player->x, map->player->y, 4, 0x228811); // the little green solid circle
+	// draw_circle(map, map->player->x, map->player->y, 4, 0x228811); // the little green solid circle
 	draw_line(map, map->player->x, map->player->y); // the line that shows the direction of the player
 }
 

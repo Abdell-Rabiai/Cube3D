@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/22 14:04:11 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/29 11:10:06 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,14 @@ void draw_circle(t_map *map, int centerX, int centerY, int radius, int color)
     }
 }
 
+double	normalize_angle(double angle)
+{
+	angle = fmodf(angle, PIE * 2);
+	if (angle < 0)
+		angle = PIE * 2 + angle;
+	return (angle);
+}
+
 void get_color_and_draw_sqaure(t_map *map, int i, int j, int *color)
 {
 	int		dir;
@@ -120,6 +128,7 @@ void	minimap(t_map *map)
 		row_len = ft_strlen(map->map[i]);
 		while (j < row_len)
 		{
+			map->player->rotation_angel = normalize_angle(map->player->rotation_angel);
 			get_color_and_draw_sqaure(map, i, j, &color);
 			j++;
 		}

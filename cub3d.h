@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/22 09:47:54 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/07/29 14:34:40 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <fcntl.h>
 # include <math.h>
 # include <string.h>
+# include <stdbool.h>
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
 # include "mlx.h"
@@ -24,6 +25,7 @@
 # define HEIGHT 1080
 # define WIDTH 1920
 # define PIE 3.14159265358979323846
+# define FAR_FROM_WALL 4
 
 enum {
 	ON_KEYDOWN = 2,
@@ -34,6 +36,30 @@ enum {
 	ON_EXPOSE = 12,
 	ON_DESTROY = 17
 };
+
+typedef struct intersect
+{
+	double	WallHitX;
+	double	WallHitY;
+	double	distance;
+	bool	wasHitVertic;
+	double	xintercept;
+	double	yintercept;
+	double	xstep;
+	double	ystep;
+	bool	HorzWallHit;
+	double	HorzWallHitX;
+	double	HorzWallHitY;
+	double	nextHorzTouchX;
+	double 	nextHorzTouchY;
+	double 	nextVertTouchX;
+	double 	nextVertTouchY;
+	double 	HorzHitDistance;
+	double 	vertHitDistance;
+	bool 	vertWallHit;
+	double 	vertWallHitX;
+	double 	vertWallHitY;
+}				t_intersect;
 
 typedef enum directions
 {
@@ -98,6 +124,7 @@ typedef struct s_map
 	int			width;
 	int			height;
 	t_bresenham	*bresenham;
+	t_intersect	*intersect;
 	t_image		*image;
 	t_player	*player;
 }				t_map;
@@ -146,7 +173,7 @@ int		check_up(char **arr, int i, int j);
 int		check_down(char **arr, int i, int j);
 int		check_multiple_players(char **arr);
 
-/***--------------- MLX FUNCTINOS && HOOKS FUNCTIONS---------------***/
+/***--------------- MLX FUNCTINOS && HOOKS FUNCTIONS ---------------***/
 void	my_mlx_pixel_put(t_image *image, int x, int y, int color);
 void	all_hooks(t_map *map);
 int		key_hook(int keycode, t_map *map);
@@ -165,4 +192,9 @@ void	draw_circle(t_map *map, int centerX, int centerY, int radius, int color);
 void	draw_line(t_map *map, int x1, int y1);
 void	draw_bresenhams_line(t_map *carte);
 void	get_color_and_draw_sqaure(t_map *map, int i, int j, int *color);
-
+void	draw_rays(t_map *map);
+int		is_there_a_wall(t_map *map, int x, int y);
+void    horizontal_intersections(t_map *map, double rayAngle, int column_id);
+double	normalize_angle(double angle);
+void	draw_line_till_inter(t_map *map, int x1, int y1, int x2, int y2);
+void	cast_ray(t_map *map, double rayAngle);

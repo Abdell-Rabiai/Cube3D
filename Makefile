@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
+#    By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/07/21 06:22:49 by arabiai          ###   ########.fr        #
+#    Updated: 2023/07/24 12:10:15 by ahmaymou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,9 @@ BANNER=\
                                                                                                      
 																									 
 parsing_files = $(addprefix parsing_files/, check_file_errors.c checking_closed_map.c checking_map.c\
-		checking_text.c init.c printing.c reading_map_text.c)
+		checking_text.c init.c printing.c reading_map_text.c )
 		
-raycasting = $(addprefix raycasting/, mlx_files.c)
+raycasting = $(addprefix raycasting/, mlx_files.c Fov.c raycasting.c) 
 
 prepare_the_map = $(addprefix prepare_the_map/, init_map.c minimap.c player_and_line.c hooks.c)
 
