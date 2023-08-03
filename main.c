@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/03 16:20:48 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/03 18:24:11 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  {
 	mlx_hook(map->image->window_ptr, 2, (1L<<0), key_hook, map);
 	mlx_hook(map->image->window_ptr, ON_MOUSEMOVE, 0, mouse_hook, map);
-	mlx_hook(map->image->window_ptr, 17, 0, exit_hook, 0);
+	mlx_hook(map->image->window_ptr, 17, 0, exit_hook, map);
 	mlx_loop(map->image->mlx_ptr);
  }
 
@@ -69,11 +69,16 @@ void get_player_position(t_map *map)
 	else if (map->player->dir == WEST)
 		map->player->rotation_angel = PIE;
 }
-
+void d(void)
+{
+	system("leaks cub3d");
+}
 int main(int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
 	t_map *map;
-	
+	atexit(d);
 	map = malloc(sizeof(t_map));
 	initialize_map(map, argv);
 	if (parsing(argv, argc, map))
@@ -83,7 +88,6 @@ int main(int argc, char **argv)
 	draw_the_map(map); // this function draws the map and the player
 	mlx_put_image_to_window(map->image->mlx_ptr, map->image->window_ptr, map->image->img, 0, 0);
 	all_hooks(map); // this function calls all the hooks that i need to move the player and the line
-	// mlx_loop_hook(map->image->mlx_ptr, draw_the_map, map);
 	mlx_loop(map->image->mlx_ptr);
 	free_map(map);
 }

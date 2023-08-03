@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:00:14 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 16:01:28 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/03 18:29:59 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,21 @@ void free_map(t_map *map)
 	while (++i < map->rows)
 		free(map->map[i]);
 	free(map->map);
+	i = -1;
+	while (++i < map->text_rows)
+		free(map->text[i]);
+	free(map->text);
+	
+	// free(map->image->mlx_ptr);
+	// free(map->image->window_ptr);
+	free(map->image->img);
+	free(map->image->addr);
+	free(map->image);
+	
+	free(map->bresenham);
+	free(map->player);
+	free(map->intersect);
+	
+	free(map);
 }
 

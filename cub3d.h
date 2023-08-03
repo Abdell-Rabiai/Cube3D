@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/03 16:20:20 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/03 18:24:27 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,6 @@ typedef struct s_map
 
 /***--------------- INIT FUNCTIONS ---------------***/
 void	initialize_map(t_map *map, char **argv);
-void	initialize_map(t_map *map, char **argv);
 int		count_text_lines(char **argv);
 int		count_map_lines(char **argv);
 size_t 	max_len(char **argv);
@@ -183,7 +182,7 @@ int		key_hook(int keycode, t_map *map);
 int		mouse_hook(int x, int y, t_map *map);
 void	change_coordinates(t_map *map, int x2, int y2);
 void	apply_the_changes(t_map *map);
-int		exit_hook(void);
+int		exit_hook(t_map *map);
 void	create_new_image(t_map *map, t_image *image);
 void	player_movement_hooks(int keycode, t_map *map);
 

@@ -6,31 +6,28 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 16:22:14 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/03 18:32:41 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int	exit_hook(void)
+int	exit_hook(t_map *map)
 {
+	mlx_destroy_window(map->image->mlx_ptr, map->image->window_ptr);
+	free_map(map);
 	exit(0);
 }
 
 int is_there_a_wall(t_map *map, int x, int y)
 {
-	int x0; // x0 and y0 are the coordinates of the square that the player is in
-	int y0; // the indexes in the matrix (map->map)
+	int x0;
+	int y0;
 	
 	if (x < 0 || x > map->width - 1 || y < 0 || y > map->height - 1)
 		return (0);
-	x0 = x / SCALE; // i divide by SCALE to get the coordinates of the square that the player is in
+	x0 = x / SCALE;
 	y0 = y / SCALE;
-	// printf("x0 = [%d]\n", x0);
-	// printf("y0 = [%d]\n", y0);
-	// print_only_map(map);
-	// printf("map->map[x0][y0] = [%c]\n", map->map[x0][y0]);
-	// if the player is in a wall then return 1 else return 0
 	if (map->map[y0][x0] == '1' || map->map[y0][x0] == ' ')
 		return (1);
 	else
@@ -51,7 +48,6 @@ void apply_the_changes(t_map *map)
 	new_player_x = player->x + transaltion_distance * cos(player->rotation_angel);
 	new_player_y = player->y + transaltion_distance * sin(player->rotation_angel);
 	
-	// if the new player coordinates are not in a wall then we can move the player
 	if (!is_there_a_wall(map, new_player_x, new_player_y))
 	{
 		player->x = new_player_x;
@@ -66,22 +62,14 @@ void change_coordinates(t_map *map, int x2, int y2)
 	int y1;
 
 	player = map->player;
-	// old coordinates
 	x1 = player->x;
 	y1 = player->y;
 	if (x2 < 0 || x2 > map->width - 1 || y2 < 0 || y2 > map->height - 1)
 		return ;
-	// make sure that the new coordinates are not out of the map
-	// printf("x2 = [%d]  ??  ", x2);
-	// printf("y2 = [%d]\n", y2);
-	// printf("width = [%d]  ??  ", map->width);
-	// printf("height = [%d]\n", map->height);
-	// if (!is_there_a_wall(map, x2, y2))
+	if (!is_there_a_wall(map, x2, y2))
 	{
-		// new coordinates
 		player->x = x2;
 		player->y = y2;
-		// modify the rotaion angel to make the line follow the direction of the mouse
 		player->rotation_angel = atan2((y2 - y1), (x2 - x1));
 	}
 }
@@ -99,10 +87,6 @@ int	mouse_hook(int x, int y, t_map *map)
 	t_image *image;
 	
 	image = map->image;
-	
-	// printf("x = %d\n", x);
-	// printf("y = %d\n", y);
-	
 	create_new_image(map, image);
 	change_coordinates(map, x, y);
 	draw_the_map(map);
@@ -142,11 +126,11 @@ int	key_hook(int keycode, t_map *map)
 	t_image *image;
 	
 	image = map->image;
-	// printf("keycode = %d\n", keycode);
+	printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(map->image->mlx_ptr, map->image->window_ptr);
-		map->image->window_ptr = NULL;
+		free_map(map);
 		exit(0);
 	}
 	player_movement_hooks(keycode, map);

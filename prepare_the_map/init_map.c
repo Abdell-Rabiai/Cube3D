@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 16:24:36 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/03 18:20:05 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void initialize_map(t_map *map, char **argv)
 	if (map_fd < 0)
 	{
 		printf("Error, NO sush file exist\n");
-		exit(0);
+		return ;
 	}
 	map->bresenham = malloc(sizeof(t_bresenham));
 	map->image = malloc(sizeof(t_image));
