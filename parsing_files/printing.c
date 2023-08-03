@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:02:27 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 11:03:04 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/03 15:16:24 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,14 @@ void print_map(t_map *map)
 	int i;
 
 	i = -1;
-	printf("ceil => (%d)\n", map->ceil_color);
-	printf("floor => (%d)\n", map->floor_color);
-	printf("path 1 => (%s)\n", map->paths[0]);
-	printf("path 2 => (%s)\n", map->paths[1]);
-	printf("path 3 => (%s)\n", map->paths[2]);
-	printf("path 4 => (%s)\n", map->paths[3]);
+	printf("ceil => ( %d )\n", map->ceil_color);
+	printf("floor => ( %d )\n", map->floor_color);
+	printf("path 1 => ( %s )\n", map->paths[0]);
+	printf("path 2 => ( %s )\n", map->paths[1]);
+	printf("path 3 => ( %s )\n", map->paths[2]);
+	printf("path 4 => ( %s )\n", map->paths[3]);
+	printf("maxlen : ( %d ) \n", map->max_len);
+	printf("height : ( %d ) \n", map->rows);
 	while (map->map[++i])
-		printf("(%s)\n", map->map[i]);
+		printf("( %s )\n", map->map[i]);
 }

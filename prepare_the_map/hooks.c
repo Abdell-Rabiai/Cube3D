@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/26 09:52:09 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:22:14 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int is_there_a_wall(t_map *map, int x, int y)
 	// print_only_map(map);
 	// printf("map->map[x0][y0] = [%c]\n", map->map[x0][y0]);
 	// if the player is in a wall then return 1 else return 0
-	if (map->map[x0][y0] == '1' || map->map[x0][y0] == ' ')
+	if (map->map[y0][x0] == '1' || map->map[y0][x0] == ' ')
 		return (1);
 	else
 		return (0);

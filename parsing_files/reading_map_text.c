@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:07:27 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/22 14:02:24 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/03 15:18:52 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,8 @@ int get_ceil_floor_cols(char *line)
 	cols = ft_split(tmp[1], ',');
 	if (!cols)
 		return (free_all(tmp), -1);
+	if (ft_atoi(cols[0]) > 255 || ft_atoi(cols[0]) < 0 || ft_atoi(cols[1]) > 255 || ft_atoi(cols[1]) < 0 || ft_atoi(cols[2]) > 255 || ft_atoi(cols[2]) < 0)
+		return (free_all(tmp), free_all(cols), -1);
 	if (count_words(tmp[1], ',') != 3)
 		return (free_all(tmp), free_all(cols), -1);
 	rgb = (ft_atoi(cols[0]) << 16) + (ft_atoi(cols[1]) << 8) + ft_atoi(cols[2]);

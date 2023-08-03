@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/29 14:34:40 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:20:20 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@
 # define WIDTH 1920
 # define PIE 3.14159265358979323846
 # define FAR_FROM_WALL 4
-
+# define WINDOW_WIDTH 1920*3/2
+# define WINDOW_HEIGHT 1080*3/2
 enum {
 	ON_KEYDOWN = 2,
 	ON_KEYUP = 3,
@@ -119,7 +120,9 @@ typedef struct s_map
 	int     	ceil_color;
 	int     	floor_color;
 	int			rows;
+	int			y;
 	int			cols;
+	int			x;
 	int			max_len;
 	int			width;
 	int			height;

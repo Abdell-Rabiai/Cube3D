@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/29 11:10:06 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:13:36 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void draw_circle(t_map *map, int centerX, int centerY, int radius, int color)
 	int i;
     while (x <= y)
     {
-        // Draw vertical lines to fill the disc
 		i = centerX - y;
         while (i <= centerX + y)
         {
@@ -92,10 +91,10 @@ void get_color_and_draw_sqaure(t_map *map, int i, int j, int *color)
 {
 	int		dir;
 
-	dir = is_player(map->map[i][j]);
-	if (map->map[i][j] == '1')
+	dir = is_player(map->map[j][i]);
+	if (map->map[j][i] == '1')
 		*color = 0x222222; // grey represents the walls
-	else if (map->map[i][j] == '0')
+	else if (map->map[j][i] == '0')
 		*color = 0xFFFFFF; // white represents the the free space / floor
 	else if (dir != -1)
 		*color = 0x228811; // green represents the player
@@ -118,15 +117,13 @@ void	minimap(t_map *map)
 {
 	int		i;
 	int		j;
-	int		row_len;
 	int		color;
 
 	i = 0;
-	while (i < map->rows) // rows - 1;
+	while (i < map->x)
 	{
 		j = 0;
-		row_len = ft_strlen(map->map[i]);
-		while (j < row_len)
+		while (j < map->y)
 		{
 			map->player->rotation_angel = normalize_angle(map->player->rotation_angel);
 			get_color_and_draw_sqaure(map, i, j, &color);

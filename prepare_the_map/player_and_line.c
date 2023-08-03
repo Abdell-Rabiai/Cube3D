@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   player_and_line.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:02:45 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/26 09:46:58 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/03 15:40:10 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,27 @@
 
 void draw_line(t_map *map, int x1, int y1)
 {
-	// draw a line from point (x1, y1) which is the player's initial position to the point (x2, y2) which is the player's direction
-	// in which x2 = x1 + 30 * cos(rotation_angel) and y2 = y1 + 30 * sin(rotation_angel)
-	// the 30 is the length of the line and we multiply it by cos(rotation_angel) and sin(rotation_angel) to get the x2 and y2
-	// because cos(rot_angel) = adjacent / hypotenuse = x2 - x1 / 30 ===> x2 = x1 + 30 * cos(rot_angel)
-	// and sin(rot_angel) = opposite / hypotenuse = y2 - y1 / 30 ====> y2 = y1 + 30 * sin(rot_angel)
 	map->bresenham->point1.x = x1;
 	map->bresenham->point1.y = y1;
 	map->bresenham->point2.x = x1 + (30 * cos(map->player->rotation_angel));
 	map->bresenham->point2.y = y1 + (30 * sin(map->player->rotation_angel));
-	// now we've got the two points we need to draw the line between them
-	// so each time we call the draw_line function we vary the rotation_angel by 0.44 or -0.44 which is the rotation_speed
-	// go to init_map.c to see how we vary the rotation_angel
 	draw_bresenhams_line(map);
 }
 
-void draw_the_player(t_map *map) // this functino represents the player as a little green circle and a line that shows the direction of the player
+void draw_the_player(t_map *map) 
 {
-	// draw_circle(map, map->player->x, map->player->y, 4, 0x228811); // the little green solid circle
-	draw_line(map, map->player->x, map->player->y); // the line that shows the direction of the player
+	draw_circle(map, map->player->x, map->player->y, 4, 0x228811);
+	draw_line(map, map->player->x, map->player->y); 
 }
 
-int draw_the_map(t_map *map) // this function draws the map and the player
+int draw_the_map(t_map *map)
 {
-	minimap(map); // this function draws the map only
-	draw_the_player(map); // and this one adds the player to the map
+	minimap(map);
+	draw_the_player(map);
 	return (0);
 }
 
-void	initialize_bresenhams_variables(t_bresenham *map) // this function initializes the variables needed for the bresenhams algorithm
+void	initialize_bresenhams_variables(t_bresenham *map)
 {
 	map->dx = abs(map->point2.x - map->point1.x);
 	map->dy = -abs(map->point2.y - map->point1.y);
@@ -57,8 +49,6 @@ void	initialize_bresenhams_variables(t_bresenham *map) // this function initiali
 	map->err = map->dx + map->dy;
 }
 
-// this function draws the line between the two points using the bresenhams algorithm
-//hadchi la biti tfhmo khassk demonstrer 3lih mathematiquemnt o katkhd dakchi katranslitih l algorithm
 void	draw_bresenhams_line(t_map *carte) 
 {
 	t_bresenham *map;
