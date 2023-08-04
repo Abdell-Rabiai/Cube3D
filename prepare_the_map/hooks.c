@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/04 14:29:27 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:47:24 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,5 @@ int	key_hook(int keycode, t_map *map)
 	draw_the_map(map);
 	draw_rays(map);
 	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, image->img, 0, 0);
-	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->main_image->img, 0, 0);
 	return (0);
 }

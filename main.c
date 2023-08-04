@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/04 14:31:58 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:47:32 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,8 @@ int main(int argc, char **argv)
 	get_player_position(map); // this function gets the player's position and direction
 	draw_rays(map);
 	draw_the_map(map); // this function draws the map and the player
-	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->main_image->img, 0, 0);
 	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->image->img, 0, 0);
-	// all_hooks(map); // this function calls all the hooks that i need to move the player and the line
+	all_hooks(map); // this function calls all the hooks that i need to move the player and the line
 	mlx_loop(map->mlx_ptr);
 	free_map(map);
 }

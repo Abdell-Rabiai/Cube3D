@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/04 14:38:25 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:46:53 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void initialize_map(t_map *map, char **argv)
 	}
 	map->bresenham = malloc(sizeof(t_bresenham));
 	map->image = malloc(sizeof(t_image));
-	map->main_image = malloc(sizeof(t_image));
 	map->player = malloc(sizeof(t_player));
 	map->intersect = malloc(sizeof(t_intersect));
+
 	map->intersect->WallHitX = 0.0;
 	map->intersect->WallHitY = 0.0;
 	map->intersect->HorzWallHit = false;
@@ -101,15 +101,10 @@ void initialize_map(t_map *map, char **argv)
 	map->y = map->rows;
 	map->width = (map->max_len * SCALE);
 	map->height = (map->rows * SCALE);
-	map->main_width = map->max_len * MAIN_SCALE;
-	map->main_height = map->rows * MAIN_SCALE;
-	
+ 	
 	map->mlx_ptr = mlx_init();
-	map->window_ptr = mlx_new_window(map->mlx_ptr, map->main_width, map->main_height, "CUBE3D");
+	map->window_ptr = mlx_new_window(map->mlx_ptr, map->width, map->height, "CUBE3D");
 
 	map->image->img = mlx_new_image(map->mlx_ptr, map->width, map->height);
 	map->image->addr = mlx_get_data_addr(map->image->img, &map->image->bits_per_pixel, &map->image->line_length, &map->image->endian);
-
-	map->main_image->img = mlx_new_image(map->mlx_ptr, map->main_width, map->main_height);
-	map->main_image->addr = mlx_get_data_addr(map->main_image->img, &map->main_image->bits_per_pixel, &map->main_image->line_length, &map->main_image->endian);
 }

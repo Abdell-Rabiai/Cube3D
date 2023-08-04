@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:16:42 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/04 14:39:07 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:46:27 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void rect(t_map *map, int x, int y, double width, double height)
     {
         if ((x + i > 0 && x + i < map->width)
             && (y + j > 0 && y + j < map->height))
-            my_mlx_pixel_put(map->main_image, x + i, y + j, 0xFFF099);
+            my_mlx_pixel_put(map->image, x + i, y + j, 0xFFF099);
     }
 }
 

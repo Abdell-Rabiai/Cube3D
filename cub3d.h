@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/04 14:37:53 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:46:45 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@
 # include "libft/libft.h"
 # include "mlx.h"
 
-# define SCALE 5
-# define MAIN_SCALE 30
+# define SCALE 17
 # define HEIGHT 1080
 # define WIDTH 1920
 # define PIE 3.14159265358979323846
@@ -131,9 +130,6 @@ typedef struct s_map
 	t_image		*image;
 	int			width;
 	int			height;
-	t_image		*main_image;
-	int 		main_width;
-	int 		main_height;
 	t_player	*player;
 }				t_map;
 
