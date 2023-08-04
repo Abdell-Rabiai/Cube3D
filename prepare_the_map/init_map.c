@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 18:20:05 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 14:38:25 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void initialize_map(t_map *map, char **argv)
 	}
 	map->bresenham = malloc(sizeof(t_bresenham));
 	map->image = malloc(sizeof(t_image));
+	map->main_image = malloc(sizeof(t_image));
 	map->player = malloc(sizeof(t_player));
 	map->intersect = malloc(sizeof(t_intersect));
 	map->intersect->WallHitX = 0.0;
@@ -84,9 +85,9 @@ void initialize_map(t_map *map, char **argv)
 
 	map->player->rotation_angel = PIE / 4;
 
-	map->player->move_speed = 8.0;
+	map->player->move_speed = 2.0;
 
-	map->player->rotation_speed = 0.2;
+	map->player->rotation_speed = 0.43;
 
 	map->ceil_color = 0;
 	map->floor_color = 0;
@@ -98,13 +99,17 @@ void initialize_map(t_map *map, char **argv)
 	map->cols = count_map_cols(argv);
 	map->x = map->max_len;
 	map->y = map->rows;
-	map->width = map->max_len * SCALE;
-	map->height = map->rows * SCALE;
+	map->width = (map->max_len * SCALE);
+	map->height = (map->rows * SCALE);
+	map->main_width = map->max_len * MAIN_SCALE;
+	map->main_height = map->rows * MAIN_SCALE;
+	
+	map->mlx_ptr = mlx_init();
+	map->window_ptr = mlx_new_window(map->mlx_ptr, map->main_width, map->main_height, "CUBE3D");
 
-	map->image->mlx_ptr = mlx_init();
-	// map->image->window_ptr = mlx_new_window(map->image->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT, "CUBE3D");
-	map->image->window_ptr = mlx_new_window(map->image->mlx_ptr, map->width, map->height, "CUBE3D");
-	map->image->img = mlx_new_image(map->image->mlx_ptr, map->width, map->height);
+	map->image->img = mlx_new_image(map->mlx_ptr, map->width, map->height);
 	map->image->addr = mlx_get_data_addr(map->image->img, &map->image->bits_per_pixel, &map->image->line_length, &map->image->endian);
 
+	map->main_image->img = mlx_new_image(map->mlx_ptr, map->main_width, map->main_height);
+	map->main_image->addr = mlx_get_data_addr(map->main_image->img, &map->main_image->bits_per_pixel, &map->main_image->line_length, &map->main_image->endian);
 }

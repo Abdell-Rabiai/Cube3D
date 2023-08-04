@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 18:32:41 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 14:29:27 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	exit_hook(t_map *map)
 {
-	mlx_destroy_window(map->image->mlx_ptr, map->image->window_ptr);
+	mlx_destroy_window(map->mlx_ptr, map->window_ptr);
 	free_map(map);
 	exit(0);
 }
@@ -76,9 +76,9 @@ void change_coordinates(t_map *map, int x2, int y2)
 
 void create_new_image(t_map *map, t_image *image)
 {
-    mlx_destroy_image(image->mlx_ptr, image->img);
-	mlx_clear_window(image->mlx_ptr, image->window_ptr);
-	image->img = mlx_new_image(image->mlx_ptr, map->width, map->height);
+    mlx_destroy_image(map->mlx_ptr, image->img);
+	mlx_clear_window(map->mlx_ptr, map->window_ptr);
+	image->img = mlx_new_image(map->mlx_ptr, map->width, map->height);
 	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->line_length, &image->endian);
 }
 
@@ -92,7 +92,7 @@ int	mouse_hook(int x, int y, t_map *map)
 	draw_the_map(map);
 	
 	draw_rays(map);
-	mlx_put_image_to_window(image->mlx_ptr, image->window_ptr, image->img, 0, 0);
+	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, image->img, 0, 0);
 	return (0);
 }
 
@@ -129,7 +129,7 @@ int	key_hook(int keycode, t_map *map)
 	printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 	{
-		mlx_destroy_window(map->image->mlx_ptr, map->image->window_ptr);
+		mlx_destroy_window(map->mlx_ptr, map->window_ptr);
 		free_map(map);
 		exit(0);
 	}
@@ -138,6 +138,7 @@ int	key_hook(int keycode, t_map *map)
 	apply_the_changes(map);
 	draw_the_map(map);
 	draw_rays(map);
-	mlx_put_image_to_window(image->mlx_ptr, image->window_ptr, image->img, 0, 0);
+	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, image->img, 0, 0);
+	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->main_image->img, 0, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/03 18:24:27 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 14:37:53 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include "libft/libft.h"
 # include "mlx.h"
 
-# define SCALE 32
+# define SCALE 5
+# define MAIN_SCALE 30
 # define HEIGHT 1080
 # define WIDTH 1920
 # define PIE 3.14159265358979323846
@@ -78,8 +79,6 @@ typedef struct s_point
 
 typedef struct s_image
 {
-	void		*mlx_ptr;
-	void		*window_ptr;
 	void        *img;
 	char        *addr;
 	int         bits_per_pixel;
@@ -111,8 +110,11 @@ typedef struct s_player
 	double 		rotation_speed;
 	int			dir;
 }				t_player;
+
 typedef struct s_map
 {
+	void		*mlx_ptr;
+	void		*window_ptr;
 	char		**map;
 	char		**text;
 	char    	**paths;
@@ -124,11 +126,14 @@ typedef struct s_map
 	int			cols;
 	int			x;
 	int			max_len;
-	int			width;
-	int			height;
 	t_bresenham	*bresenham;
 	t_intersect	*intersect;
 	t_image		*image;
+	int			width;
+	int			height;
+	t_image		*main_image;
+	int 		main_width;
+	int 		main_height;
 	t_player	*player;
 }				t_map;
 
@@ -200,3 +205,6 @@ void    horizontal_intersections(t_map *map, double rayAngle, int column_id);
 double	normalize_angle(double angle);
 void	draw_line_till_inter(t_map *map, int x1, int y1, int x2, int y2);
 void	cast_ray(t_map *map, double rayAngle);
+
+/***------------------RAYCASTIGN-----------------------------***/
+void rect(t_map *map, int x, int y, double width, double height);

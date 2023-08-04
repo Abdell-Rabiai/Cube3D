@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/03 18:24:11 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 14:31:58 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
  void all_hooks(t_map *map)
  {
-	mlx_hook(map->image->window_ptr, 2, (1L<<0), key_hook, map);
-	mlx_hook(map->image->window_ptr, ON_MOUSEMOVE, 0, mouse_hook, map);
-	mlx_hook(map->image->window_ptr, 17, 0, exit_hook, map);
-	mlx_loop(map->image->mlx_ptr);
+	mlx_hook(map->window_ptr, 2, (1L<<0), key_hook, map);
+	// mlx_hook(map->image->window_ptr, ON_MOUSEMOVE, 0, mouse_hook, map);
+	mlx_hook(map->window_ptr, 17, 0, exit_hook, map);
  }
 
 void make_map_rectangular_to_maxlen(t_map *map)
@@ -75,19 +74,18 @@ void d(void)
 }
 int main(int argc, char **argv)
 {
-	(void)argc;
-	(void)argv;
 	t_map *map;
-	atexit(d);
+	// atexit(d);
 	map = malloc(sizeof(t_map));
 	initialize_map(map, argv);
 	if (parsing(argv, argc, map))
 		return (1);
-	print_map(map);
 	get_player_position(map); // this function gets the player's position and direction
+	draw_rays(map);
 	draw_the_map(map); // this function draws the map and the player
-	mlx_put_image_to_window(map->image->mlx_ptr, map->image->window_ptr, map->image->img, 0, 0);
-	all_hooks(map); // this function calls all the hooks that i need to move the player and the line
-	mlx_loop(map->image->mlx_ptr);
+	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->main_image->img, 0, 0);
+	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->image->img, 0, 0);
+	// all_hooks(map); // this function calls all the hooks that i need to move the player and the line
+	mlx_loop(map->mlx_ptr);
 	free_map(map);
 }

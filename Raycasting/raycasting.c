@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:33:52 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/30 11:56:54 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/04 14:16:41 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,11 @@ void	distance_calc(t_map *map)
 
 void    horizontal_intersections(t_map *map, double rayAngle, int column_id)
 {
+	(void)column_id;
 	init_vars_hor(map, rayAngle);
 	while (map->intersect->nextHorzTouchX >= 0 && map->intersect->nextHorzTouchX <= map->width
 		&& map->intersect->nextHorzTouchY >= 0 && map->intersect->nextHorzTouchY <= map->height)
 	{
-		printf("=============================\n");
-		printf("nextHorzTouchX column_id = [%f] [%d]\n", map->intersect->nextHorzTouchX, column_id);
-		printf("nextHorzTouchY column_id = [%f] [%d]\n", map->intersect->nextHorzTouchY, column_id);
-		printf("=============================\n");
 		if (is_there_a_wall(map, map->intersect->nextHorzTouchX, map->intersect->nextHorzTouchY
 			- is_ray_facing_up_dir(rayAngle)))
 		{
@@ -152,8 +149,6 @@ void    horizontal_intersections(t_map *map, double rayAngle, int column_id)
 			map->intersect->nextHorzTouchY += map->intersect->ystep;
 		}
 	}
-	printf("WallHitX = [%f]\n", map->intersect->WallHitX);
-	printf("WallHitY = [%f]\n", map->intersect->WallHitY);
 	// draw_line_hor_inter(map, map->player->x, map->player->y, map->intersect->WallHitX, map->intersect->WallHitY);
 }
 
@@ -163,4 +158,5 @@ void	cast_ray(t_map *map, double rayAngle)
 	horizontal_intersections(map, rayAngle, 0);
 	vertical_intersections(map, rayAngle);
 	distance_calc(map);
+	// draw_line_till_inter(map, map->player->x, map->player->y, map->intersect->WallHitX, map->intersect->WallHitY);
 }
