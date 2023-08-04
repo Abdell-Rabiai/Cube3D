@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:33:52 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/04 14:16:41 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:52:41 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,5 +158,5 @@ void	cast_ray(t_map *map, double rayAngle)
 	horizontal_intersections(map, rayAngle, 0);
 	vertical_intersections(map, rayAngle);
 	distance_calc(map);
-	// draw_line_till_inter(map, map->player->x, map->player->y, map->intersect->WallHitX, map->intersect->WallHitY);
+	draw_line_till_inter(map, map->player->x, map->player->y, map->intersect->WallHitX, map->intersect->WallHitY);
 }

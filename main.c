@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/04 15:47:32 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:54:30 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
  void all_hooks(t_map *map)
  {
 	mlx_hook(map->window_ptr, 2, (1L<<0), key_hook, map);
-	// mlx_hook(map->image->window_ptr, ON_MOUSEMOVE, 0, mouse_hook, map);
+	mlx_hook(map->window_ptr, ON_MOUSEMOVE, 0, mouse_hook, map);
 	mlx_hook(map->window_ptr, 17, 0, exit_hook, map);
  }
 

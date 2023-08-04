@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:16:42 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/04 15:46:27 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/04 15:54:51 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ void    draw_rays(t_map *map)
 		cast_ray(map, rayAngle);
 		distanceProjectionPlane = (map->width / 2) / tan(FOV_ANGLE / 2);
 		wallStripHeight = (SCALE / map->intersect->distance) * distanceProjectionPlane;
-		rect(map, column_id, (map->height / 2) - (wallStripHeight / 2), 1, wallStripHeight);
+        // draw_line_rays(map, map->player->x, map->player->y, rayAngle);
+		// rect(map, column_id, (map->height / 2) - (wallStripHeight / 2), 1, wallStripHeight);
 		printf("%f\n", (map->height / 2) - (wallStripHeight / 2));
 		rayAngle += FOV_ANGLE / num_rays;
 	}
