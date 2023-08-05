@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:33:52 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/05 14:38:35 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/05 14:49:00 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ void    horizontal_intersections(t_map *map, double rayAngle, int column_id)
 			map->intersect->nextHorzTouchY += map->intersect->ystep;
 		}
 	}
-	// draw_line_hor_inter(map, map->player->x, map->player->y, map->intersect->WallHitX, map->intersect->WallHitY);
 }
 
 void	cast_ray(t_map *map, double rayAngle)
@@ -158,5 +157,5 @@ void	cast_ray(t_map *map, double rayAngle)
 	horizontal_intersections(map, rayAngle, 0);
 	vertical_intersections(map, rayAngle);
 	distance_calc(map);
-	draw_line_till_inter(map, map->player->x, map->player->y, map->intersect->WallHitX, map->intersect->WallHitY);
+	// draw_line_till_inter(map, map->player->x, map->player->y, map->intersect->WallHitX, map->intersect->WallHitY);
 }

@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:02:45 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 15:40:10 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/05 14:45:55 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void draw_the_player(t_map *map)
 int draw_the_map(t_map *map)
 {
 	minimap(map);
-	draw_the_player(map);
+	// draw_the_player(map);
 	return (0);
 }
 
