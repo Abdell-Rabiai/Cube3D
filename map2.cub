@@ -1,9 +1,9 @@
 C 225,30,0
-NO                    /Users/arabiai/Desktop/42_projects/Cube3D/textures/text.jpg
-WE /Users/arabiai/Desktop/42_projects/Cube3D/textures/windows.jpg
+NO                    /Users/arabiai/Desktop/blackCube/textures/screen.xpm
+WE /Users/arabiai/Desktop/blackCube/textures/space2.xpm
 F 220,100,255
-SO /Users/arabiai/Desktop/42_projects/Cube3D/textures/saul.jpg
-EA        /Users/arabiai/Desktop/42_projects/Cube3D/textures/church.jpg
+SO /Users/arabiai/Desktop/blackCube/textures/space3.xpm
+EA        /Users/arabiai/Desktop/blackCube/textures/space4.xpm
                          111111111
                         10000000001
                         10000000001

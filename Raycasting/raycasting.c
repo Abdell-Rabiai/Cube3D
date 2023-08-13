@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:33:52 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/05 14:49:00 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/13 15:16:46 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_ray_facing_right_dir(double rayAngle)
 {
-	return (rayAngle < 0.5 * PIE || rayAngle > 1.5 * PIE);
+	return (rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI);
 }
 
 int	is_ray_facing_left_dir(double rayAngle)
@@ -24,7 +24,7 @@ int	is_ray_facing_left_dir(double rayAngle)
 
 int	is_ray_facing_down_dir(double rayAngle)
 {
-	return (rayAngle > 0 && rayAngle < PIE);
+	return (rayAngle > 0 && rayAngle < M_PI);
 }
 
 int	is_ray_facing_up_dir(double rayAngle)
@@ -153,7 +153,7 @@ void    horizontal_intersections(t_map *map, double rayAngle, int column_id)
 
 void	cast_ray(t_map *map, double rayAngle)
 {
-	rayAngle = normalize_angle(rayAngle);
+	//rayAngle = normalize_angle(rayAngle);
 	horizontal_intersections(map, rayAngle, 0);
 	vertical_intersections(map, rayAngle);
 	distance_calc(map);

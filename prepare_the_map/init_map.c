@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/04 15:46:53 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/13 17:22:28 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,12 @@ void initialize_map(t_map *map, char **argv)
 	map->image = malloc(sizeof(t_image));
 	map->player = malloc(sizeof(t_player));
 	map->intersect = malloc(sizeof(t_intersect));
-
+	map->start = malloc(sizeof(t_cords));
+	map->end = malloc(sizeof(t_cords));
+	map->start->x = 0;
+	map->start->y = 0;
+	map->end->x = 0;
+	map->end->y = 0;
 	map->intersect->WallHitX = 0.0;
 	map->intersect->WallHitY = 0.0;
 	map->intersect->HorzWallHit = false;
@@ -83,11 +88,11 @@ void initialize_map(t_map *map, char **argv)
 	map->player->turn_dir = 0;
 	map->player->walk_dir = 0;
 
-	map->player->rotation_angel = PIE / 4;
+	map->player->rotation_angel = M_PI / 4;
 
-	map->player->move_speed = 2.0;
+	map->player->move_speed = 5.5;
 
-	map->player->rotation_speed = 0.43;
+	map->player->rotation_speed = 0.019;
 
 	map->ceil_color = 0;
 	map->floor_color = 0;

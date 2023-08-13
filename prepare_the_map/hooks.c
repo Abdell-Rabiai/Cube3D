@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/05 14:48:05 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/13 17:21:23 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,19 @@ int is_there_a_wall(t_map *map, int x, int y)
 void apply_the_changes(t_map *map)
 {
 	t_player	*player; 
-	int			new_player_x;
-	int			new_player_y;
-	int			transaltion_distance;
+	double			new_player_x;
+	double			new_player_y;
+	double			transaltion_distance;
 
 	player = map->player;
 	transaltion_distance = player->walk_dir * player->move_speed;
 	player->rotation_angel += player->turn_dir * player->rotation_speed; 
+	player->rotation_angel = normalize_angle(player->rotation_angel);
 
 	new_player_x = player->x + transaltion_distance * cos(player->rotation_angel);
 	new_player_y = player->y + transaltion_distance * sin(player->rotation_angel);
 	
-	if (!is_there_a_wall(map, new_player_x, new_player_y))
+	if (!is_there_a_wall(map, (int)new_player_x, (int)new_player_y))
 	{
 		player->x = new_player_x;
 		player->y = new_player_y;
@@ -57,20 +58,22 @@ void apply_the_changes(t_map *map)
 
 void change_coordinates(t_map *map, int x2, int y2)
 {
-	t_player *player;
-	int x1;
-	int y1;
+	t_player	*player;
+	int			x1;
+	int			y1;
+	double		substract;
 
 	player = map->player;
 	x1 = player->x;
 	y1 = player->y;
+	substract = x2 <= map->width / 3 ? map->width * 2 / 3 : 0;
 	if (x2 < 0 || x2 > map->width - 1 || y2 < 0 || y2 > map->height - 1)
 		return ;
-	if (!is_there_a_wall(map, x2, y2))
+	// only change the rotation angle, rotate to where the mouse is
+	if (x2 < map->width / 3 || x2 > map->width * 2 / 3)
 	{
-		player->x = x2;
-		player->y = y2;
-		player->rotation_angel = atan2((y2 - y1), (x2 - x1));
+		player->rotation_angel = atan2(y1 - y2, x1 - (x2 + substract));
+		player->rotation_angel = normalize_angle(player->rotation_angel);
 	}
 }
 
@@ -126,7 +129,6 @@ int	key_hook(int keycode, t_map *map)
 	t_image *image;
 	
 	image = map->image;
-	printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(map->mlx_ptr, map->window_ptr);

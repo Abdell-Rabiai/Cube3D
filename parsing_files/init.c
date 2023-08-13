@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:00:14 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 18:29:59 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/11 13:40:02 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int count_map_cols(char **argv)
 		free(line);
 		line = get_next_line(map_fd);
 	}
-	while (line[count])
+	while (line && line[count])
 		count++;
 	free(line);
 	close(map_fd);

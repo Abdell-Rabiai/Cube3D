@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/04 15:46:45 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/13 17:19:29 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,11 @@
 # include <stdbool.h>
 # include "get_next_line/get_next_line.h"
 # include "libft/libft.h"
-# include "mlx.h"
+# include "new_mlx/mlx.h"
 
-# define SCALE 17
-# define HEIGHT 1080
-# define WIDTH 1920
-# define PIE 3.14159265358979323846
+# define SCALE 32
+# define WIDTH 1000
+# define HEIGHT 800
 # define FAR_FROM_WALL 4
 # define WINDOW_WIDTH 1920*3/2
 # define WINDOW_HEIGHT 1080*3/2
@@ -83,6 +82,8 @@ typedef struct s_image
 	int         bits_per_pixel;
 	int         line_length;
 	int         endian;
+	int			width;
+	int			height;
 }				t_image;
 
 typedef struct s_bresenham
@@ -99,16 +100,22 @@ typedef struct s_bresenham
 
 typedef struct s_player
 {
-	int			x;
-	int			y;
+	double		x;
+	double		y;
 	double		step;
-	int 		turn_dir; // right or left
-	int			walk_dir; // forward or backward
+	double 		turn_dir; // right or left
+	double		walk_dir; // forward or backward
 	double		rotation_angel;
 	double 		move_speed;
 	double 		rotation_speed;
 	int			dir;
 }				t_player;
+
+typedef struct cords
+{
+	double x;
+	double y;
+}				t_cords;
 
 typedef struct s_map
 {
@@ -131,6 +138,9 @@ typedef struct s_map
 	int			width;
 	int			height;
 	t_player	*player;
+	t_image		textures[5];
+	t_cords		*start;
+	t_cords		*end;
 }				t_map;
 
 
@@ -203,4 +213,10 @@ void	draw_line_till_inter(t_map *map, int x1, int y1, int x2, int y2);
 void	cast_ray(t_map *map, double rayAngle);
 
 /***------------------RAYCASTIGN-----------------------------***/
-void rect(t_map *map, int x, int y, double width, double height);
+void	rect(t_map *map, int x, int y, double width, double height, int color);
+int		is_ray_facing_right_dir(double rayAngle);
+int		is_ray_facing_left_dir(double rayAngle);
+int		is_ray_facing_down_dir(double rayAngle);
+int		is_ray_facing_up_dir(double rayAngle);
+void	*open_texture_files(t_map *map, int dir);
+

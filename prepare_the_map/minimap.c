@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/05 14:44:25 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/13 15:16:46 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,26 +81,25 @@ void draw_circle(t_map *map, int centerX, int centerY, int radius, int color)
 
 double	normalize_angle(double angle)
 {
-	angle = fmodf(angle, PIE * 2);
+	angle = fmod(angle, M_PI * 2);
 	if (angle < 0)
-		angle = PIE * 2 + angle;
+		angle = M_PI * 2 + angle;
 	return (angle);
 }
 
 void get_color_and_draw_sqaure(t_map *map, int i, int j, int *color)
 {
 	int		dir;
-	(void)color;
 
 	dir = is_player(map->map[j][i]);
-	// if (map->map[j][i] == '1')
-	// 	*color = 0x222222; // grey represents the walls
-	// else if (map->map[j][i] == '0')
-	// 	*color = 0xFFFFFF; // white represents the the free space / floor
-	// else if (dir != -1)
-	// 	*color = 0x228811; // green represents the player
-	// else
-	// 	*color = 0x000000; // black represents the void
+	if (map->map[j][i] == '1')
+		*color = 0x222222; // grey represents the walls
+	else if (map->map[j][i] == '0')
+		*color = 0xFFFFFF; // white represents the the free space / floor
+	else if (dir != -1)
+		*color = 0x228811; // green represents the player
+	else
+		*color = 0x000000; // black represents the void
 	if (dir != -1)
 	{
 		if (map->player->x == -1)
@@ -126,7 +125,6 @@ void	minimap(t_map *map)
 		j = 0;
 		while (j < map->y)
 		{
-			map->player->rotation_angel = normalize_angle(map->player->rotation_angel);
 			get_color_and_draw_sqaure(map, i, j, &color);
 			j++;
 		}

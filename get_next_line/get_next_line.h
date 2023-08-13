@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:18:08 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/12 20:10:05 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/13 14:58:19 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,5 @@ unsigned int	ft_strlen1(const char *s);
 int				newline_index(char *buffer);
 
 #endif
+
+
