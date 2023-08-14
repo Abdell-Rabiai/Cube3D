@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:16:42 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/14 19:53:51 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 20:24:02 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ void	draw_ceiling_and_floor(t_map *map)
 void    draw_rays(t_map *map)
 {
     double FOV_ANGLE = 60 * (PIE / 180);
-    int num_rays = map->max_len * SCALE;
+    int num_rays = map->width; // number of rays map->x * SCALE
     double rayAngle = map->player->rotation_angel - (FOV_ANGLE / 2);
     int column_id = -1;
 	t_directions	dir;

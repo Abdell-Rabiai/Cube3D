@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/14 19:57:57 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 20:16:58 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int main(int argc, char **argv)
 	if (parsing(argv, argc, map))
 		return (1);
 	get_player_position(map);
-	// print_map(map);
+	print_map(map);
 	game(map);
 	all_hooks(map);
 	mlx_loop(map->mlx_ptr);
