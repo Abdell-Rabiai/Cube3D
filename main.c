@@ -6,29 +6,15 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/13 17:20:42 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 15:56:59 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int key_rel(int key, t_map *map)
-{
-	if (key == 126)
-		map->player->walk_dir = 0;
-	if (key == 125)
-		map->player->walk_dir = 0;
-	if (key == 124)
-		map->player->turn_dir = 0;
-	if (key == 123)
-		map->player->turn_dir = 0;
-	return (0);
-}
-
  void all_hooks(t_map *map)
  {
 	mlx_hook(map->window_ptr, 2, (1L<<0), key_hook, map);
-	mlx_hook(map->window_ptr, 6, (1L<< 0), key_rel, map);
 	mlx_hook(map->window_ptr, ON_MOUSEMOVE, 0, mouse_hook, map);
 	mlx_hook(map->window_ptr, 17, 0, exit_hook, map);
  }
@@ -62,24 +48,55 @@ int parsing(char **argv, int argc, t_map *map)
 	if (check_file_errors(argv, argc))
 		return (1);
 	read_textures_colors(map, argv);
-	read_map(map, argv);
-	make_map_rectangular_to_maxlen(map);
-	if (check_map(map) || check_text(map))
+	if (check_text(map))
 		return (1);
+	read_map(map, argv);
+	if (check_map(map))
+		return (1);
+	make_map_rectangular_to_maxlen(map);
 	store_paths_colors(map);
 	return (0);
 }
 
+void get_starting_position(t_map *map)
+{
+	int		i;
+	int		j;
+	int		dir;
+
+	i = 0;
+	while (i < map->x)
+	{
+		j = 0;
+		while (j < map->y)
+		{
+			dir = is_player(map->map[j][i]);
+			if (dir != -1)
+			{
+				if (map->player->x == -1)
+					map->player->x = i * SCALE + SCALE / 2;
+				if (map->player->y == -1)
+					map->player->y = j * SCALE + SCALE / 2;
+				if (map->player->dir == -1)
+					map->player->dir = dir;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
 void get_player_position(t_map *map)
 {	
+	get_starting_position(map);
 	if (map->player->dir == NORTH)
-		map->player->rotation_angel = - M_PI / 2;
+		map->player->rotation_angel = - PIE / 2;
 	else if (map->player->dir == SOUTH)
-		map->player->rotation_angel = M_PI / 2;
+		map->player->rotation_angel = PIE / 2;
 	else if (map->player->dir == EAST)
 		map->player->rotation_angel = 0;
 	else if (map->player->dir == WEST)
-		map->player->rotation_angel = M_PI;
+		map->player->rotation_angel = PIE;
 }
 void d(void)
 {
@@ -96,20 +113,39 @@ void	open_textures(t_map *map)
 		, &map->textures[dir].line_length, &map->textures[dir].endian);
 }
 
+void draw_minimap(t_map *map)
+{
+	//modify player's position on the minimap
+	minimap(map);
+	draw_the_player(map);
+}
+
+void start_the_game(t_map *map)
+{
+	open_textures(map);
+	draw_rays(map);
+}
+
+void game(t_map *map)
+{
+	start_the_game(map);
+	draw_minimap(map);
+	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->image->img, 0, 0);
+	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->mini_image->img, 0, 0);
+}
+
 int main(int argc, char **argv)
 {
 	t_map *map;
-	// atexit(d);
+
 	map = malloc(sizeof(t_map));
 	initialize_map(map, argv);
 	if (parsing(argv, argc, map))
 		return (1);
-	get_player_position(map); // this function gets the player's position and direction
-	draw_the_map(map);
-	open_textures(map);
-	draw_rays(map);
-	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->image->img, 0, 0);
-	all_hooks(map); // this function calls all the hooks that i need to move the player and the line
+	get_player_position(map);
+	// print_map(map);
+	game(map);
+	all_hooks(map);
 	mlx_loop(map->mlx_ptr);
 	free_map(map);
 }

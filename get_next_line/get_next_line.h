@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 16:18:08 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/13 14:58:19 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/13 20:50:54 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,3 @@ unsigned int	ft_strlen1(const char *s);
 int				newline_index(char *buffer);
 
 #endif
-
-

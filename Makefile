@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+         #
+#    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/08/11 19:03:47 by ahmaymou         ###   ########.fr        #
+#    Updated: 2023/08/14 14:53:59 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,16 +40,6 @@ prepare_the_map = $(addprefix prepare_the_map/, init_map.c minimap.c player_and_
 
 get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c)
 
-# lexer = $(addprefix a_lexer/,fill_check_1st_list.c get_words.c syntax_checker.c syntax_checker2.c syntax_checker3.c)
-
-# execution = $(addprefix execution/,child_processes_helpers.c execute_helpers.c initialize_data.c\
-# 		execute_helpers1.c execute.c heredoc_helpers.c heredoc.c multiple_cmds.c multiple_cmds_helpers.c handle_signals.c)
-
-# ebuiltin_functions = $(addprefix ebuiltin_functions/,echo.c env.c cd.c export.c export_helpers.c export_helpers1.c\
-# 	cd_helpers1.c unset.c basic_builtins.c env_helpers.c)
-
-# SRCS_OBJ = $(execution) $(ebuiltin_functions) $(parser) $(lexer)
-
 INC_EXC = -I /usr/local/include
 FRAMEWORK = -L /usr/local/lib/ -lmlx -framework OpenGl -framework AppKit
 
@@ -57,9 +47,7 @@ SRCS_OBJ = $(parsing_files) $(get_next_line) $(raycasting) $(prepare_the_map)
 
 SRC = main.c
 
-FLAGS =  --pedantic \
-	-fstack-protector-strong -fno-signed-zeros -mtune=intel \
-	-Ofast -Os -march=native -fno-trapping-math -g3 -fsanitize=address
+FLAGS = -Ofast -Wall -Werror -Wextra -g3 -fsanitize=address
 
 HEADER = cub3d.h
 

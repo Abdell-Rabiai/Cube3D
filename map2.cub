@@ -1,9 +1,10 @@
-C 225,30,0
-NO                    /Users/arabiai/Desktop/blackCube/textures/screen.xpm
-WE /Users/arabiai/Desktop/blackCube/textures/space2.xpm
-F 220,100,255
-SO /Users/arabiai/Desktop/blackCube/textures/space3.xpm
-EA        /Users/arabiai/Desktop/blackCube/textures/space4.xpm
+C 0,0,0
+NO                    /Users/arabiai/Desktop/balckCube/textures/mincraft.xpm
+WE /Users/arabiai/Desktop/balckCube/textures/mincraft.xpm
+F 0,0,0
+SO /Users/arabiai/Desktop/balckCube/textures/mincraft.xpm
+EA        /Users/arabiai/Desktop/balckCube/textures/mincraft.xpm
+
                          111111111
                         10000000001
                         10000000001
@@ -17,7 +18,7 @@ EA        /Users/arabiai/Desktop/blackCube/textures/space4.xpm
 10001000011011111111111111111111111111111           1000000001
 1000000001101               1000000000001          100000000001
 1000100001101               100000000000111111111110000000000001
-100011111110111111          10000000000000000000000000000N000001
+100011111110111111          10000000000000000000000000000W000001
 100011000000000001          100000000000111111111110000000000001
 100011000000000001          1000000000001          100000000001
 10001100000000000111111111111000000000001           1000000001
@@ -43,4 +44,4 @@ EA        /Users/arabiai/Desktop/blackCube/textures/space4.xpm
            10000000000000001
             110000000000011
               11100000111
-                 11111
+                 111111

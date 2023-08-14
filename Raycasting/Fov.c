@@ -6,13 +6,13 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/23 16:16:42 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/13 15:16:46 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 14:54:30 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-// # define FOV_ANGLE = 60 * (M_PI / 180)
+// # define FOV_ANGLE = 60 * (PIE / 180)
 // # define WALL_STRIP_WIDTH = 1;
 
 void draw_line_rays(t_map *map, int x1, int y1, double rayAngle)
@@ -52,7 +52,7 @@ void render_wall(t_map *map, double wallStripHeight, bool is_vertic, int dir)
 {
 	int j;
 	int	color;
-	char	*buff;
+	// char	*buff;
 	double offset_x;
 	double offset_y;
     j = -1;
@@ -103,26 +103,46 @@ int	direction(t_map *map, double rayAngle)
 		else if (is_ray_facing_left_dir(rayAngle))
 			dir = WEST;
 	}
-	printf("dir====>: %d\n", dir);
+	// printf("dir====>: %d\n", dir);
 	return (dir);
+}
+
+void	draw_ceiling_and_floor(t_map *map)
+{
+	int j;
+	int	color;
+	int	i;
+
+	j = -1;
+	i = -1;
+	while (++j < map->height)
+	{
+		i = -1;
+		if (j < map->height / 2)
+			color = map->ceil_color;
+		else
+			color = map->floor_color;
+		while (++i < map->width)
+			my_mlx_pixel_put(map->image, i, j, color);
+	}
 }
 
 void    draw_rays(t_map *map)
 {
-    double FOV_ANGLE = 60 * (M_PI / 180);
+    double FOV_ANGLE = 60 * (PIE / 180);
     int num_rays = map->max_len * SCALE;
     double rayAngle = map->player->rotation_angel - (FOV_ANGLE / 2);
-	rayAngle = normalize_angle(rayAngle);
     int column_id = -1;
 	t_directions	dir;
 
     double	wallStripHeight;
 	double	distanceProjectionPlane;
 	double	ray_distance;
-	double	color;
-	char	*data;
+	// double	color;
+	// char	*data;
 
 	dir = 0;
+	draw_ceiling_and_floor(map);
 	while (++column_id < num_rays)
 	{
 		dir = direction(map, rayAngle);
@@ -139,3 +159,4 @@ void    draw_rays(t_map *map)
 		rayAngle = normalize_angle(rayAngle);
 	}
 }
+ 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:33:52 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/13 15:16:46 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/12 19:13:16 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_ray_facing_right_dir(double rayAngle)
 {
-	return (rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI);
+	return (rayAngle < 0.5 * PIE || rayAngle > 1.5 * PIE);
 }
 
 int	is_ray_facing_left_dir(double rayAngle)
@@ -24,7 +24,7 @@ int	is_ray_facing_left_dir(double rayAngle)
 
 int	is_ray_facing_down_dir(double rayAngle)
 {
-	return (rayAngle > 0 && rayAngle < M_PI);
+	return (rayAngle > 0 && rayAngle < PIE);
 }
 
 int	is_ray_facing_up_dir(double rayAngle)

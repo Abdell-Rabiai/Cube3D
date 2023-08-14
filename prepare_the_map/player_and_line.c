@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:02:45 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/13 15:14:42 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 16:10:44 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,24 @@ void draw_line(t_map *map, int x1, int y1)
 {
 	map->bresenham->point1.x = x1;
 	map->bresenham->point1.y = y1;
-	map->bresenham->point2.x = x1 + (30 * cos(map->player->rotation_angel));
-	map->bresenham->point2.y = y1 + (30 * sin(map->player->rotation_angel));
+	map->bresenham->point2.x = x1 + (20 * cos(map->player->rotation_angel));
+	map->bresenham->point2.y = y1 + (20 * sin(map->player->rotation_angel));
 	draw_bresenhams_line(map);
 }
 
-void draw_the_player(t_map *map) 
+void draw_the_player(t_map *map)
 {
-	draw_circle(map, map->player->x, map->player->y, 4, 0x228811);
-	draw_line(map, map->player->x, map->player->y); 
+	double x;
+	double y;
+
+	x = (map->player->x - SCALE) / (SCALE / 2);
+	y = (map->player->y - SCALE) / (SCALE / 2);
+	x = x * ((SCALE / 4) / 2) + (SCALE / 4);
+	y = y * ((SCALE / 4) / 2) + (SCALE / 4);
+	draw_circle(map, x, y, 4, 0xFF0000);
+	draw_line(map, x, y); 
 }
 
-int draw_the_map(t_map *map)
-{
-	minimap(map);
-	// draw_the_player(map);
-	return (0);
-}
 
 void	initialize_bresenhams_variables(t_bresenham *map)
 {
@@ -59,9 +60,9 @@ void	draw_bresenhams_line(t_map *carte)
 	initialize_bresenhams_variables(map);
 	while (1)
 	{
-		if ((map->point1.x > 0 && map->point1.x < carte->width)
-			&& (map->point1.y > 0 && map->point1.y < carte->height))
-			my_mlx_pixel_put(image, map->point1.x, map->point1.y, 0x228811);
+		if ((map->point1.x > 0 && map->point1.x < carte->mini_width)
+			&& (map->point1.y > 0 && map->point1.y < carte->mini_height))
+			my_mlx_pixel_put(carte->mini_image, (int)map->point1.x, (int)map->point1.y, 0xFF0000);
 		if (map->point1.x == map->point2.x
 			&& map->point1.y == map->point2.y)
 			break ;
@@ -78,3 +79,4 @@ void	draw_bresenhams_line(t_map *carte)
 		}
 	}
 }
+

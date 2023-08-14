@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:07:27 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 15:18:52 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 12:13:53 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void read_map(t_map *map, char **argv)
 	line = get_next_line(map_fd);
 	while (!ft_strcmp(line, "\n") || line[0] == 'C' || line[0] == 'F' || line[0] == 'N' || line[0] == 'S' || line[0] == 'W' || line[0] == 'E')
 	{
+		// printf("%s\n", line);line[0] != 1 or != 0
 		free(line);
 		line = get_next_line(map_fd);
 	}
@@ -95,26 +96,26 @@ void read_map(t_map *map, char **argv)
 int get_ceil_floor_cols(char *line)
 {
 	char **cols;
-	char **tmp;
+	char *tmp;
 	int rgb;
-
-	tmp = ft_split(line, ' ');
+	
+	tmp = ft_strtrim(line + 1, " \n");
 	if (!tmp)
 		return (-1);
-	if (count_words(line, ' ') != 2)
-		return (free_all(tmp), -1);
-	if (count_charset(tmp[1], ',') != 2)
-		return (free_all(tmp), -1);
-	cols = ft_split(tmp[1], ',');
+	if (count_words(tmp, ' ') != 3 && count_words(tmp, ' ') != 1)
+		return (free(tmp), -1);
+	if (count_charset(tmp, ',') != 2)
+		return (free(tmp), -1);
+	cols = ft_split(tmp, ',');
 	if (!cols)
-		return (free_all(tmp), -1);
+		return (free(tmp), -1);
 	if (ft_atoi(cols[0]) > 255 || ft_atoi(cols[0]) < 0 || ft_atoi(cols[1]) > 255 || ft_atoi(cols[1]) < 0 || ft_atoi(cols[2]) > 255 || ft_atoi(cols[2]) < 0)
-		return (free_all(tmp), free_all(cols), -1);
-	if (count_words(tmp[1], ',') != 3)
-		return (free_all(tmp), free_all(cols), -1);
+		return (free(tmp), free_all(cols), -1);
+	if (count_words(tmp, ',') != 3)
+		return (free(tmp), free_all(cols), -1);
 	rgb = (ft_atoi(cols[0]) << 16) + (ft_atoi(cols[1]) << 8) + ft_atoi(cols[2]);
 	free_all(cols);
-	free_all(tmp);
+	free(tmp);
 	return (rgb);
 }
 

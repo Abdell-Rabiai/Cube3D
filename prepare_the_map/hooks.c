@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/13 17:21:23 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 15:14:51 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,28 +61,29 @@ void change_coordinates(t_map *map, int x2, int y2)
 	t_player	*player;
 	int			x1;
 	int			y1;
-	double		substract;
 
 	player = map->player;
 	x1 = player->x;
 	y1 = player->y;
-	substract = x2 <= map->width / 3 ? map->width * 2 / 3 : 0;
 	if (x2 < 0 || x2 > map->width - 1 || y2 < 0 || y2 > map->height - 1)
 		return ;
-	// only change the rotation angle, rotate to where the mouse is
-	if (x2 < map->width / 3 || x2 > map->width * 2 / 3)
-	{
-		player->rotation_angel = atan2(y1 - y2, x1 - (x2 + substract));
-		player->rotation_angel = normalize_angle(player->rotation_angel);
-	}
+	if (x2 > player->previous_x)
+		player->rotation_angel += player->rotation_speed / 3;
+	else
+		player->rotation_angel -= player->rotation_speed / 3;
+	player->previous_x = x2;
+	player->previous_y = y2;
 }
 
 void create_new_image(t_map *map, t_image *image)
 {
     mlx_destroy_image(map->mlx_ptr, image->img);
+	mlx_destroy_image(map->mlx_ptr, map->mini_image->img);
 	mlx_clear_window(map->mlx_ptr, map->window_ptr);
 	image->img = mlx_new_image(map->mlx_ptr, map->width, map->height);
 	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel, &image->line_length, &image->endian);
+	map->mini_image->img = mlx_new_image(map->mlx_ptr, map->mini_width, map->mini_height);
+	map->mini_image->addr = mlx_get_data_addr(map->mini_image->img, &map->mini_image->bits_per_pixel, &map->mini_image->line_length, &map->mini_image->endian);
 }
 
 int	mouse_hook(int x, int y, t_map *map)
@@ -92,10 +93,8 @@ int	mouse_hook(int x, int y, t_map *map)
 	image = map->image;
 	create_new_image(map, image);
 	change_coordinates(map, x, y);
-	draw_the_map(map);
 	
-	draw_rays(map);
-	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, image->img, 0, 0);
+	game(map);
 	return (0);
 }
 
@@ -129,6 +128,7 @@ int	key_hook(int keycode, t_map *map)
 	t_image *image;
 	
 	image = map->image;
+	// printf("keycode = %d\n", keycode);
 	if (keycode == 53)
 	{
 		mlx_destroy_window(map->mlx_ptr, map->window_ptr);
@@ -138,8 +138,7 @@ int	key_hook(int keycode, t_map *map)
 	player_movement_hooks(keycode, map);
 	create_new_image(map, image);
 	apply_the_changes(map);
-	draw_the_map(map);
-	draw_rays(map);
-	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, image->img, 0, 0);
+	
+	game(map);
 	return (0);
 }

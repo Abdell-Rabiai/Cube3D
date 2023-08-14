@@ -18,7 +18,7 @@
 ** This library is a simple framework to help 42 students
 ** create simple graphical apps.
 ** It only provides the minimum functions, it's students' job
-** to create the missing M_PIces for their own project :)
+** to create the missing pieces for their own project :)
 **
 ** The MinilibX can load XPM and PNG images.
 ** Please note that both image loaders are incomplete, some

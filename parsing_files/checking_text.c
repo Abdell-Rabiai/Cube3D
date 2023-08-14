@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:20:11 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 11:48:05 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 12:13:10 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,26 +33,32 @@ int	check_path_access(char *str)
 
 int check_text(t_map *map)
 {
-	char **text;
+	int count;
 	int i;
 
-	text = map->text;
 	i = 0;
-	while (text[i])
+	count = 0;
+	while (map->text[i])
 	{
-		if ((!ft_strncmp(text[i], "F", 1) || !ft_strncmp(text[i], "C", 1)) && ft_strcmp(text[i], "\n"))
+		if ((!ft_strncmp(map->text[i], "F", 1) || !ft_strncmp(map->text[i], "C", 1)) && ft_strcmp(map->text[i], "\n"))
 		{
-			if (get_ceil_floor_cols(text[i]) == -1)
+			count++;
+			if (get_ceil_floor_cols(map->text[i]) == -1)
 				return (printf("Error\nInvalid color\n"), 1);
 		}
-		else if (which_dir(text[i]) == -1 && ft_strcmp(text[i], "\n"))
+		else if (which_dir(map->text[i]) == -1 && ft_strcmp(map->text[i], "\n"))
 			return (printf("Error\nInvalid texture path\n"), 1);
-		else if (which_dir(text[i]) != -1 && ft_strcmp(text[i], "\n"))
+		else if (which_dir(map->text[i]) != -1 && ft_strcmp(map->text[i], "\n"))
 		{
-			if (check_path_access(text[i]) == 1)
+			count++;
+			if (check_path_access(map->text[i]) == 1)
 				return (1);
 		}
 		i++;
 	}
+	if (count < 6)
+		return (printf("Error\nMissing texture or color\n"), 1);
+	else if (count > 6)
+		return (printf("Error\nToo many texture or color\n"), 1);
 	return 0;
 }

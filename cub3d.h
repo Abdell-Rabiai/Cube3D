@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/13 17:19:29 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 16:06:44 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define SCALE 32
 # define WIDTH 1000
 # define HEIGHT 800
+# define PIE 3.14159265358979323846
 # define FAR_FROM_WALL 4
 # define WINDOW_WIDTH 1920*3/2
 # define WINDOW_HEIGHT 1080*3/2
@@ -102,6 +103,8 @@ typedef struct s_player
 {
 	double		x;
 	double		y;
+	double		previous_x;
+	double		previous_y;
 	double		step;
 	double 		turn_dir; // right or left
 	double		walk_dir; // forward or backward
@@ -135,6 +138,9 @@ typedef struct s_map
 	t_bresenham	*bresenham;
 	t_intersect	*intersect;
 	t_image		*image;
+	t_image		*mini_image;
+	int			mini_width;
+	int			mini_height;
 	int			width;
 	int			height;
 	t_player	*player;
@@ -199,12 +205,13 @@ void	player_movement_hooks(int keycode, t_map *map);
 
 /***--------------- THE MAP AN PLAYER MOVEMEMET FUNCTINOS ---------------***/
 int		draw_the_map(t_map *map);
+void	draw_the_player(t_map *map);
 void	minimap(t_map *map);
 void	draw_square(t_map *map ,int x, int y, int color);
-void	draw_circle(t_map *map, int centerX, int centerY, int radius, int color);
+void	draw_circle(t_map *map, double centerX, double centerY, int radius, int color);
 void	draw_line(t_map *map, int x1, int y1);
 void	draw_bresenhams_line(t_map *carte);
-void	get_color_and_draw_sqaure(t_map *map, int i, int j, int *color);
+void	get_color_and_draw_sqaure(t_map *map, int i, int j);
 void	draw_rays(t_map *map);
 int		is_there_a_wall(t_map *map, int x, int y);
 void    horizontal_intersections(t_map *map, double rayAngle, int column_id);
@@ -219,4 +226,7 @@ int		is_ray_facing_left_dir(double rayAngle);
 int		is_ray_facing_down_dir(double rayAngle);
 int		is_ray_facing_up_dir(double rayAngle);
 void	*open_texture_files(t_map *map, int dir);
+void	draw_ceiling_and_floor(t_map *map);
 
+/*game*/
+void game(t_map *map);

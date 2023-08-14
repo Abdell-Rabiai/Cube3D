@@ -1,9 +1,15 @@
-C 225,30,0
-NO                    ./Users/ahmaymou/Desktop/Cube3D/textures/text.jpg
-WE ./Users/ahmaymou/Desktop/Cube3D/textures/windows.jpg
-F 220,100,255
-SO ./Users/ahmaymou/Desktop/Cube3D/textures/saul.jpg
-EA        ./Users/ahmaymou/Desktop/Cube3D/textures/church.jpg
+C 37,           150,        190
+NO                    /Users/arabiai/Desktop/balckCube/textures/arabiai.xpm
+WE /Users/arabiai/Desktop/balckCube/textures/ahmaymou.xpm
+F 099,099,099
+
+
+
+
+SO /Users/arabiai/Desktop/balckCube/textures/ahaloui.xpm
+EA        /Users/arabiai/Desktop/balckCube/textures/ahaloui.xpm
+
+
         1111111111111111111111111
         1000000000110000000000001
         1011000001110000000000001
