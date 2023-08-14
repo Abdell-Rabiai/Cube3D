@@ -1,13 +1,10 @@
-C 37,           150,        190
-NO                    /Users/arabiai/Desktop/balckCube/textures/arabiai.xpm
-WE /Users/arabiai/Desktop/balckCube/textures/ahmaymou.xpm
-F 099,099,099
+C 0,0,0
+NO                    /Users/arabiai/Desktop/cu/textures/mincraft.xpm
+WE /Users/arabiai/Desktop/cu/textures/mincraft.xpm
+F 0,0,0
+SO /Users/arabiai/Desktop/cu/textures/mincraft.xpm
+EA        /Users/arabiai/Desktop/cu/textures/mincraft.xpm
 
-
-
-
-SO /Users/arabiai/Desktop/balckCube/textures/ahaloui.xpm
-EA        /Users/arabiai/Desktop/balckCube/textures/ahaloui.xpm
 
 
         1111111111111111111111111

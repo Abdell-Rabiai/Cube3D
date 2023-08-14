@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/14 19:37:12 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:57:57 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ void game(t_map *map)
 	start_the_game(map);
 	draw_minimap(map);
 	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->image->img, 0, 0);
-	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->mini_image->img, 0, 0);
+	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr, map->mini_image->img, 2, 2);
 }
 
 int main(int argc, char **argv)
