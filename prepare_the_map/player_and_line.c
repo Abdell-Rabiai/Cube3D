@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:02:45 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/14 16:10:44 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:37:00 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,11 @@ void draw_line(t_map *map, int x1, int y1)
 	draw_bresenhams_line(map);
 }
 
-void draw_the_player(t_map *map)
-{
-	double x;
-	double y;
-
-	x = (map->player->x - SCALE) / (SCALE / 2);
-	y = (map->player->y - SCALE) / (SCALE / 2);
-	x = x * ((SCALE / 4) / 2) + (SCALE / 4);
-	y = y * ((SCALE / 4) / 2) + (SCALE / 4);
-	draw_circle(map, x, y, 4, 0xFF0000);
-	draw_line(map, x, y); 
-}
+// void draw_the_player(t_map *map)
+// {
+// 	draw_circle(map, x, y, 4, 0xFF0000);
+// 	draw_line(map, x, y); 
+// }
 
 
 void	initialize_bresenhams_variables(t_bresenham *map)

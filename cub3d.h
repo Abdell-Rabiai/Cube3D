@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/14 16:06:44 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:39:57 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,9 +211,9 @@ void	draw_square(t_map *map ,int x, int y, int color);
 void	draw_circle(t_map *map, double centerX, double centerY, int radius, int color);
 void	draw_line(t_map *map, int x1, int y1);
 void	draw_bresenhams_line(t_map *carte);
-void	get_color_and_draw_sqaure(t_map *map, int i, int j);
+// void	get_color_and_draw_sqaure(t_map *map, double i, double j);
 void	draw_rays(t_map *map);
-int		is_there_a_wall(t_map *map, int x, int y);
+int		is_there_a_wall(t_map *map, double x, double y);
 void    horizontal_intersections(t_map *map, double rayAngle, int column_id);
 double	normalize_angle(double angle);
 void	draw_line_till_inter(t_map *map, int x1, int y1, int x2, int y2);

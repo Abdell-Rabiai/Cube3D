@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/14 16:45:27 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:51:46 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,37 +89,22 @@ double	normalize_angle(double angle)
 
 // void get_color_and_draw_sqaure(t_map *map, int i, int j)
 // {
-	// int		dir;
-	// int		color;
+// 	int		dir;
+// 	int		color;
 
-	// dir = is_player(map->map[j][i]);
-	// if (map->map[j][i] == '1')
-	// 	color = 0x222222; // grey represents the walls
-	// else if (map->map[j][i] == '0')
-	// 	color = 0xFFFFFF; // white represents the the free space / floor
-	// else if (dir != -1)
-	// 	color = 0x228811; // green represents the player
-	// else
-	// 	color = 0x000000; // black represents the void
-	// draw_square(map, i, j, color);
+// 	dir = is_player(map->map[j][i]);
+// 	if (map->map[j][i] == '1')
+// 		color = 0x222222; // grey represents the walls
+// 	else if (map->map[j][i] == '0')
+// 		color = 0xFFFFFF; // white represents the the free space / floor
+// 	else if (dir != -1)
+// 		color = 0x228811; // green represents the player
+// 	else
+// 		color = 0x000000; // black represents the void
+// 	draw_square(map, i, j, color);
 // }
 
-void get_color_and_draw_sqaure(t_map *map, int i, int j, double nx, double ny)
-{
-	// int		dir;
-	int		color;
 
-	// dir = is_player(map->map[j][i]);
-	if (map->map[(int)ny][(int)nx] == '1')
-		color = 0x222222; // grey represents the walls
-	else //if (map->map[(int)ny][(int)nx] == '0')
-		color = 0xFFFFFF; // white represents the the free space / floor
-	// else if (dir != -1)
-	// 	color = 0x228811; // green represents the player
-	// else
-	// 	color = 0x000000; // black represents the void
-	draw_square(map, i, j, color);
-}
 
 void	minimap(t_map *map)
 {
@@ -131,24 +116,29 @@ void	minimap(t_map *map)
 	double mini_y = map->mini_height / 2;
 	double new_x = map->player->x - mini_x;
 	double new_y = map->player->y - mini_y;
+	double tmp_y;
+	double tmp_x;
+	
+
+	tmp_x = new_x;
 	while (i < map->mini_width)
 	{
 		j = 0;
+		tmp_y = new_y;
 		while (j < map->mini_height)
 		{
-			get_color_and_draw_sqaure(map, i, j, new_x, new_y);
+			if (is_there_a_wall(map, tmp_x, tmp_y) == -1)
+				my_mlx_pixel_put(map->mini_image, i, j, 0x222222);
+			else if (is_there_a_wall(map, tmp_x, tmp_y) == 1)
+				my_mlx_pixel_put(map->mini_image, i, j, 0x222222);
+			else
+				my_mlx_pixel_put(map->mini_image, i, j, 0xa9a9a9);
 			j++;
+			tmp_y++;
 		}
 		i++;
+		tmp_x++;
 	}
-	// while (i < map->x)
-	// {
-	// 	j = 0;
-	// 	while (j < map->y)
-	// 	{
-	// 		get_color_and_draw_sqaure(map, i, j);
-	// 		j++;
-	// 	}
-	// 	i++;
-	// }
+	draw_circle(map, mini_x, mini_y, 4, 0xFF0000);
+	draw_line(map, mini_x, mini_y); 
 }

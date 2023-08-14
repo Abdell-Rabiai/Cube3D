@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/14 15:56:59 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:37:12 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void draw_minimap(t_map *map)
 {
 	//modify player's position on the minimap
 	minimap(map);
-	draw_the_player(map);
+	// draw_the_player(map);
 }
 
 void start_the_game(t_map *map)

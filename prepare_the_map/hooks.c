@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/14 15:14:51 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/14 19:36:27 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int	exit_hook(t_map *map)
 	exit(0);
 }
 
-int is_there_a_wall(t_map *map, int x, int y)
+int is_there_a_wall(t_map *map, double x, double y)
 {
 	int x0;
 	int y0;
 	
 	if (x < 0 || x > map->width - 1 || y < 0 || y > map->height - 1)
-		return (0);
-	x0 = x / SCALE;
-	y0 = y / SCALE;
+		return (-1);
+	x0 = floor(x / SCALE);
+	y0 = floor(y / SCALE);
 	if (map->map[y0][x0] == '1' || map->map[y0][x0] == ' ')
 		return (1);
 	else
