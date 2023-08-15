@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/14 20:26:30 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/15 09:26:20 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ void initialize_map(t_map *map, char **argv)
 
 	map->player->rotation_angel = PIE / 4;
 
-	map->player->move_speed = 11.5;
+	map->player->move_speed = 5.5;
 
-	map->player->rotation_speed = 0.09;
+	map->player->rotation_speed = 0.011;
 
 	map->ceil_color = 0;
 	map->floor_color = 0;
