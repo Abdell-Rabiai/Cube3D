@@ -6,17 +6,19 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:15:44 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/22 09:26:24 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/26 15:17:22 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int check_right(char **arr, int i, int j)
+int	check_right(char **arr, int i, int j)
 {
-	while (arr[i][j] != '\0' && arr[i][j] == '0')
+	while (arr[i][j] != '\0' && (arr[i][j] == '0' || arr[i][j] == 'W'
+		|| arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'S'))
 		j++;
-	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
+	if (arr[i][j] != '1' && arr[i][j] != 'N'
+		&& arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
 	{
 		printf("right ==> [%c]\n", arr[i][j]);
 		return (1);
@@ -24,11 +26,13 @@ int check_right(char **arr, int i, int j)
 	return (0);
 }
 
-int check_left(char **arr, int i, int j)
+int	check_left(char **arr, int i, int j)
 {
-	while (j > 0 && arr[i][j] == '0')
+	while (j > 0 && (arr[i][j] == '0' || arr[i][j] == 'W'
+		|| arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'S'))
 		j--;
-	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
+	if (arr[i][j] != '1' && arr[i][j] != 'N'
+		&& arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
 	{
 		printf("left ==> [%c]\n", arr[i][j]);
 		return (1);
@@ -36,15 +40,17 @@ int check_left(char **arr, int i, int j)
 	return (0);
 }
 
-int check_up(char **arr, int i, int j)
+int	check_up(char **arr, int i, int j)
 {
 	if (arr[i + 1] == NULL)
 		return (1);
-	while (i > 0 && arr[i][j] == '0')
+	while (i > 0 && (arr[i][j] == '0' || arr[i][j] == 'W'
+		|| arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'S'))
 		i--;
 	if (ft_strlen(arr[i]) - 1 < (size_t)j)
 		return (1);
-	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
+	if (arr[i][j] != '1' && arr[i][j] != 'N'
+		&& arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
 	{
 		printf("up ==> [%c]\n", arr[i][j]);
 		return (1);
@@ -52,15 +58,17 @@ int check_up(char **arr, int i, int j)
 	return (0);
 }
 
-int check_down(char **arr, int i, int j)
+int	check_down(char **arr, int i, int j)
 {
 	if (arr[i + 1] == NULL)
 		return (1);
-	while (arr[i][j] != '\0' && arr[i][j] == '0')
+	while (arr[i][j] != '\0' && (arr[i][j] == '0' || arr[i][j] == 'W'
+		|| arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'S'))
 		i++;
 	if (ft_strlen(arr[i]) - 1 < (size_t)j)
 		return (1);
-	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j] != 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
+	if (arr[i][j] != '1' && arr[i][j] != 'N' && arr[i][j]
+		!= 'S' && arr[i][j] != 'E' && arr[i][j] != 'W')
 	{
 		printf("down ==> [%c]\n", arr[i][j]);
 		return (1);
@@ -68,10 +76,10 @@ int check_down(char **arr, int i, int j)
 	return (0);
 }
 
-int check_is_closed(char **arr)
+int	check_is_closed(char **arr)
 {
-	int i;
-	int j;
+	int		i;
+	int		j;
 
 	i = 0;
 	while (arr[i])
@@ -79,9 +87,11 @@ int check_is_closed(char **arr)
 		j = 0;
 		while (arr[i][j] != '\0')
 		{
-			if (arr[i][j] == '0')
+			if (arr[i][j] == '0' || arr[i][j] == 'W' ||
+				arr[i][j] == 'E' || arr[i][j] == 'N' || arr[i][j] == 'S')
 			{
-				if (check_right(arr, i, j) || check_left(arr, i, j) || check_up(arr, i, j) || check_down(arr, i, j))
+				if (check_right(arr, i, j) || check_left(arr, i, j)
+					|| check_up(arr, i, j) || check_down(arr, i, j))
 					return (1);
 			}
 			j++;

@@ -6,7 +6,7 @@
 /*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 10:33:52 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/12 19:13:16 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/18 13:08:01 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	is_ray_facing_right_dir(double rayAngle)
 {
-	return (rayAngle < 0.5 * PIE || rayAngle > 1.5 * PIE);
+	return (rayAngle < 0.5 * M_PI || rayAngle > 1.5 * M_PI);
 }
 
 int	is_ray_facing_left_dir(double rayAngle)
@@ -24,7 +24,7 @@ int	is_ray_facing_left_dir(double rayAngle)
 
 int	is_ray_facing_down_dir(double rayAngle)
 {
-	return (rayAngle > 0 && rayAngle < PIE);
+	return (rayAngle > 0 && rayAngle < M_PI);
 }
 
 int	is_ray_facing_up_dir(double rayAngle)
@@ -51,14 +51,14 @@ void	init_vars_hor(t_map *map, double rayAngle)
 	map->intersect->nextHorzTouchX = 0;
 	map->intersect->nextHorzTouchY = 0;
 	map->intersect->HorzWallHit = false;
-	map->intersect->yintercept = floor(map->player->y / SCALE) * SCALE;
+	map->intersect->yintercept = floor(map->player->y / map->cube_size) * map->cube_size;
 	if (is_ray_facing_down_dir(rayAngle))
-		map->intersect->yintercept += SCALE;
+		map->intersect->yintercept += map->cube_size;
 	map->intersect->xintercept = map->player->x + (map->intersect->yintercept - map->player->y) / tan(rayAngle);
-	map->intersect->ystep = SCALE;
+	map->intersect->ystep = map->cube_size;
 	if (is_ray_facing_up_dir(rayAngle))
 		map->intersect->ystep *= -1;
-	map->intersect->xstep = SCALE / tan(rayAngle);
+	map->intersect->xstep = map->cube_size / tan(rayAngle);
 	if ((is_ray_facing_left_dir(rayAngle) && map->intersect->xstep > 0)
 		|| (is_ray_facing_right_dir(rayAngle) && map->intersect->xstep < 0))
 		map->intersect->xstep *= -1;
@@ -69,14 +69,14 @@ void	init_vars_hor(t_map *map, double rayAngle)
 void	init_vars_ver(t_map *map, double rayAngle)
 {
 	map->intersect->vertWallHit = false;
-	map->intersect->xintercept = floor(map->player->x / SCALE) * SCALE;
+	map->intersect->xintercept = floor(map->player->x / map->cube_size) * map->cube_size;
 	if (is_ray_facing_right_dir(rayAngle))
-		map->intersect->xintercept += SCALE;
+		map->intersect->xintercept += map->cube_size;
 	map->intersect->yintercept = map->player->y + (map->intersect->xintercept - map->player->x) * tan(rayAngle);
-	map->intersect->xstep = SCALE;
+	map->intersect->xstep = map->cube_size;
 	if (is_ray_facing_left_dir(rayAngle))
 		map->intersect->xstep *= -1;
-	map->intersect->ystep = SCALE * tan(rayAngle);
+	map->intersect->ystep = map->cube_size * tan(rayAngle);
 	if ((is_ray_facing_up_dir(rayAngle) && map->intersect->ystep > 0)
 		|| (is_ray_facing_down_dir(rayAngle) && map->intersect->ystep < 0))
 		map->intersect->ystep *= -1;
@@ -87,8 +87,9 @@ void	init_vars_ver(t_map *map, double rayAngle)
 void	vertical_intersections(t_map *map, double rayAngle)
 {
 	init_vars_ver(map, rayAngle);
-	while (map->intersect->nextVertTouchX >= 0 && map->intersect->nextVertTouchX <= map->width && map->intersect->nextVertTouchY >= 0 && map->intersect->nextVertTouchY <= map->height) {
-		if (is_there_a_wall(map, map->intersect->nextVertTouchX - is_ray_facing_left_dir(rayAngle), map->intersect->nextVertTouchY)) {
+	while (map->intersect->nextVertTouchX >= 0 && map->intersect->nextVertTouchX <= map->width
+		&& map->intersect->nextVertTouchY >= 0 && map->intersect->nextVertTouchY <= map->height) {
+		if (is_wall(map, map->intersect->nextVertTouchX - is_ray_facing_left_dir(rayAngle), map->intersect->nextVertTouchY)) {
 			map->intersect->vertWallHit = true;
 			map->intersect->vertWallHitX = map->intersect->nextVertTouchX;
 			map->intersect->vertWallHitY = map->intersect->nextVertTouchY;
@@ -96,6 +97,29 @@ void	vertical_intersections(t_map *map, double rayAngle)
 		} else {
 			map->intersect->nextVertTouchX += map->intersect->xstep;
 			map->intersect->nextVertTouchY += map->intersect->ystep;
+		}
+	}
+}
+
+void    horizontal_intersections(t_map *map, double rayAngle, int column_id)
+{
+	(void)column_id;
+	init_vars_hor(map, rayAngle);
+	while (map->intersect->nextHorzTouchX >= 0 && map->intersect->nextHorzTouchX <= map->width
+		&& map->intersect->nextHorzTouchY >= 0 && map->intersect->nextHorzTouchY <= map->height)
+	{
+		if (is_wall(map, map->intersect->nextHorzTouchX, map->intersect->nextHorzTouchY
+			- is_ray_facing_up_dir(rayAngle)))
+		{
+			map->intersect->HorzWallHit = true;
+			map->intersect->HorzWallHitX = map->intersect->nextHorzTouchX;
+			map->intersect->HorzWallHitY = map->intersect->nextHorzTouchY;
+			break ;
+		}
+		else
+		{
+			map->intersect->nextHorzTouchX += map->intersect->xstep;
+			map->intersect->nextHorzTouchY += map->intersect->ystep;
 		}
 	}
 }
@@ -128,34 +152,9 @@ void	distance_calc(t_map *map)
 	}
 }
 
-void    horizontal_intersections(t_map *map, double rayAngle, int column_id)
-{
-	(void)column_id;
-	init_vars_hor(map, rayAngle);
-	while (map->intersect->nextHorzTouchX >= 0 && map->intersect->nextHorzTouchX <= map->width
-		&& map->intersect->nextHorzTouchY >= 0 && map->intersect->nextHorzTouchY <= map->height)
-	{
-		if (is_there_a_wall(map, map->intersect->nextHorzTouchX, map->intersect->nextHorzTouchY
-			- is_ray_facing_up_dir(rayAngle)))
-		{
-			map->intersect->HorzWallHit = true;
-			map->intersect->HorzWallHitX = map->intersect->nextHorzTouchX;
-			map->intersect->HorzWallHitY = map->intersect->nextHorzTouchY;
-			break ;
-		}
-		else
-		{
-			map->intersect->nextHorzTouchX += map->intersect->xstep;
-			map->intersect->nextHorzTouchY += map->intersect->ystep;
-		}
-	}
-}
-
 void	cast_ray(t_map *map, double rayAngle)
 {
-	//rayAngle = normalize_angle(rayAngle);
 	horizontal_intersections(map, rayAngle, 0);
 	vertical_intersections(map, rayAngle);
 	distance_calc(map);
-	// draw_line_till_inter(map, map->player->x, map->player->y, map->intersect->WallHitX, map->intersect->WallHitY);
 }

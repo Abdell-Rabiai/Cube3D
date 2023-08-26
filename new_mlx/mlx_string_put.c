@@ -8,7 +8,7 @@
 #define FONT_WIDTH	((font_atlas.width/(ATLAS_NB_CHAR))-2)
 
 
-int mlx_put_image_to_window_scale(void *mlx_ptr, void *win_ptr, void *img_ptr, int sx, int sy, int sw, int sh, int dx, int dy, int dw, int dh, unsigned int color);
+int mlx_put_image_to_window_map->cube_size(void *mlx_ptr, void *win_ptr, void *img_ptr, int sx, int sy, int sw, int sh, int dx, int dy, int dw, int dh, unsigned int color);
 
 void mlx_int_fill(unsigned char *data, int sl)
 {
@@ -64,7 +64,7 @@ int mlx_string_put(void *mlx_ptr, void *win_ptr, int x, int y, int color, char *
 	val = *string - 32;
       else
 	val = 31;
-      mlx_put_image_to_window_scale(mlx_ptr, win_ptr, font, val*(FONT_WIDTH+2), 0, FONT_WIDTH, font_atlas.height, x+pos*dest_w, y, dest_w, dest_h, color);
+      mlx_put_image_to_window_map->cube_size(mlx_ptr, win_ptr, font, val*(FONT_WIDTH+2), 0, FONT_WIDTH, font_atlas.height, x+pos*dest_w, y, dest_w, dest_h, color);
       pos ++;
       string ++;
     }

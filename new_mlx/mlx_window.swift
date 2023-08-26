@@ -255,7 +255,7 @@ public class MlxWin
     mlayer.device = device
     mlayer.pixelFormat = .bgra8Unorm
     mlayer.framebufferOnly = true
-    mlayer.contentsScale = 1.0 /// winE.screen!.backingScaleFactor
+    mlayer.contentsmap->cube_size = 1.0 /// winE.screen!.backingmap->cube_sizeFactor
     mlayer.frame = vrect
     winE.contentView! = NSView(frame: vrect)
     winE.contentView!.wantsLayer = true
@@ -265,7 +265,7 @@ public class MlxWin
     winE.makeKeyAndOrderFront(nil)
 
 
-    /// drawable_image = MlxImg(d: device, w:Int(CGFloat(vrect.size.width)*winE.screen!.backingScaleFactor), h:Int(CGFloat(vrect.size.height)*winE.screen!.backingScaleFactor), t:1)
+    /// drawable_image = MlxImg(d: device, w:Int(CGFloat(vrect.size.width)*winE.screen!.backingmap->cube_sizeFactor), h:Int(CGFloat(vrect.size.height)*winE.screen!.backingmap->cube_sizeFactor), t:1)
     drawable_image = MlxImg(d: device, w:Int(vrect.size.width), h:Int(vrect.size.height), t:1)
     pixel_image = MlxImg(d: device, w:Int(vrect.size.width), h:Int(vrect.size.height))
     for i in 0...(pixel_image.texture_height*pixel_image.texture_sizeline/4-1)
@@ -401,12 +401,12 @@ public class MlxWin
   public func putImage(image img:MlxImg, x posx:Int32, y posy:Int32)
   {
 	flushPixels()
-	putImageScale(image:img, sx:0, sy:0, sw:Int32(img.texture_width), sh:Int32(img.texture_height), 
+	putImagemap->cube_size(image:img, sx:0, sy:0, sw:Int32(img.texture_width), sh:Int32(img.texture_height), 
 			   dx:posx, dy:posy, dw:Int32(img.texture_width), dh:Int32(img.texture_height),
 			   c:UInt32(0xFFFFFFFF))
   }
 
-  public func putImageScale(image img:MlxImg, sx src_x:Int32, sy src_y:Int32, sw src_w:Int32, sh src_h:Int32, dx dest_x:Int32, dy dest_y:Int32, dw dest_w:Int32, dh dest_h:Int32, c color:UInt32)
+  public func putImagemap->cube_size(image img:MlxImg, sx src_x:Int32, sy src_y:Int32, sw src_w:Int32, sh src_h:Int32, dx dest_x:Int32, dy dest_y:Int32, dw dest_w:Int32, dh dest_h:Int32, c color:UInt32)
   {
 	flushPixels()
 	if (texture_list_count == 0) /// means  I just draw

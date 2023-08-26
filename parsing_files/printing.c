@@ -6,15 +6,15 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:02:27 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/03 15:16:24 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/26 14:54:02 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void print_text(t_map *map)
+void	print_text(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < map->text_rows)
@@ -24,9 +24,9 @@ void print_text(t_map *map)
 	}
 }
 
-void print_only_map(t_map *map)
+void	print_only_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (map->map[i])
@@ -36,9 +36,9 @@ void print_only_map(t_map *map)
 	}
 }
 
-void print_paths(t_map *map)
+void	print_paths(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < 4)
@@ -48,9 +48,9 @@ void print_paths(t_map *map)
 	}
 }
 
-void print_map(t_map *map)
+void	print_map(t_map *map)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	printf("ceil => ( %d )\n", map->ceil_color);

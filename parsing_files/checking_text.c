@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:20:11 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/14 12:13:10 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/26 15:24:02 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	check_path_access(char *str)
 {
 	char	*sub;
 	char	*trim;
-	
+
 	trim = ft_strtrim(str + 2, " .\n");
 	sub = ft_substr(trim, 0, word_length(trim, ' '), 1);
 	if (access(sub, F_OK) != 0)
@@ -31,16 +31,33 @@ int	check_path_access(char *str)
 	return (0);
 }
 
-int check_text(t_map *map)
+int	func(int count)
 {
-	int count;
-	int i;
+	if (count < 6)
+		return (printf("Error\nMissing texture or color\n"), 1);
+	else if (count > 6)
+		return (printf("Error\nToo many texture or color\n"), 1);
+	return (0);
+}
 
-	i = 0;
+bool	condum(t_map *map, int i)
+{
+	if ((!ft_strncmp(map->text[i], "F", 1) || !ft_strncmp(map->text[i], "C", 1))
+		&& ft_strcmp(map->text[i], "\n"))
+		return (true);
+	return (false);
+}
+
+int	check_text(t_map *map)
+{
+	int	count;
+	int	i;
+
+	i = -1;
 	count = 0;
-	while (map->text[i])
+	while (map->text[++i])
 	{
-		if ((!ft_strncmp(map->text[i], "F", 1) || !ft_strncmp(map->text[i], "C", 1)) && ft_strcmp(map->text[i], "\n"))
+		if (condum(map, i))
 		{
 			count++;
 			if (get_ceil_floor_cols(map->text[i]) == -1)
@@ -54,11 +71,8 @@ int check_text(t_map *map)
 			if (check_path_access(map->text[i]) == 1)
 				return (1);
 		}
-		i++;
 	}
-	if (count < 6)
-		return (printf("Error\nMissing texture or color\n"), 1);
-	else if (count > 6)
-		return (printf("Error\nToo many texture or color\n"), 1);
-	return 0;
+	if (func(count))
+		return (1);
+	return (0);
 }

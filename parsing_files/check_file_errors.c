@@ -6,15 +6,15 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:06:55 by arabiai           #+#    #+#             */
-/*   Updated: 2023/07/14 10:59:03 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/26 14:48:41 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-int check_file_errors(char **argv, int argc)
+int	check_file_errors(char **argv, int argc)
 {
-	int fd;
+	int	fd;
 
 	if (argc != 2)
 		return (printf("Error\nWrong number of arguments\n"), 1);

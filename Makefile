@@ -6,7 +6,7 @@
 #    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/08/14 20:15:46 by arabiai          ###   ########.fr        #
+#    Updated: 2023/08/26 15:09:29 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,14 +29,13 @@ BANNER=\
 '╚██████╗ ╚██████╔╝ ██████╔╝ ██████╔╝ ██████╔╝'\
 ' ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝  ╚═════╝ '
                                          
-                                                                                                     
-																									 
+                                                                                                     																 
 parsing_files = $(addprefix parsing_files/, check_file_errors.c checking_closed_map.c checking_map.c\
-		checking_text.c init.c printing.c reading_map_text.c)
+		checking_text.c init.c printing.c reading_map_text.c parsing.c reading_map_text1.c)
 		
-raycasting = $(addprefix raycasting/, mlx_files.c Fov.c raycasting.c) 
+raycasting = $(addprefix raycasting/, mlx_files.c Fov.c raycasting.c)
 
-prepare_the_map = $(addprefix prepare_the_map/, init_map.c minimap.c player_and_line.c hooks.c)
+prepare_the_map = $(addprefix prepare_the_map/, init_map.c init_map1.c minimap.c player_and_line.c hooks.c)
 
 get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c)
 
@@ -47,7 +46,7 @@ SRCS_OBJ = $(parsing_files) $(get_next_line) $(raycasting) $(prepare_the_map)
 
 SRC = main.c
 
-FLAGS = -Ofast -Wall -Werror -Wextra -g #-g3 -fsanitize=address
+FLAGS = -Ofast -Wall -Werror -Wextra -g3 -fsanitize=address
 
 HEADER = cub3d.h
 
