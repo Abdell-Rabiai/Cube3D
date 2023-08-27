@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/26 16:40:11 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/27 13:40:52 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,13 @@ void	all_hooks(t_map *map)
 
 void	game(t_map *map)
 {
+	// draw the minimap
 	map->new_x = map->player->x - map->mini_x;
 	map->new_y = map->player->y - map->mini_y;
 	minimap(map);
 	draw_circle(map);
 	draw_line(map, map->mini_x, map->mini_y);
+	// render the 3d projection of the map
 	draw_rays(map);
 	mlx_put_image_to_window(map->mlx_ptr, map->window_ptr,
 		map->image->img, 0, 0);
