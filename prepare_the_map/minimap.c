@@ -6,13 +6,13 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/26 14:46:49 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/27 13:10:19 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../cub3d.h"
 
-void	draw_square(t_map *map ,int x, int y, int color)
+void	draw_square(t_map *map, int x, int y, int color)
 {
 	int		i;
 	int		j;
@@ -28,7 +28,7 @@ void	draw_square(t_map *map ,int x, int y, int color)
 				&& (j > 0 && j < map->mini_height))
 			{
 				if ((i == map->cube_size / 4 * x || j == map->cube_size / 4 * y)
-						&& color == 0xFFFFFF)
+					&& color == 0xFFFFFF)
 					my_mlx_pixel_put(map->mini_image, i, j, 0x222222);
 				else
 					my_mlx_pixel_put(map->mini_image, i, j, color);

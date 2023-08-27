@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:25:11 by ahmaymou          #+#    #+#             */
-/*   Updated: 2022/10/26 18:27:45 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/27 13:08:17 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_strrchr(const char *s, int c)
 			return ((char *)s);
 		if (*s == c1)
 			occurence--;
-	s++;
+		s++;
 	}
 	return (NULL);
 }

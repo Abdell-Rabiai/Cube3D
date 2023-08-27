@@ -45,7 +45,7 @@ bool	ft_strchr1(const char *s, int c)
 	{
 		if (s[i] == c)
 			return (true);
-	i++;
+		i++;
 	}
 	return (false);
 }

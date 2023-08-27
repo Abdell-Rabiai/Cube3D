@@ -6,7 +6,7 @@
 #    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/08/27 12:26:54 by arabiai          ###   ########.fr        #
+#    Updated: 2023/08/27 13:19:06 by arabiai          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ parsing_files = $(addprefix parsing_files/, check_file_errors.c checking_closed_
 		
 raycasting = $(addprefix raycasting/, mlx_files.c Fov.c field_of_view.c raycasting.c)
 
-prepare_the_map = $(addprefix prepare_the_map/, init_map.c init_map1.c minimap.c player_and_line.c hooks.c)
+prepare_the_map = $(addprefix prepare_the_map/, init_map.c init_map1.c minimap.c player_and_line.c hooks.c hooks1.c)
 
 get_next_line = $(addprefix get_next_line/,get_next_line.c get_next_line_utils.c)
 

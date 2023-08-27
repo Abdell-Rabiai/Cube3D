@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/09 10:30:40 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/07/14 11:39:06 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/27 13:08:07 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ char	**ft_split(const char *str, char c)
 			strings[i] = ft_substr(str, 0, word_length(str, c), 0);
 			if (!strings[i])
 				return (free_all(strings));
-		i++;
+			i++;
 		}
 		while (*str && *str != c)
 			str++;

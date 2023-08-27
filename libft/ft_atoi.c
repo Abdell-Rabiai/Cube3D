@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/08 14:32:05 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/03/28 05:11:28 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/27 13:07:56 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	ft_atoi(const char *str)
 	if (*str && (*str == '-' || *str == '+'))
 	{
 		if (*str == '-')
-		sign *= (-1);
-	str++;
+			sign *= (-1);
+		str++;
 	}
 	while (*str && ft_isdigit((*str)))
 	{
