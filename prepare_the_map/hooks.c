@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/26 16:47:44 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/27 11:59:44 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,11 @@ int	exit_hook(t_map *map)
 	exit(0);
 }
 
-int check_wall_collision(t_map *map, double x, double y)
+int	check_wall_collision(t_map *map, double x, double y)
 {
-	int x0;
-	int y0;
+	int	x0;
+	int	y0;
+
 	if (x < 0 || x > map->width || y < 0 || y > map->height)
 		return (-1);
 	x0 = floor(x / map->cube_size);
@@ -34,7 +35,7 @@ int check_wall_collision(t_map *map, double x, double y)
 	else
 		return (0);
 }
-int is_wall(t_map *map, double x, double y)
+int	is_wall(t_map *map, double x, double y)
 {
 	if (check_wall_collision(map, x, y) == 1)
 		return (1);
@@ -106,7 +107,7 @@ void change_coordinates(t_map *map, int x2, int y2)
 
 void create_new_image(t_map *map, t_image *image)
 {
-    mlx_destroy_image(map->mlx_ptr, image->img);
+	mlx_destroy_image(map->mlx_ptr, image->img);
 	mlx_destroy_image(map->mlx_ptr, map->mini_image->img);
 	mlx_clear_window(map->mlx_ptr, map->window_ptr);
 	image->img = mlx_new_image(map->mlx_ptr, map->width, map->height);

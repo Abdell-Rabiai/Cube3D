@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/26 14:47:07 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/27 12:27:51 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,27 @@ void	init_malloc(t_map *map, char **argv)
 
 void	init_intersect(t_map *map)
 {
-	map->intersect->WallHitX = 0.0;
-	map->intersect->WallHitY = 0.0;
-	map->intersect->HorzWallHit = false;
-	map->intersect->vertWallHit = false;
+	map->intersect->wall_hit_x = 0.0;
+	map->intersect->wall_hit_y = 0.0;
+	map->intersect->horz_wall_hit = false;
+	map->intersect->vert_wall_hit = false;
 	map->intersect->distance = 0.0;
-	map->intersect->wasHitVertic = false;
+	map->intersect->was_hit_vertic = false;
 	map->intersect->xintercept = 0.0;
 	map->intersect->yintercept = 0.0;
 	map->intersect->xstep = 0.0;
 	map->intersect->ystep = 0.0;
-	map->intersect->HorzWallHitX = 0.0;
-	map->intersect->HorzWallHitY = 0.0;
-	map->intersect->nextHorzTouchX = 0.0;
-	map->intersect->nextHorzTouchY = 0.0;
-	map->intersect->nextVertTouchX = 0.0;
-	map->intersect->nextVertTouchY = 0.0;
-	map->intersect->HorzHitDistance = 0.0;
-	map->intersect->vertHitDistance = 0.0;
-	map->intersect->vertWallHitX = 0.0;
-	map->intersect->vertWallHitY = 0.0;
-	map->intersect->vertWallHit = false;
+	map->intersect->horz_wall_hit_x = 0.0;
+	map->intersect->horz_wall_hit_y = 0.0;
+	map->intersect->next_horz_touch_x = 0.0;
+	map->intersect->next_horz_touch_y = 0.0;
+	map->intersect->next_vert_touch_x = 0.0;
+	map->intersect->next_vert_touch_y = 0.0;
+	map->intersect->horz_hit_distance = 0.0;
+	map->intersect->vert_hit_distance = 0.0;
+	map->intersect->vert_wall_hit_x = 0.0;
+	map->intersect->vert_wall_hit_y = 0.0;
+	map->intersect->vert_wall_hit = false;
 }
 
 void	init_player(t_map *map)
@@ -106,7 +106,7 @@ void	initialize_map(t_map *map, char **argv)
 	map->y = map->rows;
 	map->width = 1600;
 	map->height = 1000;
-	map->cube_size = 15;
+	map->cube_size = 19;
 	map->mini_height = map->height / 5;
 	map->mini_width = map->width / 5;
 	map->mini_x = map->mini_width / 2;

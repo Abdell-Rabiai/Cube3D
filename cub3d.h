@@ -6,20 +6,20 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/26 15:25:47 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/27 12:26:27 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <math.h>
-# include <string.h>
-# include <stdbool.h>
-# include "get_next_line/get_next_line.h"
-# include "libft/libft.h"
-# include "new_mlx/mlx.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <math.h>
+#include <string.h>
+#include <stdbool.h>
+#include "get_next_line/get_next_line.h"
+#include "libft/libft.h"
+#include "new_mlx/mlx.h"
 
 enum {
 	ON_KEYDOWN = 2,
@@ -33,26 +33,26 @@ enum {
 
 typedef struct intersect
 {
-	double	WallHitX;
-	double	WallHitY;
+	double	wall_hit_x;
+	double	wall_hit_y;
 	double	distance;
-	bool	wasHitVertic;
+	bool	was_hit_vertic;
 	double	xintercept;
 	double	yintercept;
 	double	xstep;
 	double	ystep;
-	bool	HorzWallHit;
-	double	HorzWallHitX;
-	double	HorzWallHitY;
-	double	nextHorzTouchX;
-	double 	nextHorzTouchY;
-	double 	nextVertTouchX;
-	double 	nextVertTouchY;
-	double 	HorzHitDistance;
-	double 	vertHitDistance;
-	bool 	vertWallHit;
-	double 	vertWallHitX;
-	double 	vertWallHitY;
+	bool	horz_wall_hit;
+	double	horz_wall_hit_x;
+	double	horz_wall_hit_y;
+	double	next_horz_touch_x;
+	double	next_horz_touch_y;
+	double	next_vert_touch_x;
+	double	next_vert_touch_y;
+	double	horz_hit_distance;
+	double	vert_hit_distance;
+	bool	vert_wall_hit;
+	double	vert_wall_hit_x;
+	double	vert_wall_hit_y;
 }				t_intersect;
 
 typedef enum directions
@@ -71,11 +71,11 @@ typedef struct s_point
 
 typedef struct s_image
 {
-	void        *img;
-	char        *addr;
-	int         bits_per_pixel;
-	int         line_length;
-	int         endian;
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
 	int			width;
 	int			height;
 }				t_image;
@@ -87,7 +87,7 @@ typedef struct s_bresenham
 	int			err;
 	int			step_x;
 	int			step_y;
-	int 		e2;
+	int			e2;
 	t_point		point1;
 	t_point		point2;
 }				t_bresenham;
@@ -99,18 +99,18 @@ typedef struct s_player
 	double		previous_x;
 	double		previous_y;
 	double		step;
-	double 		turn_dir; // right or left
-	double		walk_dir; // forward or backward
+	double		turn_dir;
+	double		walk_dir;
 	double		rotation_angel;
-	double 		move_speed;
-	double 		rotation_speed;
+	double		move_speed;
+	double		rotation_speed;
 	int			dir;
 }				t_player;
 
 typedef struct cords
 {
-	double x;
-	double y;
+	double		x;
+	double		y;
 }				t_cords;
 
 typedef struct s_map
@@ -119,10 +119,10 @@ typedef struct s_map
 	void		*window_ptr;
 	char		**map;
 	char		**text;
-	char    	**paths;
+	char		**paths;
 	int			text_rows;
-	int     	ceil_color;
-	int     	floor_color;
+	int			ceil_color;
+	int			floor_color;
 	int			rows;
 	int			y;
 	int			cols;
@@ -140,7 +140,7 @@ typedef struct s_map
 	t_image		textures[5];
 	t_cords		*start;
 	t_cords		*end;
-	double		rayAngle;
+	double		ray_angle;
 	int			cube_size;
 	double		mini_x;
 	double		mini_y;
@@ -224,19 +224,24 @@ void	draw_bresenhams_line(t_map *carte);
 void	draw_rays(t_map *map);
 int		is_there_a_wall(t_map *map, double x, double y);
 int		is_wall(t_map *map, double x, double y);
-void	horizontal_intersections(t_map *map, double rayAngle, int column_id);
+void	horizontal_intersections(t_map *map, double ray_angle, int column_id);
 double	normalize_angle(double angle);
 void	draw_line_till_inter(t_map *map, int x1, int y1, int x2, int y2);
-void	cast_ray(t_map *map, double rayAngle);
+void	cast_ray(t_map *map, double ray_angle);
 
 /***------------------RAYCASTIGN-----------------------------***/
-void	rect(t_map *map, int x, int y, double width, double height, int color);
-int		is_ray_facing_right_dir(double rayAngle);
-int		is_ray_facing_left_dir(double rayAngle);
-int		is_ray_facing_down_dir(double rayAngle);
-int		is_ray_facing_up_dir(double rayAngle);
+void	rect(t_map *map, int x, int y, double height, int color);
+int		is_ray_facing_right_dir(double ray_angle);
+int		is_ray_facing_left_dir(double ray_angle);
+int		is_ray_facing_down_dir(double ray_angle);
+int		is_ray_facing_up_dir(double ray_angle);
 void	*open_texture_files(t_map *map, int dir);
 void	draw_ceiling_and_floor(t_map *map);
 
+void	draw_line_rays(t_map *map, int x1, int y1, double ray_angle);
+void	draw_ceiling_and_floor(t_map *map);
+int		direction(t_map *map, double ray_angle);
+void	*open_texture_files(t_map *map, int dir);
+int		rgba_to_int(int r, int g, int b, double a);
 /*game*/
-void game(t_map *map);
+void	game(t_map *map);
