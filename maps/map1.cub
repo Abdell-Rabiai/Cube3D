@@ -1,9 +1,9 @@
 C 10,10,10
-NO                    /Users/arabiai/Desktop/Cube/textures/space0_1.xpm
-WE /Users/arabiai/Desktop/Cube/textures/orange.xpm
+NO                    /Users/arabiai/Desktop/black_cube/textures/space0_1.xpm
+WE /Users/arabiai/Desktop/black_cube/textures/orange.xpm
 F 50,50,54
-SO /Users/arabiai/Desktop/Cube/textures/octopus.xpm
-EA        /Users/arabiai/Desktop/Cube/textures/lwodo7.xpm
+SO /Users/arabiai/Desktop/black_cube/textures/octopus.xpm
+EA        /Users/arabiai/Desktop/black_cube/textures/lwodo7.xpm
 
 111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 100000000011000000000000111000111110000000000011111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111

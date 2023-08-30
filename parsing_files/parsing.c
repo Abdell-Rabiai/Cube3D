@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:16:46 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/26 15:24:38 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:44:52 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,14 @@ void	make_map_rectangular_to_maxlen(t_map *map)
 int	parsing(char **argv, int argc, t_map *map)
 {
 	if (check_file_errors(argv, argc))
-		return (1);
+		exit (1);
 	read_textures_colors(map, argv);
 	if (check_text(map))
-		return (1);
+		exit (1);
 	read_map(map, argv);
 	make_map_rectangular_to_maxlen(map);
 	if (check_map(map))
-		return (1);
+		exit (1);
 	store_paths_colors(map);
 	return (0);
 }

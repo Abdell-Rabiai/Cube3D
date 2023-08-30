@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/27 13:18:17 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:19:20 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check_wall_collision(t_map *map, double x, double y)
 	y0 = floor(y / map->cube_size);
 	if (x0 < 0 || x0 > map->x - 1 || y0 < 0 || y0 > map->y - 1)
 		return (-1);
-	if (map->map[y0][x0] == '1' || map->map[y0][x0] == ' ')
+	if (map->map[y0][x0] == '1' || map->map[y0][x0] == ' ' || map->map[y0][x0] == '9') /* added */
 		return (1);
 	else
 		return (0);
@@ -80,9 +80,11 @@ void	apply_the_changes(t_map *map)
 	player->rotation_angel += player->turn_dir * player->rotation_speed;
 	player->rotation_angel = normalize_angle(player->rotation_angel);
 	new_player_x = player->x + transaltion_distance
-		* cos(player->rotation_angel);
+		* cos(player->rotation_angel) + (map->player->translate_y
+			* cos(player->rotation_angel + M_PI_2));
 	new_player_y = player->y + transaltion_distance
-		* sin(player->rotation_angel);
+		* sin(player->rotation_angel) + (map->player->translate_y
+			* sin(player->rotation_angel + M_PI_2));
 	if (!is_there_a_wall(map, new_player_x, new_player_y))
 	{
 		player->x = new_player_x;

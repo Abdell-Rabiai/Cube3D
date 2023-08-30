@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+         #
+#    By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/05/05 15:25:41 by ahmaymou          #+#    #+#              #
-#    Updated: 2023/08/27 13:26:02 by arabiai          ###   ########.fr        #
+#    Updated: 2023/08/30 17:43:03 by ahmaymou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ SRCS_OBJ = $(parsing_files) $(get_next_line) $(raycasting) $(prepare_the_map)
 
 SRC = main.c
 
-FLAGS = -Ofast -Wall -Werror -Wextra -g3 -fsanitize=address
+FLAGS = -Ofast -Wall -Werror -Wextra #-g3 -fsanitize=address
 
 HEADER = cub3d.h
 

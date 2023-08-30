@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/27 13:10:19 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/29 21:09:15 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,10 @@ void	minimap(t_map *map)
 		tmp_y = map->new_y;
 		while (j < map->mini_height)
 		{
-			if (is_wall(map, tmp_x, tmp_y) == -1)
-				my_mlx_pixel_put(map->mini_image, i, j, 0x222222);
-			else if (is_wall(map, tmp_x, tmp_y) == 1)
-				my_mlx_pixel_put(map->mini_image, i, j, 0xC2F5C9);
-			else
-				my_mlx_pixel_put(map->mini_image, i, j, 0xa9a9a9);
+			if (is_wall(map, tmp_x, tmp_y) == 1)
+				my_mlx_pixel_put(map->mini_image, i, j, 0x000000);
+			else if (is_wall(map, tmp_x, tmp_y) == 0)
+				my_mlx_pixel_put(map->mini_image, i, j, 0xFAF1E4);
 			j++;
 			tmp_y++;
 		}

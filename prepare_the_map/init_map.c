@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/27 13:41:50 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/29 19:57:15 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void	init_player(t_map *map)
 	map->floor_color = 0;
 	map->map = NULL;
 	map->paths = NULL;
+	map->fov_angle = 60 * (M_PI / 180);
 }
 
 void	init_mlx(t_map *map)
@@ -90,7 +91,6 @@ void	init_mlx(t_map *map)
 	map->mini_image->addr = mlx_get_data_addr(map->mini_image->img,
 			&map->mini_image->bits_per_pixel, &map->mini_image->line_length,
 			&map->mini_image->endian);
-	lmsa(map);
 }
 
 void	initialize_map(t_map *map, char **argv)
@@ -104,9 +104,10 @@ void	initialize_map(t_map *map, char **argv)
 	map->cols = count_map_cols(argv);
 	map->x = map->max_len;
 	map->y = map->rows;
-	map->width = 1600;
-	map->height = 1000;
-	map->cube_size = 19;
+	map->width = 1200;
+	map->height = 800;
+	map->cube_size = 19; //map->width / 38.4615384615;
+	lmsa(map);
 	map->mini_height = map->height / 5;
 	map->mini_width = map->width / 5;
 	map->mini_x = map->mini_width / 2;

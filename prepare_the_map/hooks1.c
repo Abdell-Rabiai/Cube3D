@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:12:58 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/27 13:15:24 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:30:19 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,18 @@ int	key_released(int keycode, t_map *map)
 		map->player->walk_dir = 0;
 	else if (keycode == 1 || keycode == 125)
 		map->player->walk_dir = 0;
-	else if (keycode == 2 || keycode == 124)
+	else if (keycode == 124)
 		map->player->turn_dir = 0;
-	else if (keycode == 0 || keycode == 123)
+	else if (keycode == 123)
 		map->player->turn_dir = 0;
+	else if (keycode == 2 || keycode == 0)
+		map->player->translate_y = 0;
+	else if (keycode == 53)
+	{
+		mlx_destroy_window(map->mlx_ptr, map->window_ptr);
+		free_map(map);
+		exit(0);
+	}
 	return (0);
 }
 
@@ -55,6 +63,8 @@ int	key_pressed(int keycode, t_map *map)
 {
 	if (keycode == 53)
 	{
+		mlx_destroy_image(map->mlx_ptr, map->image->img);
+		mlx_destroy_image(map->mlx_ptr, map->mini_image->img);
 		mlx_destroy_window(map->mlx_ptr, map->window_ptr);
 		free_map(map);
 		exit(0);
@@ -63,9 +73,13 @@ int	key_pressed(int keycode, t_map *map)
 		map->player->walk_dir = 1;
 	else if (keycode == 1 || keycode == 125)
 		map->player->walk_dir = -1;
-	else if (keycode == 2 || keycode == 124)
+	else if (keycode == 2)
+		map->player->translate_y = 1;
+	else if (keycode == 124)
 		map->player->turn_dir = 1;
-	else if (keycode == 0 || keycode == 123)
+	else if (keycode == 0)
+		map->player->translate_y = -1;
+	else if (keycode == 123)
 		map->player->turn_dir = -1;
 	return (0);
 }

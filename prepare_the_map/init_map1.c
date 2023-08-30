@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:12:07 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/27 13:16:33 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/29 11:23:45 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,18 @@ size_t	max_len(char **argv)
 
 void	lmsa(t_map *map)
 {
-	if (map->width > 2560)
-		map->width = 2500;
-	if (map->height > 1440)
-		map->height = 1400;
-	if (map->width < 800)
-		map->width = 820;
-	if (map->height < 600)
-		map->height = 620;
-	if (map->cube_size >= 18)
-		map->cube_size = 15;
-	if (map->cube_size <= 2)
-		map->cube_size = 15;
+	if (map->width > 1300)
+		map->width = 1300;
+	if (map->height > 850)
+		map->height = 850;
+	if (map->width < 1300)
+		map->width = 1300;
+	if (map->height < 850)
+		map->height = 850;
+	if (map->cube_size > 19)
+		map->cube_size = 19;
+	if (map->cube_size < 19)
+		map->cube_size = 19;
 	if (map->mini_width < 0)
 		map->mini_width *= -1;
 	if (map->mini_height < 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/28 10:09:13 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/30 17:55:59 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ typedef struct s_player
 	double		step;
 	double		turn_dir;
 	double		walk_dir;
+	double		translate_y;
 	double		rotation_angel;
 	double		move_speed;
 	double		rotation_speed;
@@ -146,6 +147,13 @@ typedef struct s_map
 	double		mini_y;
 	double		new_x;
 	double		new_y;
+	double		wall_strip_height;
+	double		dist_proj_plane;
+	double		ray_distance;
+	int			num_rays;
+	double		fov_angle;
+	double		offset_x;
+	double		offset_y;
 }				t_map;
 
 /***--------------- INIT FUNCTIONS ---------------***/
@@ -224,7 +232,7 @@ void	draw_bresenhams_line(t_map *carte);
 void	draw_rays(t_map *map);
 int		is_there_a_wall(t_map *map, double x, double y);
 int		is_wall(t_map *map, double x, double y);
-void	horizontal_intersections(t_map *map, double ray_angle, int column_id);
+void	horizontal_intersections(t_map *map, double ray_angle);
 void	vertical_intersections(t_map *map, double ray_angle);
 double	normalize_angle(double angle);
 void	draw_line_till_inter(t_map *map, int x1, int y1, int x2, int y2);

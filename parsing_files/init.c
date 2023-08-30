@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:00:14 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/26 15:16:29 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/30 18:13:48 by ahmaymou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,11 +103,12 @@ void	free_map(t_map *map)
 	while (++i < map->text_rows)
 		free(map->text[i]);
 	free(map->text);
-	free(map->image->img);
-	free(map->image->addr);
 	free(map->image);
+	free(map->mini_image);
 	free(map->bresenham);
 	free(map->player);
 	free(map->intersect);
+	free(map->start);
+	free(map->end);
 	free(map);
 }
