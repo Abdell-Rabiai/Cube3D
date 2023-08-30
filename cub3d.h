@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/30 17:55:59 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:54:46 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 #include <stdbool.h>
 #include "get_next_line/get_next_line.h"
 #include "libft/libft.h"
-#include "new_mlx/mlx.h"
+#include "mlx.h"
 
 enum {
 	ON_KEYDOWN = 2,
@@ -235,12 +235,10 @@ int		is_wall(t_map *map, double x, double y);
 void	horizontal_intersections(t_map *map, double ray_angle);
 void	vertical_intersections(t_map *map, double ray_angle);
 double	normalize_angle(double angle);
-void	draw_line_till_inter(t_map *map, int x1, int y1, int x2, int y2);
 void	cast_ray(t_map *map, double ray_angle);
 void	distance_calc(t_map *map);
 
 /***------------------RAYCASTIGN-----------------------------***/
-void	rect(t_map *map, int x, int y, double height, int color);
 int		is_ray_facing_right_dir(double ray_angle);
 int		is_ray_facing_left_dir(double ray_angle);
 int		is_ray_facing_down_dir(double ray_angle);
@@ -253,5 +251,8 @@ void	draw_ceiling_and_floor(t_map *map);
 int		direction(t_map *map, double ray_angle);
 void	*open_texture_files(t_map *map, int dir);
 int		rgba_to_int(int r, int g, int b, double a);
+
+double	dist_be2n_pts(double x1, double y1, double x2, double y2);
+void	assign_wall_hit_cords(t_map *map, bool is_vertic);
 /*game*/
 void	game(t_map *map);

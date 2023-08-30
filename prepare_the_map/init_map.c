@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/29 19:57:15 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/30 18:53:17 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	initialize_map(t_map *map, char **argv)
 	map->y = map->rows;
 	map->width = 1200;
 	map->height = 800;
-	map->cube_size = 19; //map->width / 38.4615384615;
+	map->cube_size = 19;
 	lmsa(map);
 	map->mini_height = map->height / 5;
 	map->mini_width = map->width / 5;
