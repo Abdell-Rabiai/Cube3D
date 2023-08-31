@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:20:11 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/26 15:24:02 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/31 11:09:47 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,18 @@
 
 int	check_path_access(char *str)
 {
-	char	*sub;
 	char	*trim;
-
+	
 	trim = ft_strtrim(str + 2, " .\n");
-	sub = ft_substr(trim, 0, word_length(trim, ' '), 1);
-	if (access(sub, F_OK) != 0)
+	if (access(trim, F_OK) != 0)
 	{
 		printf("Error\n");
 		printf("Texture path not accessible\n");
-		printf("path => %s\n", sub);
-		free(sub);
+		printf("path => %s\n", trim);
+		free(trim);
 		return (1);
 	}
-	free(sub);
+	free(trim);
 	return (0);
 }
 
