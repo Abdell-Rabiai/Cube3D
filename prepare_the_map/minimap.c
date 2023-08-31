@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/29 21:09:15 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/31 10:26:56 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,12 @@ void	draw_circle(t_map *map)
 		j = 0;
 		while (j < radius)
 		{
-			my_mlx_pixel_put(map->mini_image, map->mini_x + cos(angle) * j,
-				map->mini_y + sin(angle) * j, 0xFF0000);
+			if (map->mini_x + cos(angle) * j > 0
+				&& map->mini_x + cos(angle) * j < map->mini_width
+				&& map->mini_y + sin(angle) * j > 0
+				&& map->mini_y + sin(angle) * j < map->mini_height)
+				my_mlx_pixel_put(map->mini_image, map->mini_x + cos(angle) * j,
+					map->mini_y + sin(angle) * j, 0xFF0000);
 			j++;
 		}
 		i++;

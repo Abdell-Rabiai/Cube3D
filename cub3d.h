@@ -162,7 +162,7 @@ int		count_text_lines(char **argv);
 int		count_map_lines(char **argv);
 size_t	max_len(char **argv);
 int		count_map_cols(char **argv);
-void	lmsa(t_map *map);
+void	protect(t_map *map);
 void	init_malloc(t_map *map, char **argv);
 void	init_intersect(t_map *map);
 void	init_player(t_map *map);

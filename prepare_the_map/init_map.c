@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/30 18:53:17 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/31 10:22:07 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,10 +104,10 @@ void	initialize_map(t_map *map, char **argv)
 	map->cols = count_map_cols(argv);
 	map->x = map->max_len;
 	map->y = map->rows;
-	map->width = 1200;
-	map->height = 800;
+	map->width = 1600;
+	map->height = 900;
 	map->cube_size = 19;
-	lmsa(map);
+	protect(map);
 	map->mini_height = map->height / 5;
 	map->mini_width = map->width / 5;
 	map->mini_x = map->mini_width / 2;

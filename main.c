@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/30 17:45:39 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/08/31 10:13:06 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,10 @@ void	game(t_map *map)
 		map->mini_image->img, 0, 0);
 }
 
-void	apah(void)
-{
-	system("leaks cub3d");
-}
-
 int	main(int argc, char **argv)
 {
 	t_map	*map;
 
-	atexit(apah);
 	map = malloc(sizeof(t_map));
 	initialize_map(map, argv);
 	if (parsing(argv, argc, map))
