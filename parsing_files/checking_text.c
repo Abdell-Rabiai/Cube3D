@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:20:11 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 11:09:47 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/31 11:30:39 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	check_path_access(char *str)
 {
 	char	*trim;
-	
+
 	trim = ft_strtrim(str + 2, " .\n");
 	if (access(trim, F_OK) != 0)
 	{

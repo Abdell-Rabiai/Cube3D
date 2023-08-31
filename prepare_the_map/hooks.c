@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 10:14:03 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/31 11:55:27 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void	apply_the_changes(t_map *map)
 	player->rotation_angel = normalize_angle(player->rotation_angel);
 	new_player_x = player->x + transaltion_distance
 		* cos(player->rotation_angel) + (map->player->translate_y
-			* cos(player->rotation_angel + M_PI_2));
+			* -sin(player->rotation_angel));
 	new_player_y = player->y + transaltion_distance
 		* sin(player->rotation_angel) + (map->player->translate_y
-			* sin(player->rotation_angel + M_PI_2));
+			* cos(player->rotation_angel));
 	if (!is_there_a_wall(map, new_player_x, new_player_y))
 	{
 		player->x = new_player_x;

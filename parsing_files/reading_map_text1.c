@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:08:37 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/26 15:09:04 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/31 11:29:55 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	store_paths_colors(t_map *map)
 		if (dir != -1)
 		{
 			tmp = ft_strtrim(arr[i] + 2, " .\n");
-			map->paths[dir] = ft_substr(tmp, 0, word_length(tmp, ' '), 1);
+			map->paths[dir] = tmp;
 		}
 		else if (arr[i][0] == 'F')
 			map->floor_color = get_ceil_floor_cols(arr[i]);

@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 14:29:48 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/31 10:26:56 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/08/31 11:28:37 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,8 @@ void	minimap(t_map *map)
 	double	tmp_x;
 
 	i = 0;
+	map->new_x = map->player->x - map->mini_x;
+	map->new_y = map->player->y - map->mini_y;
 	tmp_x = map->new_x;
 	while (i < map->mini_width)
 	{
