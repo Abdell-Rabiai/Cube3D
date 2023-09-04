@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:06:13 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 11:55:27 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:49:02 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ int	check_wall_collision(t_map *map, double x, double y)
 	y0 = floor(y / map->cube_size);
 	if (x0 < 0 || x0 > map->x - 1 || y0 < 0 || y0 > map->y - 1)
 		return (-1);
-	if (map->map[y0][x0] == '1' || map->map[y0][x0] == ' '
-			|| map->map[y0][x0] == '9')
+	if (map->map[y0][x0] == '1' || map->map[y0][x0] == ' ')
 		return (1);
 	else
 		return (0);
@@ -42,29 +41,21 @@ int	is_wall(t_map *map, double x, double y)
 
 int	is_there_a_wall(t_map *map, double x, double y)
 {
-	if (check_wall_collision(map, x, y - 3) == 1
-		|| check_wall_collision(map, x, y - 3) == -1)
+	if (check_wall_collision(map, x, y - 3) == 1 || check_wall_collision(map, x, y - 3) == -1)
 		return (1);
-	else if (check_wall_collision(map, x + 3, y - 3) == 1
-		|| check_wall_collision(map, x + 3, y - 3) == -1)
+	else if (check_wall_collision(map, x + 3, y - 3) == 1 || check_wall_collision(map, x + 3, y - 3) == -1)
 		return (1);
-	else if (check_wall_collision(map, x + 3, y) == 1
-		|| check_wall_collision(map, x + 3, y) == -1)
+	else if (check_wall_collision(map, x + 3, y) == 1 || check_wall_collision(map, x + 3, y) == -1)
 		return (1);
-	else if (check_wall_collision(map, x + 3, y + 3) == 1
-		|| check_wall_collision(map, x + 3, y + 3) == -1)
+	else if (check_wall_collision(map, x + 3, y + 3) == 1 || check_wall_collision(map, x + 3, y + 3) == -1)
 		return (1);
-	else if (check_wall_collision(map, x, y + 3) == 1
-		|| check_wall_collision(map, x, y + 3) == -1)
+	else if (check_wall_collision(map, x, y + 3) == 1 || check_wall_collision(map, x, y + 3) == -1)
 		return (1);
-	else if (check_wall_collision(map, x - 3, y + 3) == 1
-		|| check_wall_collision(map, x - 3, y + 3) == -1)
+	else if (check_wall_collision(map, x - 3, y + 3) == 1 || check_wall_collision(map, x - 3, y + 3) == -1)
 		return (1);
-	else if (check_wall_collision(map, x - 3, y) == 1
-		|| check_wall_collision(map, x - 3, y) == -1)
+	else if (check_wall_collision(map, x - 3, y) == 1 || check_wall_collision(map, x - 3, y) == -1)
 		return (1);
-	else if (check_wall_collision(map, x - 3, y - 3) == 1
-		|| check_wall_collision(map, x - 3, y - 3) == -1)
+	else if (check_wall_collision(map, x - 3, y - 3) == 1 || check_wall_collision(map, x - 3, y - 3) == -1)
 		return (1);
 	return (0);
 }

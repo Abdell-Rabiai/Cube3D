@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:20:11 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 12:06:16 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 12:07:36 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,9 @@ int	check_path_access(char *str)
 int	func(int count)
 {
 	if (count < 6)
-		return (printf("Error\nMissing texture or color\n"), 1);
+		return (printf("Error\nMissing textures or colors\n"), 1);
 	else if (count > 6)
-		return (printf("Error\nToo many texture or color\n"), 1);
+		return (printf("Error\nToo many textures or colors\n"), 1);
 	return (0);
 }
 

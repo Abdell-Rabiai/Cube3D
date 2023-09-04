@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:30 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/31 10:13:06 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:50:56 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	main(int argc, char **argv)
 	if (parsing(argv, argc, map))
 		return (1);
 	get_player_position(map);
+	print_map(map);
 	open_textures(map);
 	game(map);
 	all_hooks(map);

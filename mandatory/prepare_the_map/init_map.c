@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 12:28:51 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:40:16 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,12 +79,26 @@ void	init_player(t_map *map)
 void	init_mlx(t_map *map)
 {
 	map->mlx_ptr = mlx_init();
+	if (map->mlx_ptr == NULL)
+		exit(0);
 	map->window_ptr = mlx_new_window(map->mlx_ptr, map->width,
 			map->height, "CUBE3D");
+	if (map->window_ptr == NULL)
+		exit(0);
 	map->image->img = mlx_new_image(map->mlx_ptr, map->width, map->height);
+	if (map->image->img == NULL)
+	{
+		printf("Error\nImage creation failed\n");
+		exit(0);
+	}
 	map->image->addr = mlx_get_data_addr(map->image->img,
 			&map->image->bits_per_pixel, &map->image->line_length,
 			&map->image->endian);
+	if (map->image->addr == NULL)
+	{
+		printf("Error\nImage creation failed\n");
+		exit(0);
+	}
 }
 
 void	initialize_map(t_map *map, char **argv)

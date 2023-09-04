@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 10:11:33 by ahmaymou          #+#    #+#             */
-/*   Updated: 2023/08/30 18:54:46 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 12:13:26 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include "get_next_line/get_next_line.h"
-#include "libft/libft.h"
+#include "../mandatory/libft/libft.h"
 #include "mlx.h"
 
 enum {

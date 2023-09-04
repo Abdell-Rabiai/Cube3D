@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   hooks1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:12:58 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/30 18:30:19 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/09/04 11:36:59 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,12 @@ void	create_new_image(t_map *map, t_image *image)
 	map->mini_image->addr = mlx_get_data_addr(map->mini_image->img,
 			&map->mini_image->bits_per_pixel,
 			&map->mini_image->line_length, &map->mini_image->endian);
+	if (image->img == NULL || map->mini_image->img == NULL
+		|| image->addr == NULL || map->mini_image->addr == NULL)
+	{
+		printf("Error\nImage creation failed\n");
+		exit(0);
+	}
 }
 
 int	mouse_hook(int x, int y, t_map *map)

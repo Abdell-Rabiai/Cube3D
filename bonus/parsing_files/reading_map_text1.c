@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:08:37 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 11:29:55 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 12:01:58 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	get_ceil_floor_cols(char *line)
 	tmp = ft_strtrim(line + 1, " \n");
 	if (!tmp)
 		return (-1);
-	if (count_words(tmp, ' ') != 3 && count_words(tmp, ' ') != 1)
+	if (count_words(tmp, ' ') != 3 && count_words(tmp, ' ') != 1 && count_words(tmp, ' ') != 2)
 		return (free(tmp), -1);
 	if (count_charset(tmp, ',') != 2)
 		return (free(tmp), -1);

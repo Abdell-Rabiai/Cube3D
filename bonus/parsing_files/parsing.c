@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ahmaymou <ahmaymou@student.42.fr>          +#+  +:+       +#+        */
+/*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 13:16:46 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/30 17:44:52 by ahmaymou         ###   ########.fr       */
+/*   Updated: 2023/09/04 11:47:30 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	make_map_rectangular_to_maxlen(t_map *map)
 		ft_strlcpy(map->map[i], old_line, len + 1);
 		while (len < map->max_len)
 		{
-			map->map[i][len] = '9';
+			map->map[i][len] = ' ';
 			len++;
 		}
 		map->map[i][len] = '\0';
@@ -98,8 +98,15 @@ void	open_textures(t_map *map)
 
 	dir = -1;
 	while (++dir < 4)
+	{
 		map->textures[dir].addr = mlx_get_data_addr(
 				open_texture_files(map, dir),
 				&map->textures[dir].bits_per_pixel,
 				&map->textures[dir].line_length, &map->textures[dir].endian);
+		if (map->textures[dir].addr == NULL)
+		{
+			printf("Error\nTexture file corrupted/invalid\n");
+			exit(0);
+		}
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/21 06:07:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 11:30:46 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:41:05 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,12 @@ void	init_player(t_map *map)
 void	init_mlx(t_map *map)
 {
 	map->mlx_ptr = mlx_init();
+	if (map->mlx_ptr == NULL)
+		exit(0);
 	map->window_ptr = mlx_new_window(map->mlx_ptr, map->width,
 			map->height, "CUBE3D");
+	if (map->window_ptr == NULL)
+		exit(0);
 	map->image->img = mlx_new_image(map->mlx_ptr, map->width, map->height);
 	map->image->addr = mlx_get_data_addr(map->image->img,
 			&map->image->bits_per_pixel, &map->image->line_length,
@@ -91,6 +95,12 @@ void	init_mlx(t_map *map)
 	map->mini_image->addr = mlx_get_data_addr(map->mini_image->img,
 			&map->mini_image->bits_per_pixel, &map->mini_image->line_length,
 			&map->mini_image->endian);
+	if (map->image->img == NULL || map->image->addr == NULL
+		|| map->mini_image->img == NULL || map->mini_image->addr == NULL)
+	{
+		printf("Error\nImage file corrupted/invalid\n");
+		exit(0);
+	}
 }
 
 void	initialize_map(t_map *map, char **argv)

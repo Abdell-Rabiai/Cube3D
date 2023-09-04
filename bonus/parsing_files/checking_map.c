@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 09:16:49 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/26 15:17:45 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:46:52 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,11 @@ int	check_valid_map_line(char *line)
 		return (printf("Error\nEmpty line in the map\n"), 1);
 	while (line[i])
 	{
-		if (line[i] != '9' && line[i] != ' ' && line[i] != '1'
+		if (line[i] != ' ' && line[i] != '1'
 			&& line[i] != '0' && line[i] != 'N' && line[i] != 'S'
 			&& line[i] != 'E' && line[i] != 'W' && line[i] != '\n')
 		{
-			printf("character[%d] = [%c]\n", i, line[i]);
-			return (printf("Error\nInvalid characters in map\n"), 1);
+			return (printf("Error\nInvalid characters [%c] in map\n", line[i]), 1);
 		}
 		i++;
 	}
@@ -72,6 +71,8 @@ int	check_multiple_players(char **arr)
 	}
 	if (count > 1)
 		return (1);
+	if (count == 0)
+		return (2);
 	return (0);
 }
 
@@ -84,8 +85,10 @@ int	check_map(t_map *map)
 	mp = map->map;
 	if (check_invalid_characters(mp))
 		return (1);
-	if (check_multiple_players(mp))
+	if (check_multiple_players(mp) == 1)
 		return (printf("Error\nMultiple players\n"), 1);
+	else if (check_multiple_players(mp) == 2)
+		return (printf("Error\nNo player\n"), 1);
 	if (check_is_closed(mp))
 		return (printf("Error\nMap is not closed\n"), 1);
 	return (0);

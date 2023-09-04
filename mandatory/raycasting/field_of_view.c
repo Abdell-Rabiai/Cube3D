@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 12:08:27 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 12:32:46 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:18:01 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ void	*open_texture_files(t_map *map, int dir)
 
 	data = mlx_xpm_file_to_image(map->mlx_ptr, map->paths[dir],
 			&map->textures[dir].width, &map->textures[dir].height);
+	if (data == NULL)
+	{
+		printf("Error\nTexture file corrupted/invalid\n");
+		exit(0);
+	}
 	return (data);
 }
 

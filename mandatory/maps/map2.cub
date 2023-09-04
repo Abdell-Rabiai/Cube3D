@@ -1,9 +1,9 @@
-C 10,10,10
-NO                    /Users/arabiai/Desktop/Cube3D/mandatory/textures/space0_1.xpm
-WE /Users/arabiai/Desktop/Cube3D/mandatory/textures/orange.xpm
-F 50,50,54
-SO /Users/arabiai/Desktop/Cube3D/mandatory/textures/octopus.xpm
-EA        /Users/arabiai/Desktop/Cube3D/mandatory/textures/lwodo7.xpm
+C 99,99,99
+NO                    /Users/arabiai/Desktop/intra_cube/mandatory/textures/space0_1.xpm
+WE /Users/arabiai/Desktop/intra_cube/mandatory/textures/orange.xpm
+F 60,60,75
+SO /Users/arabiai/Desktop/intra_cube/mandatory/textures/octopus.xpm
+EA        /Users/arabiai/Desktop/intra_cube/mandatory/textures/lwodo7.xpm
 
                          111111111
                         10000000001

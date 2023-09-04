@@ -6,7 +6,7 @@
 /*   By: arabiai <arabiai@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 13:12:58 by arabiai           #+#    #+#             */
-/*   Updated: 2023/08/31 12:30:14 by arabiai          ###   ########.fr       */
+/*   Updated: 2023/09/04 11:38:40 by arabiai          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,18 @@ void	create_new_image(t_map *map, t_image *image)
 	mlx_destroy_image(map->mlx_ptr, image->img);
 	mlx_clear_window(map->mlx_ptr, map->window_ptr);
 	image->img = mlx_new_image(map->mlx_ptr, map->width, map->height);
+	if (image->img == NULL)
+	{
+		printf("Error\nImage creation failed\n");
+		exit(0);
+	}
 	image->addr = mlx_get_data_addr(image->img, &image->bits_per_pixel,
 			&image->line_length, &image->endian);
+	if (image->addr == NULL)
+	{
+		printf("Error\nImage creation failed\n");
+		exit(0);
+	}
 }
 
 int	key_released(int keycode, t_map *map)
